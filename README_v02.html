@@ -1,0 +1,1820 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
+  max-width: 980px;
+  border: 1px solid #ddd;
+  outline: 1300px solid #fff;
+  margin: 16px auto;
+}
+
+body .markdown-body
+{
+  padding: 45px;
+}
+
+@font-face {
+  font-family: fontawesome-mini;
+  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+
+.markdown-body {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #333333;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.markdown-body a {
+  background: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+
+.markdown-body b,
+.markdown-body strong {
+  font-weight: bold;
+}
+
+.markdown-body mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body sub,
+.markdown-body sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.markdown-body sup {
+  top: -0.5em;
+}
+.markdown-body sub {
+  bottom: -0.25em;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.markdown-body img {
+  border: 0;
+}
+
+.markdown-body hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+
+.markdown-body input {
+  line-height: normal;
+}
+
+.markdown-body input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body .codehilitetable {
+  border: 0;
+  border-spacing: 0;
+}
+
+.markdown-body .codehilitetable tr {
+  border: 0;
+}
+
+.markdown-body .codehilitetable pre,
+.markdown-body .codehilitetable div.codehilite {
+  margin: 0;
+}
+
+.markdown-body .linenos,
+.markdown-body .code,
+.markdown-body .codehilitetable td {
+  border: 0;
+  padding: 0;
+}
+
+.markdown-body td:not(.linenos) .linenodiv {
+  padding: 0 !important;
+}
+
+.markdown-body .code {
+  width: 100%;
+}
+
+.markdown-body .linenos div pre,
+.markdown-body .linenodiv pre,
+.markdown-body .linenodiv {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.markdown-body .code div pre,
+.markdown-body .code div {
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.markdown-body * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font: 13px Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.4;
+}
+
+.markdown-body a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+.markdown-body a:hover,
+.markdown-body a:focus,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before,
+.markdown-body hr:after {
+  display: table;
+  content: " ";
+}
+
+.markdown-body hr:after {
+  clear: both;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.markdown-body h1 {
+  font-size: 30px;
+}
+
+.markdown-body h2 {
+  font-size: 21px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+}
+
+.markdown-body h4 {
+  font-size: 14px;
+}
+
+.markdown-body h5 {
+  font-size: 12px;
+}
+
+.markdown-body h6 {
+  font-size: 11px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code,
+.markdown-body pre,
+.markdown-body samp {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body kbd {
+  background-color: #e7e7e7;
+  background-image: -moz-linear-gradient(#fefefe, #e7e7e7);
+  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
+  background-image: linear-gradient(#fefefe, #e7e7e7);
+  background-repeat: repeat-x;
+  border-radius: 2px;
+  border: 1px solid #cfcfcf;
+  color: #000;
+  padding: 3px 5px;
+  line-height: 10px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  display: inline-block;
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body .headerlink {
+  font: normal 400 16px fontawesome-mini;
+  vertical-align: middle;
+  margin-left: -16px;
+  float: left;
+  display: inline-block;
+  text-decoration: none;
+  opacity: 0;
+  color: #333;
+}
+
+.markdown-body .headerlink:focus {
+  outline: none;
+}
+
+.markdown-body h1 .headerlink {
+  margin-top: 0.8rem;
+}
+
+.markdown-body h2 .headerlink,
+.markdown-body h3 .headerlink {
+  margin-top: 0.6rem;
+}
+
+.markdown-body h4 .headerlink {
+  margin-top: 0.2rem;
+}
+
+.markdown-body h5 .headerlink,
+.markdown-body h6 .headerlink {
+  margin-top: 0;
+}
+
+.markdown-body .headerlink:hover,
+.markdown-body h1:hover .headerlink,
+.markdown-body h2:hover .headerlink,
+.markdown-body h3:hover .headerlink,
+.markdown-body h4:hover .headerlink,
+.markdown-body h5:hover .headerlink,
+.markdown-body h6:hover .headerlink {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+
+.markdown-body h5 {
+  font-size: 1em;
+}
+
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre,
+.markdown-body .admonition {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body code,
+.markdown-body samp {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .codehilite {
+  margin-bottom: 16px;
+}
+
+.markdown-body .codehilite pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+.markdown-body .codehilite pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+
+/* Admonition */
+.markdown-body .admonition {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid #e0e0e0;
+  border-left: 6px solid #333;
+  padding: 10px 10px 10px 30px;
+}
+
+.markdown-body .admonition table {
+  color: #333;
+}
+
+.markdown-body .admonition p {
+  padding: 0;
+}
+
+.markdown-body .admonition-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.markdown-body .admonition>.admonition-title {
+  color: #333;
+}
+
+.markdown-body .attention>.admonition-title {
+  color: #a6d796;
+}
+
+.markdown-body .caution>.admonition-title {
+  color: #d7a796;
+}
+
+.markdown-body .hint>.admonition-title {
+  color: #96c6d7;
+}
+
+.markdown-body .danger>.admonition-title {
+  color: #c25f77;
+}
+
+.markdown-body .question>.admonition-title {
+  color: #96a6d7;
+}
+
+.markdown-body .note>.admonition-title {
+  color: #d7c896;
+}
+
+.markdown-body .admonition:before,
+.markdown-body .attention:before,
+.markdown-body .caution:before,
+.markdown-body .hint:before,
+.markdown-body .danger:before,
+.markdown-body .question:before,
+.markdown-body .note:before {
+  font: normal normal 16px fontawesome-mini;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 1.5;
+  color: #333;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.markdown-body .admonition:before {
+  content: "\f056\00a0";
+  color: 333;
+}
+
+.markdown-body .attention:before {
+  content: "\f058\00a0";
+  color: #a6d796;
+}
+
+.markdown-body .caution:before {
+  content: "\f06a\00a0";
+  color: #d7a796;
+}
+
+.markdown-body .hint:before {
+  content: "\f05a\00a0";
+  color: #96c6d7;
+}
+
+.markdown-body .danger:before {
+  content: "\f057\00a0";
+  color: #c25f77;
+}
+
+.markdown-body .question:before {
+  content: "\f059\00a0";
+  color: #96a6d7;
+}
+
+.markdown-body .note:before {
+  content: "\f040\00a0";
+  color: #d7c896;
+}
+
+.markdown-body .admonition::after {
+  content: normal;
+}
+
+.markdown-body .attention {
+  border-left: 6px solid #a6d796;
+}
+
+.markdown-body .caution {
+  border-left: 6px solid #d7a796;
+}
+
+.markdown-body .hint {
+  border-left: 6px solid #96c6d7;
+}
+
+.markdown-body .danger {
+  border-left: 6px solid #c25f77;
+}
+
+.markdown-body .question {
+  border-left: 6px solid #96a6d7;
+}
+
+.markdown-body .note {
+  border-left: 6px solid #d7c896;
+}
+
+.markdown-body .admonition>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body .admonition>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* progress bar*/
+.markdown-body .progress {
+  display: block;
+  width: 300px;
+  margin: 10px 0;
+  height: 24px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #ededed;
+  position: relative;
+  box-shadow: inset -1px 1px 3px rgba(0, 0, 0, .1);
+}
+
+.markdown-body .progress-label {
+  position: absolute;
+  text-align: center;
+  font-weight: bold;
+  width: 100%; margin: 0;
+  line-height: 24px;
+  color: #333;
+  text-shadow: 1px 1px 0 #fefefe, -1px -1px 0 #fefefe, -1px 1px 0 #fefefe, 1px -1px 0 #fefefe, 0 1px 0 #fefefe, 0 -1px 0 #fefefe, 1px 0 0 #fefefe, -1px 0 0 #fefefe, 1px 1px 2px #000;
+  -webkit-font-smoothing: antialiased !important;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.markdown-body .progress-bar {
+  height: 24px;
+  float: left;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #96c6d7;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), inset 0 -1px 0 rgba(0, 0, 0, .1);
+  background-size: 30px 30px;
+  background-image: -webkit-linear-gradient(
+    135deg, rgba(255, 255, 255, .4) 27%,
+    transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%,
+    transparent 77%, transparent
+  );
+  background-image: -moz-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -ms-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: -o-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, .4) 27%, transparent 27%,
+    transparent 52%, rgba(255, 255, 255, .4) 52%,
+    rgba(255, 255, 255, .4) 77%, transparent 77%,
+    transparent
+  );
+}
+
+.markdown-body .progress-100plus .progress-bar {
+  background-color: #a6d796;
+}
+
+.markdown-body .progress-80plus .progress-bar {
+  background-color: #c6d796;
+}
+
+.markdown-body .progress-60plus .progress-bar {
+  background-color: #d7c896;
+}
+
+.markdown-body .progress-40plus .progress-bar {
+  background-color: #d7a796;
+}
+
+.markdown-body .progress-20plus .progress-bar {
+  background-color: #d796a6;
+}
+
+.markdown-body .progress-0plus .progress-bar {
+  background-color: #c25f77;
+}
+
+.markdown-body .candystripe-animate .progress-bar{
+  -webkit-animation: animate-stripes 3s linear infinite;
+  -moz-animation: animate-stripes 3s linear infinite;
+  animation: animate-stripes 3s linear infinite;
+}
+
+@-webkit-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@-moz-keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+@keyframes animate-stripes {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 60px 0;
+  }
+}
+
+.markdown-body .gloss .progress-bar {
+  box-shadow:
+    inset 0 4px 12px rgba(255, 255, 255, .7),
+    inset 0 -12px 0 rgba(0, 0, 0, .05);
+}
+
+/* Multimarkdown Critic Blocks */
+.markdown-body .critic_mark {
+  background: #ff0;
+}
+
+.markdown-body .critic_delete {
+  color: #c82829;
+  text-decoration: line-through;
+}
+
+.markdown-body .critic_insert {
+  color: #718c00 ;
+  text-decoration: underline;
+}
+
+.markdown-body .critic_comment {
+  color: #8e908c;
+  font-style: italic;
+}
+
+.markdown-body .headeranchor {
+  font: normal normal 16px fontawesome-mini;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.headeranchor:before {
+  content: '\e157';
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 4px 0.25em -20px;
+  vertical-align: middle;
+}
+
+/* Media */
+@media only screen and (min-width: 480px) {
+  .markdown-body {
+    font-size:14px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .markdown-body {
+    font-size:16px;
+  }
+}
+
+@media print {
+  .markdown-body * {
+    background: transparent !important;
+    color: black !important;
+    filter:none !important;
+    -ms-filter: none !important;
+  }
+
+  .markdown-body {
+    font-size:12pt;
+    max-width:100%;
+    outline:none;
+    border: 0;
+  }
+
+  .markdown-body a,
+  .markdown-body a:visited {
+    text-decoration: underline;
+  }
+
+  .markdown-body .headeranchor-link {
+    display: none;
+  }
+
+  .markdown-body a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  .markdown-body abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  .markdown-body .ir a:after,
+  .markdown-body a[href^="javascript:"]:after,
+  .markdown-body a[href^="#"]:after {
+    content: "";
+  }
+
+  .markdown-body pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .markdown-body pre,
+  .markdown-body blockquote {
+    border: 1px solid #999;
+    padding-right: 1em;
+    page-break-inside: avoid;
+  }
+
+  .markdown-body .progress,
+  .markdown-body .progress-bar {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .markdown-body .progress {
+    border: 1px solid #ddd;
+  }
+
+  .markdown-body .progress-bar {
+    height: 22px;
+    border-right: 1px solid #ddd;
+  }
+
+  .markdown-body tr,
+  .markdown-body img {
+    page-break-inside: avoid;
+  }
+
+  .markdown-body img {
+    max-width: 100% !important;
+  }
+
+  .markdown-body p,
+  .markdown-body h2,
+  .markdown-body h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .markdown-body h2,
+  .markdown-body h3 {
+    page-break-after: avoid;
+  }
+}
+</style><style>/*github*/
+.codehilite {background-color:#fff;color:#333333;}
+.codehilite .hll {background-color:#ffffcc;}
+.codehilite .c{color:#999988;font-style:italic}
+.codehilite .err{color:#a61717;background-color:#e3d2d2}
+.codehilite .k{font-weight:bold}
+.codehilite .o{font-weight:bold}
+.codehilite .cm{color:#999988;font-style:italic}
+.codehilite .cp{color:#999999;font-weight:bold}
+.codehilite .c1{color:#999988;font-style:italic}
+.codehilite .cs{color:#999999;font-weight:bold;font-style:italic}
+.codehilite .gd{color:#000000;background-color:#ffdddd}
+.codehilite .ge{font-style:italic}
+.codehilite .gr{color:#aa0000}
+.codehilite .gh{color:#999999}
+.codehilite .gi{color:#000000;background-color:#ddffdd}
+.codehilite .go{color:#888888}
+.codehilite .gp{color:#555555}
+.codehilite .gs{font-weight:bold}
+.codehilite .gu{color:#800080;font-weight:bold}
+.codehilite .gt{color:#aa0000}
+.codehilite .kc{font-weight:bold}
+.codehilite .kd{font-weight:bold}
+.codehilite .kn{font-weight:bold}
+.codehilite .kp{font-weight:bold}
+.codehilite .kr{font-weight:bold}
+.codehilite .kt{color:#445588;font-weight:bold}
+.codehilite .m{color:#009999}
+.codehilite .s{color:#dd1144}
+.codehilite .n{color:#333333}
+.codehilite .na{color:teal}
+.codehilite .nb{color:#0086b3}
+.codehilite .nc{color:#445588;font-weight:bold}
+.codehilite .no{color:teal}
+.codehilite .ni{color:purple}
+.codehilite .ne{color:#990000;font-weight:bold}
+.codehilite .nf{color:#990000;font-weight:bold}
+.codehilite .nn{color:#555555}
+.codehilite .nt{color:navy}
+.codehilite .nv{color:teal}
+.codehilite .ow{font-weight:bold}
+.codehilite .w{color:#bbbbbb}
+.codehilite .mf{color:#009999}
+.codehilite .mh{color:#009999}
+.codehilite .mi{color:#009999}
+.codehilite .mo{color:#009999}
+.codehilite .sb{color:#dd1144}
+.codehilite .sc{color:#dd1144}
+.codehilite .sd{color:#dd1144}
+.codehilite .s2{color:#dd1144}
+.codehilite .se{color:#dd1144}
+.codehilite .sh{color:#dd1144}
+.codehilite .si{color:#dd1144}
+.codehilite .sx{color:#dd1144}
+.codehilite .sr{color:#009926}
+.codehilite .s1{color:#dd1144}
+.codehilite .ss{color:#990073}
+.codehilite .bp{color:#999999}
+.codehilite .vc{color:teal}
+.codehilite .vg{color:teal}
+.codehilite .vi{color:teal}
+.codehilite .il{color:#009999}
+.codehilite .gc{color:#999;background-color:#EAF2F5}
+</style><title>README_v02</title></head><body><article class="markdown-body"><h1 id="icemelt-model-v02">ICEMELT model (v02)<a class="headerlink" href="#icemelt-model-v02" title="Permanent link"></a></h1>
+<p>Repository for ICEMELT fortran model and pre- and post- processing scripts. Created to track modifications (in-lieu of a branch) made to Hoffman et al ICEMELT version by Julian Cross.</p>
+<p>This FORTRAN code simulates the temperature and water content within snow and ice in response to the surface energy balance and penetration of solar radiation into the snow and ice.</p>
+<p><strong>Code:</strong> <code>icemelt_spatial_jmc.f95</code><br />
+<strong>File Location:</strong>
+<code>I:\Antarctica_Julian\icemelt-jmc-working</code><br />
+<strong>Date of README:</strong> 28 June 2018<br />
+<strong>Author of README:</strong> Julian Cross</p>
+<h3 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link"></a></h3>
+<ol>
+<li><a href="#version_history">Version History</a></li>
+<li><a href="#compiling">Compiling the Model</a></li>
+<li><a href="#running">Running the Model</a></li>
+<li><a href="#folders">Folder Structure</a></li>
+<li><a href="#parameters">Input Parameters</a></li>
+<li><a href="#input_files">Input Files</a></li>
+<li><a href="#output_files">Output Files</a></li>
+<li><a href="#postprocess">Post-processing Scripts</a></li>
+<li><a href="#attribution">Attribution</a></li>
+<li><a href="#appendix">Appendix</a></li>
+</ol>
+<hr />
+<h2 id="version-history"><a name="version_history"></a>Version History<a class="headerlink" href="#version-history" title="Permanent link"></a></h2>
+<h5 id="previous-versions">Previous versions:<a class="headerlink" href="#previous-versions" title="Permanent link"></a></h5>
+<ul>
+<li><code>icemelt_8hr_Qc_spatial_xy_mc_drain.f</code> (v00)</li>
+<li><code>icemelt_hoffman_v01.f95</code> (v01)</li>
+</ul>
+<h5 id="changes-from-previous-version">Changes from previous version:<a class="headerlink" href="#changes-from-previous-version" title="Permanent link"></a></h5>
+<ul>
+<li><strong>September 2017</strong>: In <code>elseif (nz.eq.71) then</code>, FZ changed <code>delta(71)</code> to <code>delta(70)</code> due to error flag when compiling.  This can be undone if the user wants to run the code using <code>nz = 71</code>.</li>
+<li><strong>October 2017:</strong> FZ reformatted fixed-format v00 (.f) to free-format v01 (.f95).</li>
+<li><strong>November 2017:</strong> JC made adjustments to <code>namelist.input</code> and output handling.</li>
+<li><strong>March 2018:</strong> JC and FZ removed some portions of functional commented-out code from previous version added by Ebnet or Hoffman.  We did not remove their descriptive comments.</li>
+<li><strong>June 2018:</strong> JC developed scripts to run ICEMELT on Coeus Cluster.</li>
+<li><strong>July 2018:</strong> JC added new albedo method to account for spatial variability of albedo.</li>
+</ul>
+<h2 id="compiling-the-model"><a name="compiling"></a>Compiling the Model<a class="headerlink" href="#compiling-the-model" title="Permanent link"></a></h2>
+<h5 id="fortran-format">FORTRAN format:<a class="headerlink" href="#fortran-format" title="Permanent link"></a></h5>
+<ul>
+<li>The original code was written in FORTRAN 77 (fixed-form).</li>
+<li>Modified version of code was translated to FORTRAN 95 (free-form).</li>
+<li>This verison should be compiled with any FORTRAN 90/95 compiler.</li>
+</ul>
+<h5 id="operating-system">Operating System:<a class="headerlink" href="#operating-system" title="Permanent link"></a></h5>
+<p>The <code>os_info.inc</code> file allows the code to be compiled on DOS or linux operating systems.</p>
+<ul>
+<li>It must be in the icemelt directory (see Model Folder Structure section below).</li>
+<li>It contains shell commands written for each OS.</li>
+</ul>
+<h5 id="linux-compiling">Linux Compiling:<a class="headerlink" href="#linux-compiling" title="Permanent link"></a></h5>
+<p>An example of a compile shell command using GCC (GNU Fortran) 7.2.0<br />
+<code>gfortran -o ./icemelt ./icemelt_spatial_jmc.f95</code></p>
+<p>In this command the <code>-o</code> option specifies that the <code>./icemelt_spatial_jmc.f95</code> program is compiled to an executable object at <code>./icemelt</code> (rather than the default <code>a.out</code>). This executable is used in further shell scripts to run the model.</p>
+<h2 id="running-the-model"><a name="running"></a>Running the Model<a class="headerlink" href="#running-the-model" title="Permanent link"></a></h2>
+<h3 id="on-the-herarcpdxedu-server">On the hera.rc.pdx.edu Server<a class="headerlink" href="#on-the-herarcpdxedu-server" title="Permanent link"></a></h3>
+<ul>
+<li>PSU Research Computing (RC) infrastructure allows for computing on a remote Linux server.</li>
+<li>Permisions need to be given by OIT for access to these servers.</li>
+</ul>
+<h5 id="step-1-logging-into-the-rc-server">Step 1: Logging into the RC Server<a class="headerlink" href="#step-1-logging-into-the-rc-server" title="Permanent link"></a></h5>
+<ul>
+<li>These servers can be accessed via an SSH protocol (from a linux shell or from Putty, for example).</li>
+<li>In a Linux shell, SSH into the server: <code>ssh USERNAME@rc.pdx.edu</code></li>
+<li>Once a PSU odin password is provided, you will be connected to the research server.</li>
+</ul>
+<h5 id="step-2-setting-up-the-working-environment">Step 2: Setting up the working environment<a class="headerlink" href="#step-2-setting-up-the-working-environment" title="Permanent link"></a></h5>
+<ul>
+<li>Once connected to the <code>rc.pdx.edu</code> server, files can be copied from <code>I:\Antarctica_Julian\icemelt-jmc-working</code> via SSH Secure Copy.</li>
+<li>For example, to copy the icemelt directory from the <code>I:</code> drive to the current directory use:<br />
+<code>scp -r USERNAME@sftp.myfiles.pdx.edu:Idrive-ResourcesFolder/Research/Shares/antarctica/WORKING_DIRECTORY .</code></li>
+<li>You may need to load the correct modules in order for code to be correctly compiled, see section below on setting up the working environment.</li>
+</ul>
+<h5 id="step-3-running-the-model">Step 3: Running the model<a class="headerlink" href="#step-3-running-the-model" title="Permanent link"></a></h5>
+<ul>
+<li>If all the required <a href="#input_files">input files</a> and the correct <a href="#folders">folder structure</a> are present, the model can be compiled and run:  </li>
+</ul>
+<div class="codehilite"><pre>gfortran -o ./icemelt ./icemelt_spatial_jmc.f95
+chmod u+x icemelt
+./icemelt
+</pre></div>
+
+<h5 id="step-4-check-the-results-and-transfer-files-back-to-local">Step 4: Check the results and transfer files back to local<a class="headerlink" href="#step-4-check-the-results-and-transfer-files-back-to-local" title="Permanent link"></a></h5>
+<ul>
+<li>Output files and logs can be copied back to the I:drive for post-processing using the inverse of the <code>scp</code> command above:<br />
+<code>scp -r output USERNAME@sftp.myfiles.pdx.edu:Idrive-ResourcesFolder/Research/Shares/antarctica/WORKING_DIRECTORY</code></li>
+<li><strong>NOTE:</strong> A full run of the spatial model should never be run against an executable or data stored on the <code>I:drive</code>. Make sure to transfer necesary data and files to a working directory on the RC server.</li>
+</ul>
+<h3 id="on-the-coeusrcpdxedu-cluster">On the coeus.rc.pdx.edu Cluster<a class="headerlink" href="#on-the-coeusrcpdxedu-cluster" title="Permanent link"></a></h3>
+<ul>
+<li>PSU Research Computing (RC) infrastructure also includes a high-powered computing cluster known as Coeus. </li>
+<li>For more information on how to get access to the Coeus Cluster see <a href="https://www.pdx.edu/oit/research-computing">here</a>.</li>
+<li>For more information on RC infrastructure see these two videos <a href="https://media.pdx.edu/media/MSRP-Research_Computing_Part_1/0_7a3563h2">here</a> and <a href="https://media.pdx.edu/media/MSRP-Research_Computing_Part_2/0_06cog3h7">here</a>.</li>
+<li>For a more elaborate guide to using the Coeus Cluster see this Google Doc <a href="https://docs.google.com/document/d/1OE8ZU_QyMda7pznTBQx_uvBGiSvuHje6v255qMO3j_I/edit#">here</a>.</li>
+<li><strong>NOTE:</strong> You need to be connected to the campus VPN to ssh to the Cluster. From off-campus this can be accomplished with Cisco AnyConnect. For instructions see <a href="https://www.pdx.edu/oit/virtual-private-network-vpn">here</a>.</li>
+</ul>
+<h5 id="step-1-logging-into-the-cluster">Step 1: Logging into the Cluster<a class="headerlink" href="#step-1-logging-into-the-cluster" title="Permanent link"></a></h5>
+<ul>
+<li>Just like the other research servers (e.g. Hera), the Coeus Cluster can be accessed via an SSH conection.</li>
+<li>In a Linux shell, SSH into the cluster login node:<br />
+<code>ssh USERNAME@login1.coeus.rc.pdx.edu</code> or <code>@login2.coeus.rc.pdx.edu</code></li>
+<li>Once a PSU odin password is provided, you will be connected to the cluster.</li>
+</ul>
+<h5 id="step-2-setting-up-the-working-environment_1">Step 2: Setting up the working environment<a class="headerlink" href="#step-2-setting-up-the-working-environment_1" title="Permanent link"></a></h5>
+<ul>
+<li>Files can be copied from <code>I:\Antarctica_Julian\icemelt-jmc-working</code> via SSH Secure Copy.</li>
+<li>For example, to copy the icemelt directory from the <code>I:</code> drive to the current directory use:<br />
+<code>scp -r USERNAME@sftp.myfiles.pdx.edu:Idrive-ResourcesFolder/Research/Shares/antarctica/WORKING_DIRECTORY .</code></li>
+<li>In order to compile and run certain programs, modules containing the necessary compilers and software (e.g. GCC, Python, FORTRAN, R) need to be loaded into the working environment on the Cluster.</li>
+<li>The modules that are available to load can be listed with <code>module avail</code>:</li>
+</ul>
+<div class="codehilite"><pre><span class="go">------------------------------ /usr/share/Modules/modulefiles -------------------------------</span>
+<span class="go">dot         module-git  module-info modules     null        use.own</span>
+
+<span class="go">------------------------------------- /etc/modulefiles --------------------------------------</span>
+<span class="go">mpi/openmpi-x86_64</span>
+
+<span class="go">------------------------------------- /act/modulefiles --------------------------------------</span>
+<span class="go">gcc-6.3.0</span>
+<span class="go">gcc-7.2.0</span>
+<span class="go">General/matlab/R2018a</span>
+<span class="go">General/matlab2017a</span>
+<span class="go">mvapich2-2.2/gcc-6.3.0</span>
+<span class="go">mvapich2-2.2/gcc-7.2.0</span>
+<span class="go">openmpi-2.0/gcc-7.2.0</span>
+<span class="go">Python/3.6.4/gcc-6.3.0</span>
+<span class="go">R/3.2.1/mvapich2-2.2-psm/gcc-7.2.0</span>
+<span class="go">R/3.4.0/gcc6.3</span>
+</pre></div>
+
+<ul>
+<li>To list the modules currently loaded, use <code>module list</code></li>
+<li>To load a module use <code>module load NAME</code></li>
+<li><strong>NOTE:</strong> Modules can be loaded from inside a run/batch script, see below.</li>
+</ul>
+<h5 id="step-3-running-the-model-with-an-sbatch-script">Step 3: Running the model with an SBATCH script<a class="headerlink" href="#step-3-running-the-model-with-an-sbatch-script" title="Permanent link"></a></h5>
+<ul>
+<li>The Coeus Cluster uses a program called SLURM Workload Manager with OpenMPI (message passing interface) to schedule processes and manage processes on each node of the cluster.</li>
+<li>More information on SLURM see <a href="https://slurm.schedmd.com/quickstart.html">here</a>.</li>
+<li>To schedule processes on the Cluster through SLURM, a SBATCH script needs to be used. This script is basically a bash or <code>.sh</code> script with some lines of code that are unique to the SLURM program. See code example below:</li>
+</ul>
+<div class="codehilite"><pre><span class="ch">#!/bin/bash</span>
+<span class="c1"># script to run all surfaces in ICEMELT in parallel on Coeus Cluster</span>
+<span class="c1">#</span>
+<span class="c1"># SLURM parallel commands</span>
+<span class="c1">#SBATCH --job-name=icemelt-all</span>
+<span class="c1">#SBATCH --output=logs/icemelt-%A.log</span>
+<span class="c1">#</span>
+<span class="c1"># mail alert at start, end and abortion of execution</span>
+<span class="c1">#SBATCH --mail-type=ALL</span>
+<span class="c1">#</span>
+<span class="c1"># send mail to this address</span>
+<span class="c1">#SBATCH --mail-user=jucross@pdx.edu</span>
+<span class="c1">#</span>
+<span class="c1"># load cluster module</span>
+module purge
+module load gcc-7.2.0
+
+<span class="c1"># compile ICEMELT</span>
+<span class="c1"># gfortran -g -o ./icemelt ./icemelt_spatial_jmc.f95</span>
+
+<span class="c1">### run ICEMELT with for loop and SLURM srun</span>
+
+<span class="c1"># base commands for running the model</span>
+<span class="nv">NL</span><span class="o">=</span><span class="s2">&quot;./namelist/namelist.input&quot;</span>
+<span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;./icemelt&quot;</span>
+<span class="nv">runname</span><span class="o">=</span><span class="sb">`</span>grep runnametext <span class="nv">$NL</span> <span class="p">|</span> cut -f <span class="m">2</span> -d <span class="s2">&quot;\&quot;&quot;</span><span class="sb">`</span>
+
+<span class="nb">echo </span>using <span class="nv">runnametext</span><span class="o">=</span><span class="nv">$runname</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;running smooth surface run&quot;</span>
+cp <span class="nv">$NL</span> <span class="nv">$NL</span>.smooth
+
+<span class="c1"># run smooth</span>
+<span class="nv">$CMD</span> <span class="nv">$NL</span>.smooth <span class="p">&amp;</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;setup &amp; run basin wall&quot;</span>
+cp <span class="nv">$NL</span> <span class="nv">$NL</span>.bwall
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*z_0.*/z_0 = 1/&quot;</span> <span class="nv">$NL</span>.bwall
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*tempadd.*/tempadd = 0.5/&quot;</span> <span class="nv">$NL</span>.bwall
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*windmult.*/windmult = 0.67/&quot;</span> <span class="nv">$NL</span>.bwall
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*albedo_offset.*/albedo_offset = -0.065/&quot;</span> <span class="nv">$NL</span>.bwall
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*runnametext.*/runnametext = \&quot;</span><span class="nv">$runname</span><span class="s2">-bwall\&quot;/&quot;</span> <span class="nv">$NL</span>.bwall
+
+<span class="c1"># run basin wall</span>
+<span class="nv">$CMD</span> <span class="nv">$NL</span>.bwall <span class="p">&amp;</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;setup &amp; run basin floor&quot;</span>
+cp <span class="nv">$NL</span> <span class="nv">$NL</span>.bfloor
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*z_0.*/z_0 = 1/&quot;</span> <span class="nv">$NL</span>.bfloor
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*tempadd.*/tempadd = 1.5/&quot;</span> <span class="nv">$NL</span>.bfloor
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*windmult.*/windmult = 0.33/&quot;</span> <span class="nv">$NL</span>.bfloor
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*albedo_offset.*/albedo_offset = -0.17/&quot;</span> <span class="nv">$NL</span>.bfloor
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*runnametext.*/runnametext = \&quot;</span><span class="nv">$runname</span><span class="s2">-bfloor\&quot;/&quot;</span> <span class="nv">$NL</span>.bfloor
+
+<span class="c1"># run basin floor</span>
+<span class="nv">$CMD</span> <span class="nv">$NL</span>.bfloor <span class="p">&amp;</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;setup &amp; run cliff&quot;</span>
+cp <span class="nv">$NL</span> <span class="nv">$NL</span>.cliff
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*z_0.*/z_0 = 0.1/&quot;</span> <span class="nv">$NL</span>.cliff
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*glacnum.*/glacnum = -1/&quot;</span> <span class="nv">$NL</span>.cliff
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*runnametext.*/runnametext = \&quot;</span><span class="nv">$runname</span><span class="s2">-cliff\&quot;/&quot;</span> <span class="nv">$NL</span>.cliff
+
+<span class="c1"># run cliff</span>
+<span class="nv">$CMD</span> <span class="nv">$NL</span>.cliff <span class="p">&amp;</span>
+
+<span class="nb">wait</span>
+
+<span class="c1"># rm sed*</span>
+<span class="c1"># rm *.SEDBACKUP</span>
+
+<span class="c1"># end</span>
+</pre></div>
+
+<ul>
+<li>
+<p>In the code above, the <code>#SBATCH</code> command is used to setup the SLURM job. Note that the <code>#SBATCH</code> (correct) is different than <code># SBATCH</code> (incorrect).</p>
+<ul>
+<li><code>#SBATCH --job-name=icemelt</code> sets the job name.</li>
+<li><code>#SBATCH --ntasks-per-node=1</code> sets the number of tasks per node (-n=1 is the default and synonymous to &ndash;ntasks-per-node=1)</li>
+<li><code>#SBATCH --partition medium</code> sets the jobs to run on the medium partition of the Coeus Cluster, which is meant for processes that take between 1-3 days.</li>
+<li><code>#SBATCH --output=logs/albedo-%A.log</code> sets the output to a <code>.log</code> text file where <code>%A</code> is the job ID.</li>
+<li><code>#SBATCH --mail-type=ALL</code> and <code>#SBATCH --mail-user=USERNAME@pdx.edu</code> control how SLURM sends notifications.</li>
+<li><code>module load gcc-7.2.0</code> loads the GCC 7.2.0 compiler.</li>
+<li><code>./icemelt ./namelist.input</code> runs the model.</li>
+</ul>
+</li>
+<li>
+<p>This SBATCH job submit script can be run by calling the sbatch command:</p>
+</li>
+</ul>
+<div class="codehilite"><pre>chmod u+x run_cluster.sh
+sbatch run_cluster.sh
+</pre></div>
+
+<ul>
+<li>If the job was succesfully submitted:</li>
+</ul>
+<div class="codehilite"><pre><span class="go">Submitted batch job 42776</span>
+</pre></div>
+
+<h5 id="step-4-check-the-results-and-transfer-files-back-to-local_1">Step 4: Check the results and transfer files back to local<a class="headerlink" href="#step-4-check-the-results-and-transfer-files-back-to-local_1" title="Permanent link"></a></h5>
+<ul>
+<li><code>squeue -u USERNAME</code> can be used to check if the job is running (use <code>-u USERNAME</code> option to show only jobs submitted by you). Or to see the queue of jobs to be run.</li>
+</ul>
+<div class="codehilite"><pre><span class="go">    JOBID PARTITION     NAME     USER ST       TIME  NODES NODELISTREASON)</span>
+<span class="go">     42776_[7]    medium  icemelt  jucross PD       0:00      1 (Resources)</span>
+<span class="go">       42776_1    medium  icemelt  jucross  R       0:06      1 compute033</span>
+<span class="go">       42776_2    medium  icemelt  jucross  R       0:06      1 compute021</span>
+<span class="go">       42776_3    medium  icemelt  jucross  R       0:06      1 compute024</span>
+<span class="go">       42776_4    medium  icemelt  jucross  R       0:06      1 compute026</span>
+<span class="go">       42776_5    medium  icemelt  jucross  R       0:06      1 compute029</span>
+<span class="go">       42776_6    medium  icemelt  jucross  R       0:06      1 compute031</span>
+</pre></div>
+
+<ul>
+<li><code>scancel JOBID</code> can be used to cancel a job.</li>
+<li>Output files and logs can be copied back to the I:drive for post-processing using the inverse of the <code>scp</code> command above:<br />
+<code>scp -r output USERNAME@sftp.myfiles.pdx.edu:Idrive-ResourcesFolder/Research/Shares/antarctica/WORKING_DIRECTORY</code><br />
+and<br />
+<code>scp -r logs USERNAME@sftp.myfiles.pdx.edu:Idrive-ResourcesFolder/Research/Shares/antarctica/WORKING_DIRECTORY</code>  </li>
+<li><strong>NOTE:</strong> A full run of the spatial model should never be run against an executable or data stored on the <code>I:drive</code>. Make sure to transfer necesary data and files to a working directory on the Cluster.</li>
+</ul>
+<h2 id="folder-structure"><a name="folders"></a>Folder Structure<a class="headerlink" href="#folder-structure" title="Permanent link"></a></h2>
+<p>The model depends on several files and directories that need to reside in the same working directory. These files include <code>os_info.inc</code>, <code>namelist.input</code> and the files described below in the &lsquo;Input Files&rsquo; section. Additionally an <code>output</code> directory needs to exist. The folder structure below is required for a succesful spatial run of the model:</p>
+<div class="codehilite"><pre>├───icemelt-working-dir
+│       icemelt
+│       icemelt_spatial_jmc.f95
+│       os_info.inc
+│       namelist.input
+│       README.txt
+│
+├───────output
+├───────logs
+├───────input_cliff
+│               XXXYYY.bin
+│               ...
+│
+├───────input
+│               XXXYYY.bin
+│               ...
+│               9513_alb.clf
+│               9513_alb.AVG
+│               9513_alb.CAA
+│               9513_alb.TAR
+│               BFS_stn.bin
+│               CAA_stn.bin
+│               COH_stn.bin
+│               HOD_stn.bin
+│               LHC_stn.bin
+│               TAR_stn.bin
+│               hoe_pa.bin
+│               icetempinit2008good.txt
+│               mie.dat
+│               solar.dat
+│               specalb.dat
+│               tv_basins_cliff.txt
+│               tv_basins_surface.txt
+│               tv_dem250.txt
+│               tv_landcovermetstake.txt
+│               tv_landcover_met.txt
+│               T_avg_all.txt
+│               T_avg_cliff.txt
+└────────────── T_avg_surf.txt
+</pre></div>
+
+<h2 id="input-parameters"><a name="parameters"></a>Input Parameters<a class="headerlink" href="#input-parameters" title="Permanent link"></a></h2>
+<p>Model parameters controlling both environmental variables and run settings are specified in the <code>namelist.input</code> file (a FORTRAN file formatted as below).</p>
+<div class="codehilite"><pre><span class="p">&amp;</span><span class="n">params</span>
+<span class="c">! required parameters</span>
+    <span class="n">glacnum</span> <span class="o">=</span> <span class="mi">0</span> <span class="c">! case</span>
+    <span class="n">z_0</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c">! mm</span>
+    <span class="n">dz1</span> <span class="o">=</span> <span class="mf">0.0025</span> <span class="c">! m</span>
+    <span class="n">n_snowgrain_radius</span> <span class="o">=</span> <span class="mi">9</span> <span class="c">! index</span>
+    <span class="n">runmin</span> <span class="o">=</span> <span class="mi">10</span> <span class="c">! index</span>
+    <span class="n">runmax</span> <span class="o">=</span> <span class="mi">82</span> <span class="c">! index</span>
+    <span class="n">runnametext</span> <span class="o">=</span> <span class="s2">&quot;TEST&quot;</span>
+<span class="c">! optional adjustments to met data</span>
+    <span class="n">tempadd</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">windmult</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">albedo_offset</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="c">! number of time steps to run</span>
+    <span class="n">maxiter</span> <span class="o">=</span> <span class="mi">6426</span>
+<span class="c">! set start year</span>
+    <span class="n">yeararg</span> <span class="o">=</span> <span class="s2">&quot;1995&quot;</span>
+<span class="o">/</span>
+</pre></div>
+
+<p>The values for <code>z_0</code>, <code>dz1</code>, <code>n_snowgrain_radius</code> in the above example correspond to the parameterization of the model by MJH in Hoffman 2016.</p>
+<p>The values for <code>glacnum</code>, <code>runmin</code>, and <code>runmax</code> correspond to a spatial configuration of the model.</p>
+<p>The values for parameters <code>tempadd</code>, <code>windmult</code>, and <code>albedo_offset</code> correspond to no adjustments to the input met data.</p>
+<p>The values for parameters <code>maxiter</code> and <code>yeararg</code> correspond with a configuration of the model to run accross the entire MicroMet period with data, from July 1st 1995 to February 1st 2013 (e.g. 6426 days).</p>
+<h5 id="required-parameters">Required Parameters:<a class="headerlink" href="#required-parameters" title="Permanent link"></a></h5>
+<ul>
+<li><code>glacnum</code> Specifies the run type (e.g. station or spatial).</li>
+<li><code>z_0</code>: Surface roughness length.</li>
+<li><code>dz1</code>: The thickness of the darkened surface layer.</li>
+<li><code>n_snowgrain_radius</code>: The address of specified snow grain radius in an index.</li>
+</ul>
+<div class="codehilite"><pre><span class="c">! These are the possible radii (mm) that can be used for the model simulations.</span>
+      <span class="k">data </span><span class="n">radii</span><span class="o">/</span><span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.007</span><span class="p">,</span> <span class="mf">0.010</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">,</span> <span class="mf">0.020</span><span class="p">,</span> <span class="p">&amp;</span>
+                 <span class="mf">0.030</span><span class="p">,</span> <span class="mf">0.040</span><span class="p">,</span> <span class="mf">0.050</span><span class="p">,</span> <span class="mf">0.065</span><span class="p">,</span> <span class="mf">0.080</span><span class="p">,</span> <span class="p">&amp;</span>
+                 <span class="mf">0.100</span><span class="p">,</span> <span class="mf">0.120</span><span class="p">,</span> <span class="mf">0.140</span><span class="p">,</span> <span class="mf">0.170</span><span class="p">,</span> <span class="mf">0.200</span><span class="p">,</span> <span class="p">&amp;</span>
+                 <span class="mf">0.240</span><span class="p">,</span> <span class="mf">0.290</span><span class="p">,</span> <span class="mf">0.350</span><span class="p">,</span> <span class="mf">0.420</span><span class="p">,</span> <span class="mf">0.500</span><span class="p">,</span> <span class="p">&amp;</span>
+                 <span class="mf">0.570</span><span class="p">,</span> <span class="mf">0.660</span><span class="p">,</span> <span class="mf">0.760</span><span class="p">,</span> <span class="mf">0.870</span><span class="p">,</span> <span class="mf">1.000</span><span class="p">,</span> <span class="p">&amp;</span>
+                 <span class="mf">1.100</span><span class="p">,</span> <span class="mf">1.250</span><span class="p">,</span> <span class="mf">1.400</span><span class="p">,</span> <span class="mf">1.600</span><span class="p">,</span> <span class="mf">1.800</span><span class="p">,</span> <span class="p">&amp;</span>
+                 <span class="mf">2.000</span><span class="p">,</span> <span class="mf">2.500</span><span class="p">,</span> <span class="mf">3.000</span><span class="p">,</span> <span class="mf">3.500</span><span class="p">,</span> <span class="mf">4.000</span><span class="p">,</span> <span class="p">&amp;</span>
+                 <span class="mf">4.500</span><span class="p">,</span> <span class="mf">5.000</span><span class="p">,</span> <span class="mf">5.500</span><span class="p">,</span> <span class="mf">6.000</span><span class="p">,</span> <span class="mf">6.500</span><span class="p">,</span> <span class="p">&amp;</span>
+                 <span class="mf">7.000</span><span class="p">,</span> <span class="mf">7.500</span><span class="p">,</span> <span class="mf">8.000</span><span class="p">,</span> <span class="mf">8.500</span><span class="p">,</span> <span class="mf">9.000</span><span class="p">,</span> <span class="p">&amp;</span>
+                 <span class="mf">9.500</span><span class="p">,</span><span class="mi">1</span><span class="mf">0.000</span><span class="o">/</span>
+</pre></div>
+
+<ul>
+<li><code>runmin</code>: Minimum value of the range of model basins to run, the lowest being 10. Can be set to -999 to prevent spatial run. (An index value)</li>
+<li><code>runmax</code>: Maximum value of the range of model basins to run, the maximum being 82. Can be set to -999 to prevent spatial run. (An index value)</li>
+<li><code>runnametext</code>: User specified name within full run name (see notes on output folder name below).</li>
+</ul>
+<h5 id="optional-adjustments-to-met-data">Optional adjustments to met data:<a class="headerlink" href="#optional-adjustments-to-met-data" title="Permanent link"></a></h5>
+<ul>
+<li><code>tempadd</code>: added globally to input air temperature data.</li>
+<li><code>windmult</code>: multiplier applied to input wind speed data.</li>
+<li><code>albedo_offset</code>: offset applied to input albedo data.</li>
+</ul>
+<h5 id="temporal-parameters">Temporal parameters:<a class="headerlink" href="#temporal-parameters" title="Permanent link"></a></h5>
+<ul>
+<li><code>maxiter</code>: The number of daily time steps in the model run.  If an hourly step is used, they are addressed within the model, and maxiter should still equal the number of daily time steps.</li>
+<li><code>yeararg</code>: This controls which year the model starts on, so if this is adjusted the <code>maxiter</code> parameter will likely need to be as well.</li>
+</ul>
+<h5 id="other-parameters">Other parameters:<a class="headerlink" href="#other-parameters" title="Permanent link"></a></h5>
+<p>These are not controlled by the <code>namelist.input</code> file but are set internally in the model.</p>
+<ul>
+<li><code>nz</code>: The number of cells in the ice subsurface down to 15 m. This parameter also dictates the size of each cell.</li>
+<li><code>ndarklayers</code>: the number of surface layers of the air-ice interface that interactvs with the atmosphere over the time step (related to Chi in Hoffman et al. 2008) </li>
+<li><code>drain_thresh</code>: the water fraction at which water is removed from the subsurface.</li>
+<li><code>J_day_start</code>: Start Date (Julian calendar) = 182 (July 1), which is ideal since it initiates the model at a time low melt.</li>
+<li><code>dt</code> (Time step): 3600 s (hourly), 86400 s (daily)</li>
+</ul>
+<h5 id="output-control-parameters">Output control parameters:<a class="headerlink" href="#output-control-parameters" title="Permanent link"></a></h5>
+<ul>
+<li><code>iwritehourlymelt</code>: controls how often output is written.  1 = hourly.  0 = daily.</li>
+</ul>
+<h2 id="input-files"><a name="input_files"></a>Input Files<a class="headerlink" href="#input-files" title="Permanent link"></a></h2>
+<h5 id="required-for-stationary-run">Required for Stationary Run:<a class="headerlink" href="#required-for-stationary-run" title="Permanent link"></a></h5>
+<ul>
+<li><code>STN_stn.bin</code>: binary hourly met input file for each met station (Unit 32).<ul>
+<li>Includes: TAR, HOD, COH, CAA, BFS, LHC</li>
+</ul>
+</li>
+<li><code>9513_alb.STN</code>: ASCII (text) input daily albedo file for each run case (Unit 33)<ul>
+<li>Includes: TAR, CAA, clf, AVG</li>
+</ul>
+</li>
+<li><code>icetempinit.txt</code>: optional text file that initializes subsurfce temperatures, precluding the need to run multiple annual iterations to equilibrate the ice tmperature. </li>
+</ul>
+<h5 id="required-for-spatial-run">Required for Spatial Run:<a class="headerlink" href="#required-for-spatial-run" title="Permanent link"></a></h5>
+<ul>
+<li><code>XXXYYY.bin</code>: binary MicroMet input file for each glacier cell (Unit 31). <ul>
+<li>Includes: 1300 cells with names formatted as X (000), Y (000) location</li>
+</ul>
+</li>
+<li><code>tv_basins_cliff.txt</code>: ASCII input landcover type for cliff run (Unit 50)</li>
+<li><code>tv_basins_surface.txt</code>: ASCII input landcover type for smooth surface run (Unit 50)</li>
+<li><code>tv_dem250.txt</code>: ASCII input DEM (Unit 51)</li>
+<li><code>T_avg_all.txt</code>: ASCII input temperature file (Unit 52)</li>
+</ul>
+<h2 id="output-files"><a name="output_files"></a>Output Files<a class="headerlink" href="#output-files" title="Permanent link"></a></h2>
+<ul>
+<li>Binary (.bin) files can be read using <code>float32</code> format.</li>
+<li>When reading data, the number of rows in the array will depend on the value of nz used in the model.</li>
+<li>Output array is structured so the variables are written by row and each column represents a point in time.</li>
+<li>The prefix of output file names indicates the grid cell in &lsquo;model space&rsquo; (could be met station location or uninstrumented glacier cell)</li>
+</ul>
+<h5 id="output-folder-name">Output Folder Name:<a class="headerlink" href="#output-folder-name" title="Permanent link"></a></h5>
+<ul>
+<li>E.g. <code>TAR_NAME_0.0100000_0.0001_10</code></li>
+<li>A concatenation of the <code>glaccode</code>, <code>runname</code>, and other input parameters (e.g. <code>z_0</code>, <code>delta z</code>, <code>snow grain radius</code>)</li>
+<li>The runname is set in the namelist.input file, in this case <code>runnametext = "NAME"</code></li>
+</ul>
+<h5 id="station-run-output-files-referred-to-as-detailed-output-in-model">Station run output files (referred to as detailed output in model):<a class="headerlink" href="#station-run-output-files-referred-to-as-detailed-output-in-model" title="Permanent link"></a></h5>
+<ul>
+<li><code>053036.out</code>: binary unformated file<ul>
+<li>Meteorologic and energy balance output varaiables (20)</li>
+<li>Stored in array <code>xdataout</code> with dimensions <code>[20,175000]</code></li>
+<li>Accessed using unit (28)</li>
+<li>Each of the 20 columns are listed below with corresponding variable:</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Column #</th>
+<th align="center">Variable</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">timestep</td>
+<td align="center">Hourly timestep</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Tair - Tf</td>
+<td align="center">Air temp. minus the freezing point of water</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Tsfc - Tf</td>
+<td align="center">Surface temp. minus the freezing point of water</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">Qsi</td>
+<td align="center">Incoming shortwave radiation flux</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">Qli</td>
+<td align="center">Incoming longwave radiation flux</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">Qle</td>
+<td align="center">Outgoing longwave radiation flux</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">Qh</td>
+<td align="center">Latent energy flux</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">Qe</td>
+<td align="center">Sensible energy flux</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">Qc</td>
+<td align="center">Conduction heat flux</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">Qm</td>
+<td align="center">Energy available for melt</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">balance</td>
+<td align="center">Energy balance</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">albedo</td>
+<td align="center">Albedo</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">stability</td>
+<td align="center">Stability</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center">surface melt</td>
+<td align="center">Melt at surface</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center">ablation</td>
+<td align="center">Ablation at surface</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td align="center">snow</td>
+<td align="center">Snow depth at surface</td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td align="center">water depth</td>
+<td align="center">Water column depth</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td align="center">water flux</td>
+<td align="center">Water flux out of ice column at surface</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td align="center">subdrain</td>
+<td align="center">Water flux out of ice column subsurface</td>
+</tr>
+<tr>
+<td align="center">20</td>
+<td align="center">wind speed</td>
+<td align="center">Windspeed</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>053036.densityprofile</code>: ASCII text format file<ul>
+<li>This is a file to write out the end of summer density profile for each year</li>
+<li>Stored in array &lsquo;endofsummerdensity&rsquo; with dimensions <code>[30]</code></li>
+<li>Writes just the upper 30 layers for each year (on January 31, the approx. end of summer  date)</li>
+<li>Default density of ice and snow assumed to be 870 kg m-3</li>
+<li>Accessed using unit (66)</li>
+</ul>
+</li>
+</ul>
+<h5 id="spatial-run-output-files-referred-to-as-general-output-in-model">Spatial Run Output Files (referred to as general output in model):<a class="headerlink" href="#spatial-run-output-files-referred-to-as-general-output-in-model" title="Permanent link"></a></h5>
+<ul>
+<li>
+<p><code>053036.ablation.hourly</code>: binary unformatted file</p>
+<ul>
+<li>This is a file to write out surface melt, ablation, and drained subsurface melt hourly</li>
+<li>Stored in variables <code>surface_melt</code>, <code>ablation</code>, <code>submelt</code>.</li>
+<li>Output array has dimensions of <code>[3,175000]</code></li>
+<li>This is optionally switched on and off at <code>iwritehourlymelt</code></li>
+<li>Accessed using unit (21)</li>
+</ul>
+</li>
+<li>
+<p><code>053036.ablation.daily</code>: binary unformatted file</p>
+<ul>
+<li>This is a file to write out surface melt, ablation, and drained subsurface melt daily</li>
+<li>Stored in variables <code>daymelt</code>, <code>dayablation</code>, and <code>daysubdrain</code> which are then stored in array <code>day_melt_abl_out</code> with dimensions <code>[3,7000]</code></li>
+<li>Accessed using unit (20)</li>
+</ul>
+</li>
+</ul>
+<h5 id="other-output-files">Other Output Files:<a class="headerlink" href="#other-output-files" title="Permanent link"></a></h5>
+<ul>
+<li>
+<p><code>downupext.out</code>: ASCII text format file</p>
+<ul>
+<li>Energy downwelling and upwelling based on extinction coefficient, feeds back into model as initial conditions of subsequent runs.</li>
+<li>First line is incoming solar radiation</li>
+<li>Next 73 lines are for depths as per ycrds.out down to 15 meters.</li>
+<li>Accessed using unit (24)</li>
+</ul>
+</li>
+<li>
+<p><code>qsfactor</code>: ASCII text format file</p>
+<ul>
+<li>Single value, used for output processing</li>
+<li>Calculated in <code>DARKENLAYERS</code> subroutine.</li>
+<li>This subroutine automatically calculates what % of the net Qs to eliminate from the SEB based on how many layers you want to black out.</li>
+</ul>
+</li>
+<li>
+<p><code>ycrds.out</code>: ASCII text format file</p>
+<ul>
+<li>Writes the coordinate system used for the T points, excluding boundaries.</li>
+<li>Accessed using unit (24)</li>
+</ul>
+</li>
+<li>
+<p><code>downup.OUT</code>: ASCII text format file</p>
+<ul>
+<li>This is the full output for downwelling and upwelling energy at every depth.</li>
+<li>Variables include depth (meters), downwelling energy, upwelling energy, and the difference between up and downwelling</li>
+<li>Optional output of down and up streams.  This is useful for getting around the variable deltaz problem: Set deltaz to be constant, output down &amp; up, change deltaz back to the desired values, then read down &amp; up in to bypass their calculation.&rdquo;</li>
+<li>Accessed using unit (24)</li>
+</ul>
+</li>
+<li>
+<p><code>053036.subsurf</code>: binary unformatted file</p>
+<ul>
+<li>Array with dimensions <code>[100]</code></li>
+<li>Still not sure what this file is, but it has to do with temperature and water fraction.</li>
+</ul>
+</li>
+</ul>
+<h2 id="post-processing-scripts"><a name="postprocess"></a>Post-processing Scripts<a class="headerlink" href="#post-processing-scripts" title="Permanent link"></a></h2>
+<h2 id="attribution"><a name="attribution"></a>Attribution<a class="headerlink" href="#attribution" title="Permanent link"></a></h2>
+<h5 id="author-of-original-code-is">Author of original code is:<a class="headerlink" href="#author-of-original-code-is" title="Permanent link"></a></h5>
+<ul>
+<li>Dr. Glen E. Liston<br />
+InterWorks Consulting<br />
+15048 NCR 25E<br />
+Loveland, Colorado 80538  </li>
+</ul>
+<p>The general model equations are described in the paper:</p>
+<ul>
+<li>Below-surface ice melt on the coastal Antarctic ice sheet, by Glen E. Liston and 4 others, Journal of Glaciology, 1999, Vol. 45, No. 150, pages 273-285.</li>
+</ul>
+<h5 id="modifications-to-the-orginal-code-by">Modifications to the orginal code by:<a class="headerlink" href="#modifications-to-the-orginal-code-by" title="Permanent link"></a></h5>
+<ul>
+<li>Dr. Matthew J. Hoffman<br />
+Department of Geology,<br />
+Portland State University,<br />
+Portland, Oregon 97201  </li>
+</ul>
+<p>For details on Hoffman model, see:</p>
+<ul>
+<li>Hoffman et al. 2008</li>
+<li>Hoffman et al. 2014</li>
+<li>Hoffman et al. 2016</li>
+</ul>
+<h5 id="subsequent-modifications-to-hoffman-code-by">Subsequent modifications to Hoffman code by:<a class="headerlink" href="#subsequent-modifications-to-hoffman-code-by" title="Permanent link"></a></h5>
+<ul>
+<li>Julian M. Cross<br />
+Department of Geography,<br />
+Portland State University,<br />
+Portland, Oregon 97201</li>
+</ul>
+<h2 id="appendix"><a name="appendix"></a>Appendix<a class="headerlink" href="#appendix" title="Permanent link"></a></h2>
+<h5 id="data-dictionary">Data Dictionary<a class="headerlink" href="#data-dictionary" title="Permanent link"></a></h5>
+<p>Comments and notes developed by Felix Zamora on 10/11/2017 and subsequent contributuions by Julian Cross on 6/28/2018.</p>
+<div class="codehilite"><pre><span class="c">! data dictionary</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">ablation_output</span>   <span class="c">! ablation</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">albedo_evo_poly_a</span><span class="p">,</span><span class="n">albedo_evo_poly_b</span><span class="p">,</span><span class="n">albedo_evo_poly_c</span> 
+        <span class="c">! constants for calculating the best fit polynomial of albedo.</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">albedo_evo_poly_d</span><span class="p">,</span><span class="n">snow_albedo_thresh</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">31</span><span class="p">)</span> <span class="kd">::</span> <span class="n">albedo_file</span>       <span class="c">! albedo input data from met stations</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">albedo_water</span>   <span class="c">! albedo of water</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="kd">::</span> <span class="n">c_deltaz1</span>    
+        <span class="c">! placeholder for deltaz value when writing run name</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span> <span class="kd">::</span> <span class="n">c_md_string</span>   
+        <span class="c">! shell commands for DOS or Linux environments</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="kd">::</span> <span class="n">c_snowgrain_radius</span>  
+        <span class="c">! placeholder for snowgrain radius when building filename</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="kd">::</span> <span class="n">c_year</span>         
+        <span class="c">! placeholder for year start when building filename</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="kd">::</span> <span class="n">c_yearstart</span>  <span class="c">! placeholder when building filename</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="kd">::</span> <span class="n">c_yearend</span>      <span class="c">! placeholder when building filename</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="kd">::</span> <span class="n">c_z_0</span>      
+        <span class="c">! placeholder for z_0 value when writing run name</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span> <span class="kd">::</span> <span class="n">cjunk</span>   
+        <span class="c">! shell variable to read through input file headers</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">Cp_air</span>      
+        <span class="c">! Specific heat capacity of air (SUBROUTINE: CONSTS_ICE)</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">D_e</span><span class="p">,</span> <span class="n">D_h</span>        
+        <span class="c">! Exchange coefficient of sensible and latent heat (eq. A14, SUBROUTINES: EXCOEFS, EXCOEFS_SCALAR)</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">day_melt_abl_out</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7000</span><span class="p">)</span>   
+        <span class="c">! output array for daily melt, ablation, and drainage</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">dt</span>      <span class="c">! model time steps; day=86400, hr=3600 sec.</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">dz1</span><span class="p">,</span> <span class="n">drainthresh</span><span class="p">,</span> <span class="n">tempadd</span><span class="p">,</span> <span class="n">windmult</span><span class="p">,</span> <span class="n">albedo_offset</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">ea</span>          
+        <span class="c">! Vapor pressure at reference height (SUBROUTINE: VAPPRESS)</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">emiss_sfc</span>  <span class="c">! surface emissivity of snow/ice</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">endofsummerdensity</span><span class="p">(</span><span class="n">JJ</span><span class="p">)</span>  <span class="c">! ice density updated each season</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">es0</span>         <span class="c">! Vapor pressure at ice surface (SUBROUTINE: VAPOR)</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="kd">::</span> <span class="n">glaccode</span>  <span class="c">! glacier code</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">glacnum</span>  <span class="c">! used to delcare run type</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">gravity</span>     <span class="c">! gravitational acceleration</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">hr</span>     <span class="c">! hour of day</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i2</span><span class="p">,</span><span class="n">j2</span><span class="p">,</span><span class="n">iarraypos</span>   
+        <span class="c">! array position variables for met station and pressure data.</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">ierr</span>     <span class="c">! i/o error code</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">immstart</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">28</span><span class="p">),</span> <span class="n">immoffset</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">ihrs_day</span>     <span class="c">! hours in a day (SUBROUTINE: CONSTS)</span>
+    <span class="kt">real</span><span class="p">,</span> <span class="k">dimension</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span> <span class="kd">::</span> <span class="n">input_met</span>   <span class="c">! meteorologic input array</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">i_yearstart</span>      <span class="c">! Starting year</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">lamp_dist</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">maxiter</span>
+    <span class="c">! maxiter is the number of DAILY time steps in the model run.</span>
+    <span class="c">! parameter (maxiter=365)</span>
+    <span class="c">! parameter (maxiter=1)</span>
+    <span class="c">! replace this with leap year check below</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">n_snowgrain_radius</span>   <span class="c">! snow grain radius</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span> <span class="kd">::</span> <span class="n">nlfname</span>     <span class="c">! name list file name??</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">one_atmos</span>   <span class="c">! One atmosphere (Subroutine: CONSTS)</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">Pa</span>      
+        <span class="c">! Atmospheric pressure when met. data is unavailable (Subroutine: PRESSURE)</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">26</span><span class="p">)</span> <span class="kd">::</span> <span class="n">Pa_file</span>   <span class="c">! Lake Hoare Atmospheric pressure file</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">Qe</span>    <span class="c">! Sensible energy</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">Qh</span>      <span class="c">! Latent energy</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">Qsi</span>   <span class="c">! Incoming shortwave energy (SUBROUTINE: SHORTWAVE)</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">Qsip</span>  <span class="c">! Incoming shortwave energy that&#39;s penetrated the ice</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">R</span>           <span class="c">! used in ro_air calculation</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">real_Ma</span> <span class="c">! used in ro_air calculation</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">rh</span>      <span class="c">! relative humidity from meteorologic data</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">ro_air</span>  <span class="c">! Air density</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">ro_ice</span>  <span class="c">! Ice density ** Not updated with each time step ** Endofsummerdensity is used for that for some reason.</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">ro_water</span><span class="c">! Water density</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">runmin</span><span class="p">,</span> <span class="n">runmax</span>       <span class="c">! control which basins to run</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span> <span class="kd">::</span> <span class="n">runnametext</span>       <span class="c">!  run name</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span> <span class="kd">::</span> <span class="n">runname</span>               <span class="c">!  also run name</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">status</span>   <span class="c">! I/O status</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">Stef_Boltz</span>  <span class="c">! Stefan Boltzman constant</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span> <span class="kd">::</span> <span class="n">stn_met_file</span>  <span class="c">! Meteorologic station input file</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">stnx</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="n">stny</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>   <span class="c">! station xxx and yyy postion</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">strlen</span>   <span class="c">! placeholder for string length when writing run names</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">Tair</span>        <span class="c">! Temperature at reference height</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">Tannualmean</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">)</span>  
+        <span class="c">! mean annual air temperature for given grid cell</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">Tf</span>      <span class="c">! Freezing point of water (SUBROUTINE: CONSTS_ICE)  Units in Kelvin??</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="nb">time</span>    <span class="c">! time</span>
+    <span class="kt">double precision</span> <span class="kd">::</span> <span class="n">totalheat</span><span class="p">,</span><span class="n">totalheat2</span> <span class="c">! total heat in (SUBROUTINE: ICE_ENERGY)</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">Tsfc</span>        <span class="c">! Temperature at surface</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">water_frac</span><span class="p">(</span><span class="n">JJ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>             <span class="c">! Water fraction of current time step</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">water_frac_old</span><span class="p">(</span><span class="n">JJ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>         <span class="c">! Water fraction of previous time step</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">windspd</span>     <span class="c">! The wind speed at reference height (zr)</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">xdur</span>        <span class="c">! program run time</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">xinternal_heating_corr</span>   <span class="c">! Internal Heating Correction.  Multiplies internal heat from solar rad by a factor</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">xk_ice</span>  <span class="c">! Thermal conductivity of ice (Table 9.1 Cuffey &amp; Patterson 2010)</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">xkappa</span>  <span class="c">! Von Karman&#39;s constant.  Equal to 0.4 in (SUBROUTINE CONSTS)</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">xLs</span>     <span class="c">! Latent heat of fusion of ice (Subroutine: CONSTS_ICE)</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">xmmdata</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">175000</span><span class="p">),</span><span class="n">xstndata</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">175000</span><span class="p">),</span><span class="n">xpadata</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">175000</span><span class="p">)</span>  <span class="c">! micromet, station, and atmospheric pressure input arrays</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">xdataout</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">175000</span><span class="p">),</span><span class="n">subout</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>   <span class="c">! general output data array, output array for water fraction??</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">y_crds</span><span class="p">(</span><span class="n">JJ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>  <span class="c">! not sure but do not delete since it&#39;s everywhere</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">y_wall</span><span class="p">(</span><span class="n">JJ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>  <span class="c">! not sure but do not delete since it&#39;s everywhere</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">year</span>    <span class="c">! year</span>
+    <span class="kt">character</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="kd">::</span> <span class="n">yeararg</span>   <span class="c">! text of year, which is then converted to a real number</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">z0</span>          <span class="c">! Momentum surface roughness length, assumed to be 10^-4 although Patterson et al. say .01-.1</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">z_windobs</span>   <span class="c">! Reference height of wind speed observation</span>
+    <span class="kt">integer</span> <span class="kd">::</span> <span class="n">nz</span><span class="p">,</span><span class="n">JJ</span><span class="p">,</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span>  <span class="c">! number of cells in z-dir, cell number (),</span>
+    <span class="k">parameter</span> <span class="kd">::</span> <span class="p">(</span><span class="n">nz</span><span class="o">=</span><span class="mi">70</span><span class="p">)</span> <span class="c">!170, 37, 71, 70</span>
+    <span class="k">parameter</span> <span class="kd">::</span> <span class="p">(</span><span class="n">JJ</span><span class="o">=</span><span class="n">nz</span><span class="p">)</span>   <span class="c">! ice cell number. increases with depth.  used in do loops.</span>
+    <span class="k">parameter</span> <span class="kd">::</span> <span class="p">(</span><span class="n">nx</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>  <span class="c">! cell x coordinate</span>
+    <span class="k">parameter</span> <span class="kd">::</span> <span class="p">(</span><span class="n">ny</span><span class="o">=</span><span class="mi">140</span><span class="p">)</span>    <span class="c">! cell y coordiante</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">deltaz</span><span class="p">(</span><span class="n">nz</span><span class="p">)</span>          <span class="c">! cell thickness @ nz</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="nb">gamma</span><span class="p">(</span><span class="n">JJ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>   <span class="c">! gamma </span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">f_n</span><span class="p">(</span><span class="n">JJ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>     <span class="c">! used in gamma calculation</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">dely_p</span><span class="p">(</span><span class="n">JJ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>  <span class="c">! distance between pressure grid points used in control volume calculation.</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">dy_p</span><span class="p">(</span><span class="n">JJ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>    <span class="c">! maximum amount of ice available to melt (equal to deltaz)</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">T_old</span><span class="p">(</span><span class="n">JJ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>   <span class="c">! temperature of cell during previous timestep</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">xmelt</span><span class="p">(</span><span class="n">JJ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>   <span class="c">! amount of water produced by the energy represented by the temperature above freezing.</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">up</span><span class="p">(</span><span class="n">JJ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>        <span class="c">! updward solar radiation</span>
+    <span class="kt">real</span> <span class="kd">::</span> <span class="n">down</span><span class="p">(</span><span class="n">JJ</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>      <span class="c">! downward solar radiation</span>
+</pre></div></article></body></html>

@@ -1,0 +1,18 @@
+&params
+! required parameters
+glacnum = -1
+z_0 = 1
+dz1 = 0.0025 ! m
+n_snowgrain_radius = 9 ! index
+runmin = 10 ! index
+runmax = 82 ! index
+runnametext = "Albedo-cliff-adj0"
+! optional adjustments to met data
+tempadd = 0.0
+windmult = 1.0
+albedo_offset = 0.0
+! number of time steps to run
+maxiter = 30
+! set start year
+yeararg = '1995'
+/

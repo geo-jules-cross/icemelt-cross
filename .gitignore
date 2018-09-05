@@ -1,0 +1,19 @@
+# list of files to ignore by git
+
+# exclude everything
+output/*
+
+# exception to the rule
+!output/.gitkeep 
+
+# exclude everything
+logs/*
+
+# exception to the rule
+!logs/.gitkeep 
+
+# exclude everything
+input/*
+
+# exception to the rule
+!input/.gitkeep
