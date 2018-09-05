@@ -1,15 +1,15 @@
 # list of files to ignore by git
 
-# exclude these files:
+# exclude these files
 desktop.ini
 
-# Exclude these directories:
+# exclude these directories
 output/*
 logs/*
 input/*
 namelist/*
 
-# Except these files:
+# except these files
 !output/.gitkeep 
 !logs/.gitkeep 
 !input/.gitkeep
