@@ -74,7 +74,7 @@ do
     echo "setup & run basin wall"
     NL_bwall=$NL.bwall.$SLURM_ARRAY_TASK_ID
     cp $NL $NL_bwall
-    sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1/" $NL_bwall
+    sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1.0/" $NL_bwall
     sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 0.5/" $NL_bwall
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.67/" $NL_bwall
     sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_offset = "$bwallshift"/" $NL_bwall
@@ -86,7 +86,7 @@ do
     echo "setup & run basin floor"
     NL_bfloor=$NL.bfloor.$SLURM_ARRAY_TASK_ID
     cp $NL $NL_bfloor
-    sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1/" $NL_bfloor
+    sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1.0/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 1.5/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.33/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_offset = "$bfloorshift"/" $NL_bfloor
