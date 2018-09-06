@@ -14,3 +14,4 @@ namelist/*
 !logs/.gitkeep 
 !input/.gitkeep
 !namelist/.gitkeep
+!namelist/namelist.input
