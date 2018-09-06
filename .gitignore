@@ -13,4 +13,4 @@ namelist/*
 !output/.gitkeep 
 !logs/.gitkeep 
 !input/.gitkeep
-!namelist/namelist.input
+!namelist/.gitkeep
