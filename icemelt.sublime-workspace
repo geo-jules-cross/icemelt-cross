@@ -11,7 +11,8 @@
 			"file": "run_albedo_cluster.sh",
 			"settings":
 			{
-				"buffer_size": 3466,
+				"buffer_size": 3470,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
@@ -72,11 +73,12 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/icemelt-cross",
-		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/icemelt-cross/namelist"
+		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/icemelt-cross"
 	],
 	"file_history":
 	[
+		"/D/old-logs/20180813/albedo-52535_2.log",
+		"/D/old-logs/20180813/albedo-52535_1.log",
 		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/icemelt-cross/icemelt_spatial_jmc.f95",
 		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/icemelt-cross/.gitignore",
 		"/Z/Antarctica_Julian/icemelt-jmc-working/run_all_cluster.sh",
@@ -172,7 +174,7 @@
 	],
 	"find":
 	{
-		"height": 25.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -186,6 +188,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"roughness",
 			"input_cliff"
 		],
 		"highlight": true,
@@ -210,18 +213,18 @@
 				{
 					"buffer": 0,
 					"file": "run_albedo_cluster.sh",
-					"semi_transient": true,
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3466,
+						"buffer_size": 3470,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2699,
+								2699
 							]
 						],
 						"settings":
@@ -231,7 +234,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 480.0,
+						"translation.y": 576.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

@@ -1405,10 +1405,10 @@
         extramelt=0.0 !all used up!
       endif
 
-      if (water_frac(j).lt.0.0) then
-      write (*,*) 'WARNING: Water fraction after adding water &
-       at level # is neg: ',    j,water_frac(j)
-      endif
+      ! if (water_frac(j).lt.0.0) then
+      ! write (*,*) 'WARNING: Water fraction after adding water &
+      !  at level # is neg: ',    j,water_frac(j)
+      ! endif
 
       !========== End Melting Scenario =============
 
@@ -1419,10 +1419,10 @@
 !     2) Only some of the water freezes and temperature remains at Tf.
 !     3) All of the water freezes and extra energy drops energy below Tf.
 !
-        if (water_frac(j).lt.0.0) then
-          write (*,*) 'WARNING: Water fraction at level # is neg: ',  &
-          j,water_frac(j)
-        endif
+        ! if (water_frac(j).lt.0.0) then
+        !   write (*,*) 'WARNING: Water fraction at level # is neg: ',  &
+        !   j,water_frac(j)
+        ! endif
 
         if (water_frac(j).gt.0.0) then
 
@@ -1437,10 +1437,10 @@
             T_old(j) = Tf
             flag = 1.0
 
-            if (water_frac(j).lt.0.0) then
-              write (*,*) 'WARNING: Water frac after Case3 at level # is neg:', &
-              j,water_frac(j)
-            endif
+            ! if (water_frac(j).lt.0.0) then
+            !   write (*,*) 'WARNING: Water frac after Case3 at level # is neg:', &
+            !   j,water_frac(j)
+            ! endif
 
       else ! Case 3.
 
@@ -1449,11 +1449,11 @@
         T_old(j) = Tf - freeze(j) * xLf / (Cp_snow * dy_p(j))
         flag = 1.0
 
-        if (water_frac(j).lt.0.0) then
-          write (*,*) &
-          'WARNING: Water frac after Case2 at level # is neg: ', &
-          j,water_frac(j)
-        endif
+        ! if (water_frac(j).lt.0.0) then
+        !   write (*,*) &
+        !   'WARNING: Water frac after Case2 at level # is neg: ', &
+        !   j,water_frac(j)
+        ! endif
 
 
         endif ! Case 2
@@ -1462,10 +1462,10 @@
     endif ! if T_old > Tf or extramelt > 0  =========================
 
 
-        if (water_frac(j).lt.0.0) then
-          write (*,*) 'WARNING: Water fraction at end at level # is neg:', &
-          j,water_frac(j)
-        endif
+        ! if (water_frac(j).lt.0.0) then
+        !   write (*,*) 'WARNING: Water fraction at end at level # is neg:', &
+        !   j,water_frac(j)
+        ! endif
 
       enddo !z-layer loop
 
