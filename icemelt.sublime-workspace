@@ -8,12 +8,19 @@
 	"buffers":
 	[
 		{
-			"file": "run_albedo_cluster.sh",
+			"file": "input/9513_alb.CAA",
 			"settings":
 			{
-				"buffer_size": 3470,
-				"encoding": "UTF-8",
+				"buffer_size": 272403,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "icemelt_spatial_jmc.f95",
+			"settings":
+			{
+				"buffer_size": 119386,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -73,14 +80,21 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/icemelt-cross"
+		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/icemelt-cross",
+		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/icemelt-cross/input"
 	],
 	"file_history":
 	[
+		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/icemelt-cross/run_albedo_cluster.sh",
+		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/postprocess-output/model-output/20180906/namelist/namelist.input.cliff.1",
+		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/postprocess-output/model-output/20180906/namelist/namelist.input.smooth.1",
+		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/postprocess-output/model-output/20180906/namelist/namelist.input.bwall.1",
+		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/postprocess-output/model-output/20180906/namelist/namelist.input.bfloor.1",
+		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/postprocess-output/model-output/20180906/namelist/namelist.input",
+		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/icemelt-cross/.gitignore",
 		"/D/old-logs/20180813/albedo-52535_2.log",
 		"/D/old-logs/20180813/albedo-52535_1.log",
 		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/icemelt-cross/icemelt_spatial_jmc.f95",
-		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/icemelt-cross/.gitignore",
 		"/Z/Antarctica_Julian/icemelt-jmc-working/run_all_cluster.sh",
 		"/Z/Antarctica_Julian/icemelt-jmc-working/namelist/namelist.input.cliff",
 		"/Z/Antarctica_Julian/icemelt-jmc-working/namelist/namelist.input.bfloor",
@@ -188,6 +202,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"cloud",
+			"cloud_frac",
+			"albedo_file",
+			"warning",
 			"roughness",
 			"input_cliff"
 		],
@@ -207,34 +225,64 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "run_albedo_cluster.sh",
-					"semi_transient": false,
+					"file": "input/9513_alb.CAA",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 3470,
+						"buffer_size": 272403,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2699,
-								2699
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/ShellScript/Bash.sublime-syntax",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 6,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "icemelt_spatial_jmc.f95",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 119386,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								19627,
+								19627
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Fortran/grammars/FortranModern.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 576.0,
+						"translation.y": 8842.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -276,7 +324,7 @@
 		"cols":
 		[
 			0.0,
-			0.910233393178,
+			0.941792782305,
 			1.0
 		],
 		"rows":

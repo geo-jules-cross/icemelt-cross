@@ -606,23 +606,29 @@
               ,j2=1,immoffset-1+maxiter*24)
     endif
 
-    !
-    ! TODO: Implement a spatially distributed albedo 
-    !
     SELECT CASE (glacnum)
         case (0) !running all cells
             if (runmax .ge. 30) then ! Basins < 30 are HOE and FXL
             ! Note this will not work for runs that span the basins
                 albedo_file = './input/9513_alb.CAA' 
                 ! Use CAA albedo in Hoare and Fryxell basins
+                
+                !albedo_file = './input/9513_alb.AVG'
+                !JMC: Use CAA and TAR average 
+            else
+                albedo_file = './input/9513_alb.TAR' 
+                ! Use TAR albedo in Bonney basin
+
+                !albedo_file = './input/9513_alb.AVG'
+                !JMC: Use CAA and TAR average 
+            endif
+!---------------------------------------------------------------------
+! TODO: Implement a spatially distributed albedo 
                 ! albedo_file = './input/9513_alb_snow.CAA' 
                 ! JMC: Adjusted CAA albedo for simulating snow
                 ! albedo_file = './input/9513_alb_alt.CAA' 
                 ! JMC: Adjusted CAA albedo via MODIS data
-            else
-                albedo_file = './input/9513_alb.TAR' 
-                ! Use TAR albedo in Bonney basin
-            endif
+ !---------------------------------------------------------------------               
         case (-1)
             albedo_file = './input/9513_alb.clf' 
             !JMC fixed 9513_alb.clf file
