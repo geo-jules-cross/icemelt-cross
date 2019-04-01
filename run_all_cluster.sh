@@ -2,7 +2,7 @@
 # script to run all surfaces in ICEMELT in parallel on Coeus Cluster
 #
 # SLURM parallel commands
-#SBATCH --job-name=icemelt-all
+#SBATCH --job-name=icemelt
 #SBATCH --output=logs/icemelt-%A.log
 #
 # mail alert at start, end and abortion of execution
