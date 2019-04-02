@@ -18,13 +18,13 @@ module purge
 module load gcc-7.2.0
 
 # compile ICEMELT
-# gfortran -g -o ./icemelt ./icemelt_spatial_jmc.f95
+gfortran -g -o ./icemelt_v04 ./icemelt_spatial_jmc_v04.f95
 
 ### run ICEMELT with for loop and SLURM srun
 
 # base commands for running the model
 NL="./namelist/namelist.input"
-CMD="./icemelt"
+CMD="./icemelt_v04"
 runname=`grep runnametext $NL | cut -f 2 -d "\""`
 
 echo using runnametext=$runname
