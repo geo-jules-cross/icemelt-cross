@@ -38,8 +38,9 @@
     integer nz,JJ,nx,ny
     ! nz = JJ equals the number of grid cells in the z direction.  
     ! Because heat equation solver calls the z-dir(k) the y-dir(j).
-    parameter(nz=70) !Options: 170, 37, 71, 70 
+    parameter(nz=170) !Options: 170, 37, 71, 70 
     ! FJZ JMC found 70 to work
+    ! JMC: changed to 170 from 70 based on Hoffman 2014 and 2016
     parameter(JJ=nz)
     parameter(nx=200)
     parameter(ny=140)
