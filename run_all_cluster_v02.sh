@@ -18,7 +18,7 @@ module purge
 module load gcc-7.2.0
 
 # compile ICEMELT
-gfortran -g -o ./icemelt_v04 ./icemelt_spatial_jmc_v04.f95
+gfortran -g -o ./icemelt_v04 ./icemelt_albedo_jmc_v04.f95
 
 ### run ICEMELT with for loop and SLURM srun
 
