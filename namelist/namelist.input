@@ -2,7 +2,7 @@
 ! required parameters
 glacnum = 0 ! case
 z_0 = 0.05 ! mm
-dz1 = 0.0024 ! m
+dz1 = 0.0023 ! m
 n_snowgrain_radius = 9 ! index
 runmin = 10 ! index
 runmax = 82 ! index
