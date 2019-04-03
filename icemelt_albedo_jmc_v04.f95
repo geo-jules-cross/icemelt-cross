@@ -38,9 +38,12 @@
     integer nz,JJ,nx,ny
     ! nz = JJ equals the number of grid cells in the z direction.  
     ! Because heat equation solver calls the z-dir(k) the y-dir(j).
-    parameter(nz=170) !Options: 170, 37, 71, 70 
-    ! FJZ JMC found 70 to work
-    ! JMC: changed to 170 from 70 based on Hoffman 2014 and 2016
+    
+    parameter(nz=70) !Options: 70, 170, 37
+    ! FJZ JMC found 70 to work, MJH says this is what he used
+    ! JMC: tried 170 rather than 70 based on Hoffman 2014 and 2016
+    ! No significant difference in results
+    
     parameter(JJ=nz)
     parameter(nx=200)
     parameter(ny=140)
@@ -3090,7 +3093,7 @@
 !   you are interested in.  The model will extract the value and
 !   convert to meters.
       data radii/0.005, 0.007, 0.010, 0.015, 0.020, &
-                 0.030, 0.040, 0.050, 0.065, 0.080, &
+                 0.030, 0.040, 0.050, 0.064, 0.080, &
                  0.100, 0.120, 0.140, 0.170, 0.200, &
                  0.240, 0.290, 0.350, 0.420, 0.500, &
                  0.570, 0.660, 0.760, 0.870, 1.000, &
@@ -3099,6 +3102,8 @@
                  4.500, 5.000, 5.500, 6.000, 6.500, &
                  7.000, 7.500, 8.000, 8.500, 9.000, &
                  9.500,10.000/
+
+! JMC changed index 9 to 0.064 to see how that changes results
 
       r_snow = radii(n_snowgrain_radius) / 1000.0
       write (6,102) r_snow * 1000.0
