@@ -1,10 +1,10 @@
-# ICEMELT model (v03)
+# ICEMELT model (v04)
 
 Repository for ICEMELT fortran model and pre- and post- processing scripts. Created to track modifications (in-lieu of a branch) made to Hoffman et al ICEMELT version by Julian Cross.
 
 This FORTRAN code simulates the temperature and water content within snow and ice in response to the surface energy balance and penetration of solar radiation into the snow and ice.
 
-**Code:** `icemelt_albedo_jmc_v03.f95`  
+**Code:** `icemelt_cross_v04.f95`  
 **File Location:**
 `I:\Antarctica_Julian\icemelt-cross`  
 **Date of README:** 28 October 2018  
@@ -30,6 +30,7 @@ This FORTRAN code simulates the temperature and water content within snow and ic
 - `icemelt_8hr_Qc_spatial_xy_mc_drain.f` (v00)
 - `icemelt_hoffman_v01.f95` (v01)
 - `icemelt_spatial_cross_v02.f95` (v02)
+-  `icemelt_albedo_cross_v03.f95` (v02)
 
 ##### Changes from previous version:
 
@@ -39,6 +40,7 @@ This FORTRAN code simulates the temperature and water content within snow and ic
 - **March 2018:** JC and FZ removed some portions of functional commented-out code from previous version added by Ebnet or Hoffman.  We did not remove their descriptive comments.
 - **June 2018:** JC developed scripts to run ICEMELT on Coeus Cluster.
 - **October 2018:** JC added new albedo method to account for spatial variability of albedo.
+- - **April 2019:** JC adjusted parameters to be the same as Hoffman 2016. Specifically `snowgrain_radius` = 0.064, `dz1` = 0.002, `SRSF` = 0.22 and `nz` = 70.
 
 ## <a name="compiling"></a>Compiling the Model
 
@@ -58,9 +60,9 @@ The `os_info.inc` file allows the code to be compiled on DOS or linux operating 
 ##### Linux Compiling:
 
 An example of a compile shell command using GCC (GNU Fortran) 7.2.0  
-`gfortran -o ./icemelt ./icemelt_albedo_jmc_v03.f95`
+`gfortran -o ./icemelt ./icemelt_cross_v04.f95`
 
-In this command the `-o` option specifies that the `./icemelt_albedo_jmc_v03.f95` program is compiled to an executable object at `./icemelt` (rather than the default `a.out`). This executable is used in further shell scripts to run the model.
+In this command the `-o` option specifies that the `./icemelt_cross_v04.f95` program is compiled to an executable object at `./icemelt` (rather than the default `a.out`). This executable is used in further shell scripts to run the model.
 
 ## <a name="running"></a>Running the Model
 
@@ -87,7 +89,7 @@ In this command the `-o` option specifies that the `./icemelt_albedo_jmc_v03.f95
 - If all the required [input files](#input_files) and the correct [folder structure](#folders) are present, the model can be compiled and run:  
 
 ```bash
-gfortran -o ./icemelt ./icemelt_albedo_jmc_v03.f95
+gfortran -o ./icemelt ./icemelt_cross_v04.f95
 chmod u+x icemelt
 ./icemelt
 ```
@@ -170,7 +172,7 @@ module purge
 module load gcc-7.2.0
 
 # compile ICEMELT
-# gfortran -g -o ./icemelt ./icemelt_spatial_jmc.f95
+# gfortran -g -o ./icemelt ./icemelt_cross_v04.f95
 
 ### run ICEMELT with for loop and SLURM srun
 
@@ -324,8 +326,8 @@ Model parameters controlling both environmental variables and run settings are s
 ! required parameters
     glacnum = 0 ! case
     z_0 = 0.05 ! mm
-    dz1 = 0.0025 ! m
-    n_snowgrain_radius = 9 ! index
+    dz1 = 0.0020 ! m
+    n_snowgrain_radius = 9 ! index value equal to 0.064
     runmin = 10 ! index
     runmax = 82 ! index
     runnametext = "TEST"
@@ -352,13 +354,13 @@ The values for parameters `maxiter` and `yeararg` correspond with a configuratio
 
 - `glacnum` Specifies the run type (e.g. station or spatial).
 - `z_0`: Surface roughness length.
-- `dz1`: The thickness of the darkened surface layer.
+- `dz1`: The thickness of the surface layer, sets SRSF or chi
 - `n_snowgrain_radius`: The address of specified snow grain radius in an index.
 
 ``` fortran
 ! These are the possible radii (mm) that can be used for the model simulations.
       data radii/0.005, 0.007, 0.010, 0.015, 0.020, &
-                 0.030, 0.040, 0.050, 0.065, 0.080, &
+                 0.030, 0.040, 0.050, 0.064, 0.080, &
                  0.100, 0.120, 0.140, 0.170, 0.200, &
                  0.240, 0.290, 0.350, 0.420, 0.500, &
                  0.570, 0.660, 0.760, 0.870, 1.000, &

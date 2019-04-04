@@ -17,14 +17,6 @@
 			}
 		},
 		{
-			"file": "output/20190401/.gitkeep",
-			"settings":
-			{
-				"buffer_size": 37,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "namelist/namelist.input",
 			"settings":
 			{
@@ -103,6 +95,7 @@
 	],
 	"file_history":
 	[
+		"/Z/Antarctica_Julian/icemelt-cross/output/20190401/.gitkeep",
 		"/C/Users/jucross/Documents/MDV-Lakes-Thesis/melt-model/postprocess-output/model-output/20190402/test_run2/ycrds.out",
 		"/Z/Antarctica_Julian/icemelt-cross/icemelt_albedo_jmc_v03.f95",
 		"/Z/Antarctica_Julian/icemelt-cross/run_all_cluster.sh",
@@ -293,34 +286,6 @@
 				},
 				{
 					"buffer": 1,
-					"file": "output/20190401/.gitkeep",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 37,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/zzz A File Icon zzz/aliases/Plain Text (Git Keep).sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "namelist/namelist.input",
 					"semi_transient": false,
 					"settings":
@@ -332,8 +297,8 @@
 						"selection":
 						[
 							[
-								177,
-								177
+								344,
+								344
 							]
 						],
 						"settings":
@@ -344,11 +309,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 2,
 					"file": "run_all_cluster_v02.sh",
 					"semi_transient": false,
 					"settings":
@@ -372,7 +337,7 @@
 						"translation.y": 186.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]

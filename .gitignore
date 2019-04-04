@@ -8,6 +8,8 @@ output/*
 logs/*
 input/*
 namelist/*
+icemelt.sublime-project
+icemelt.sublime-workspace
 
 # except these files
 !output/.gitkeep 
