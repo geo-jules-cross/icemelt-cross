@@ -2,14 +2,14 @@
 
 # exclude these files
 desktop.ini
+icemelt.sublime-project
+icemelt.sublime-workspace
 
 # exclude these directories
 output/*
 logs/*
 input/*
 namelist/*
-icemelt.sublime-project
-icemelt.sublime-workspace
 
 # except these files
 !output/.gitkeep 
