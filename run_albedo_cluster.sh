@@ -18,6 +18,9 @@
 module purge
 module load gcc-7.2.0
 
+# compile ICEMELT
+gfortran -g -o ./icemelt ./icemelt_cross_v04.f95
+
 ### run ICEMELT with SLURM srun in packed job array
 
 # base commands for running the model
@@ -27,10 +30,10 @@ CMD="./icemelt"
 # set parameter values and setup jobs (5x4 on one 5x4 on another)
 if [ $SLURM_ARRAY_TASK_ID  == 1 ] 
     then
-    ALBEDO=(0.000 -0.005 -0.010 -0.015 -0.020) # 5 parameters to optimize running time
+    ALBEDO=(-0.005 -0.010 -0.015 -0.020 -0.025) # 5 parameters to optimize running time
 elif [ $SLURM_ARRAY_TASK_ID  == 2 ] 
     then
-    ALBEDO=(-0.025 -0.030 -0.035 -0.040 -0.045) # increase array to add more
+    ALBEDO=(-0.030 -0.035 -0.040 -0.045 -0.050) # increase array to add more
     fi
 
 # loops over parameters specific to node
