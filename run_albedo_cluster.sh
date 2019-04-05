@@ -19,7 +19,7 @@ module purge
 module load gcc-7.2.0
 
 # compile ICEMELT
-gfortran -g -o ./icemelt ./icemelt_cross_v04.f95
+# gfortran -g -o ./icemelt ./icemelt_cross_v04.f95
 
 ### run ICEMELT with SLURM srun in packed job array
 
@@ -47,7 +47,7 @@ do
     
     # set runname based on albedo
     runname=`grep runnametext $NL | cut -f 2 -d "\""` # get runname
-    alb=$(bc <<< "sqrt($albedo*$albedo)*1000")
+    alb=$(bc <<< "$albedo*1000")
     a=$(printf "%.0f" $alb)
     runname_alb=$runname-a$a
 
