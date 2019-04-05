@@ -49,7 +49,7 @@ do
     runname=`grep runnametext $NL | cut -f 2 -d "\""` # get runname
     alb=$(bc <<< "$albedo*1000")
     a=$(printf "%.0f" $alb)
-    runname_alb=$runname-a$a
+    runname_alb=$runname-$a
 
     echo""
     echo using albedo adjustment of $albedo
