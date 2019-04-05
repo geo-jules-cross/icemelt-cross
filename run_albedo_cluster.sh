@@ -47,7 +47,7 @@ do
     
     # set runname based on albedo
     runname=`grep runnametext $NL | cut -f 2 -d "\""` # get runname
-    alb=$(bc <<< "$albedo*1000")
+    alb=$(bc <<< "sqrt($albedo*$albedo)*1000")
     a=$(printf "%.0f" $alb)
     runname_alb=$runname-$a
 
