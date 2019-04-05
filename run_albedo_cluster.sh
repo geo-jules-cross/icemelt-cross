@@ -47,19 +47,9 @@ do
     
     # set runname based on albedo
     runname=`grep runnametext $NL | cut -f 2 -d "\""` # get runname
-    if [ $(echo "$albedo > 0.0" | bc) -ne  0 ]
-    then
-        alb=$(bc <<< "$albedo*100")
-        a=$(printf "%.0f" $alb)
-        runname_alb=$runname-adjUp$a
-    elif [ $(echo "$albedo < 0.0" | bc) -ne  0 ]
-    then
-        alb=$(bc <<< "$albedo*-100")
-        a=$(printf "%.0f" $alb)
-        runname_alb=$runname-adjDn$a
-    else
-    runname_alb=$runname-adjNa
-    fi
+    alb=$(bc <<< "sqrt($albedo*$albedo)*1000")
+    a=$(printf "%.0f" $alb)
+    runname_alb=$runname-a$a
 
     echo""
     echo using albedo adjustment of $albedo
@@ -113,6 +103,5 @@ done
 wait
 
 # rm namelist/namelist.input.*
-# rm namelist/sed*
 
 # end
