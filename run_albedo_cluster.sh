@@ -2,8 +2,8 @@
 # script to run ICEMELT in parallel on Coeus Cluster
 #
 # SLURM parallel commands
-#SBATCH --job-name=icemelt-test
-#SBATCH --partition himem
+#SBATCH --job-name=icemelt
+#SBATCH --partition medium
 #SBATCH --ntasks=20
 #SBATCH --output=logs/albedo-%A_%a.log
 #SBATCH --array=1-2
@@ -30,10 +30,10 @@ CMD="./icemelt"
 # set parameter values and setup jobs (5x4 on one 5x4 on another)
 if [ $SLURM_ARRAY_TASK_ID  == 1 ] 
     then
-    ALBEDO=(-0.005 -0.010 -0.015 -0.020 -0.025) # 5 parameters to optimize running time
+    ALBEDO=(0.07 0.05 0) # 5 parameters to optimize running time
 elif [ $SLURM_ARRAY_TASK_ID  == 2 ] 
     then
-    ALBEDO=(-0.030 -0.035 -0.040 -0.045 -0.050) # increase array to add more
+    ALBEDO=(-0.025 -0.05 -0.07) # increase array to add more
     fi
 
 # loops over parameters specific to node
