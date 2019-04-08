@@ -2,7 +2,7 @@
 # script to run ICEMELT in parallel on Coeus Cluster
 #
 # SLURM parallel commands
-#SBATCH --job-name=icemelt
+#SBATCH --job-name=icemelt-test
 #SBATCH --partition himem
 #SBATCH --ntasks=20
 #SBATCH --output=logs/albedo-%A_%a.log
