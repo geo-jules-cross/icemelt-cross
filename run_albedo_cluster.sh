@@ -3,7 +3,7 @@
 #
 # SLURM parallel commands
 #SBATCH --job-name=icemelt
-#SBATCH --partition medium
+#SBATCH --partition himem
 #SBATCH --ntasks=20
 #SBATCH --output=logs/albedo-%A_%a.log
 #SBATCH --array=1-2
