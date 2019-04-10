@@ -41,7 +41,6 @@ for albedo in "${ALBEDO[@]}"
 do
 
     # shift albedo 
-    # baseshift=$(awk '{print $1*1}' <<<"$albedo") # original 0.0
     baseshift=$(awk '{print $1*1}' <<<"$albedo") # original 0.0
     bwallshift=$(awk '{print $1-0.065}' <<<"$albedo") # original -0.065
     bfloorshift=$(awk '{print $1-0.17}' <<<"$albedo") # original -0.17
