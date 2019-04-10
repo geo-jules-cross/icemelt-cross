@@ -12,8 +12,8 @@ tempadd = 0.0
 windmult = 1.0
 albedo_offset = 0.0
 ! number of time steps to run
-maxiter = 6426
-! maxiter = 2
+! maxiter = 6426
+maxiter = 2
 ! set start year
 yeararg = "1995"
 /
