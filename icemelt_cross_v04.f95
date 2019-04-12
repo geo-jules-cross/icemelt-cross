@@ -556,13 +556,19 @@
         ! print *,'WORKING ON CELL = ',iii, ' , ' , jjj,',num',cellcount
         ! print *, 'BELONGS TO BASIN =', runcell(iii) ! Added by JMC
 
-        ! We want to use a lower albedo for HOD and COH glaciers
+        !------
+        ! MJH: We want to use a lower albedo for HOD and COH glaciers
         ! Set that here, but only for 'clean' ice
-        if (runcell(iii)>=50) then
-           if (albedo_offset == 0.0) then
-                albedo_offset = -0.05
-           endif
-        endif
+
+        ! JMC: Turned this off because I think it is causing issues
+        ! with global albedo adjustments
+
+        ! if (runcell(iii)>=50) then
+        !    if (albedo_offset == 0.0) then
+        !         albedo_offset = -0.05
+        !    endif
+        ! endif
+        !------
 
 ! reset everything for each cell to use clean
         slope_az = 0.0
