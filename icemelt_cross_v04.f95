@@ -166,7 +166,7 @@
         ! Temperature added to measured temperature.
         windmult     = 1.00 ! FLOOR=0.33  WALL=0.67 
         ! Wind multiplier on measured wind speed.
-        albedo_offset= 0.0  ! FLOOR=-0.17  WALL=-0.0065 
+        albedo_offset= 0.0  ! FLOOR=-0.17  WALL=-0.065 
         ! Albedo offset added to measured albedo.
 
 ! Define maxiter, the number of time steps in the model run.
