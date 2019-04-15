@@ -30,7 +30,7 @@ CMD="./icemelt"
 # set parameter values and setup jobs (5x4 on one 5x4 on another)
 if [ $SLURM_ARRAY_TASK_ID  == 1 ] 
     then
-    ALBEDO=(0.07 0.05 0.025 0) # 5 parameters to optimize running time
+    ALBEDO=(0.07 0.05 0.025 0.0) # 5 parameters to optimize running time
 elif [ $SLURM_ARRAY_TASK_ID  == 2 ] 
     then
     ALBEDO=(-0.025 -0.05 -0.07) # increase array to add more
