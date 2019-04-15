@@ -10,7 +10,7 @@ runnametext = "test-alb"
 ! optional adjustments to met data
 tempadd = 0.0
 windmult = 1.0
-albedo_offset = -0.05
+albedo_offset = 0.05
 ! number of time steps to run
 maxiter = 6426
 ! maxiter = 2
