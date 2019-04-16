@@ -108,7 +108,7 @@
     character*(80) nlfname
     real endofsummerdensity(JJ)
     integer :: ierr
-    real :: z_0, dz1, drainthresh, tempadd, windmult,
+    real :: z_0, dz1, drainthresh, tempadd, windmult
     real :: albedo_surface, albedo_offset, albedo_mult
     integer :: n_snowgrain_radius
 
@@ -127,7 +127,7 @@
 
         namelist /params/ glacnum, z_0, dz1, n_snowgrain_radius, &
                            runmin, runmax, runnametext, &
-                           tempadd, windmult, albedo_surface, albedo_offset, albedo_mult &
+                           tempadd, windmult, albedo_surface, albedo_offset, albedo_mult, &
                            maxiter, yeararg
 
 ! INITIALIZE TO 0 FOR RUN TIME
@@ -828,7 +828,7 @@
 
 ! Albedo Offset and Percent Adjustment for the Day (constant for each day)
         read (33,*) junk1,junk2,junk3,albedo
-        albedo = albedo + albedo_surface + albedo_offset + (albedo * albedo_mult)
+        albedo = albedo + albedo_surface + albedo_offset + (albedo*albedo_mult)
 
 !=====================================================================
 !            START HOURLY TIMESTEP LOOP
