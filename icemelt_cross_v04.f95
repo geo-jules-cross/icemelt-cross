@@ -108,7 +108,8 @@
     character*(80) nlfname
     real endofsummerdensity(JJ)
     integer :: ierr
-    real :: z_0, dz1, drainthresh, tempadd, windmult, albedo_offset
+    real :: z_0, dz1, drainthresh, tempadd, windmult,
+    real :: albedo_surface, albedo_offset, albedo_mult
     integer :: n_snowgrain_radius
 
     real albedo_evo_poly_a,albedo_evo_poly_b,albedo_evo_poly_c
@@ -126,7 +127,7 @@
 
         namelist /params/ glacnum, z_0, dz1, n_snowgrain_radius, &
                            runmin, runmax, runnametext, &
-                           tempadd, windmult, albedo_offset, &
+                           tempadd, windmult, albedo_surface, albedo_offset, albedo_mult &
                            maxiter, yeararg
 
 ! INITIALIZE TO 0 FOR RUN TIME
@@ -162,12 +163,16 @@
         ! the water frac at which water is removed from subsurface
 
 ! Adjustments to turn on or off for adjustments to general met data
-        tempadd      = 0.0  ! FLOOR=1.5   WALL=0.5  
+        tempadd         = 0.0  ! FLOOR=1.5   WALL=0.5  
         ! Temperature added to measured temperature.
-        windmult     = 1.00 ! FLOOR=0.33  WALL=0.67 
+        windmult        = 1.00 ! FLOOR=0.33  WALL=0.67 
         ! Wind multiplier on measured wind speed.
-        albedo_offset= 0.0  ! FLOOR=-0.17  WALL=-0.065 
+        albedo_surface  = 0.0
+        ! Albedo adjustment applied to specific surface type
+        albedo_offset   = 0.0  ! FLOOR=-0.17  WALL=-0.065 
         ! Albedo offset added to measured albedo.
+        albedo_mult     = 1.00
+        ! Percent change to albedo. JMC: added
 
 ! Define maxiter, the number of time steps in the model run.
 ! In the hourly model it's the number of days, hours are handled later
@@ -821,10 +826,9 @@
         dayablation = 0.0
         daysubdrain = 0.0
 
-! Albedo Offset for the Day 
-! Albedo is constant for each day
+! Albedo Offset and Percent Adjustment for the Day (constant for each day)
         read (33,*) junk1,junk2,junk3,albedo
-        albedo=albedo + albedo_offset
+        albedo = albedo + albedo_surface + albedo_offset + (albedo * albedo_mult)
 
 !=====================================================================
 !            START HOURLY TIMESTEP LOOP

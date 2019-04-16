@@ -40,7 +40,7 @@ cp $NL $NL.bwall
 sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1/" $NL.bwall
 sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 0.5/" $NL.bwall
 sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.67/" $NL.bwall
-sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_offset = -0.065/" $NL.bwall
+sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_surface = -0.065/" $NL.bwall
 sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname-bwall\"/" $NL.bwall
 
 # run basin wall
@@ -51,7 +51,7 @@ cp $NL $NL.bfloor
 sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1/" $NL.bfloor
 sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 1.5/" $NL.bfloor
 sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.33/" $NL.bfloor
-sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_offset = -0.17/" $NL.bfloor
+sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_surface = -0.17/" $NL.bfloor
 sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname-bfloor\"/" $NL.bfloor
 
 # run basin floor
