@@ -47,7 +47,7 @@ do
     runname_alb=$runname$a
 
     echo""
-    echo using albedo adjustments: $albedo $baseshift $bwallshift $bfloorshift
+    echo using albedo offset of: $albedo
     echo using runnametext=$runname_alb
 
     echo "setup & run smooth surface"
@@ -65,7 +65,7 @@ do
     sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1.0/" $NL_bwall
     sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 0.5/" $NL_bwall
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.67/" $NL_bwall
-    sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_surface = -0.065/"
+    sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.065/"
     sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_offset = "$albedo"/" $NL_bwall
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb-bwall\"/" $NL_bwall
 
@@ -78,7 +78,7 @@ do
     sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1.0/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 1.5/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.33/" $NL_bfloor
-    sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_surface = -0.17/" $NL_bfloor
+    sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.17/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_offset = "$albedo"/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb-bfloor\"/" $NL_bfloor
 
