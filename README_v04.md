@@ -40,7 +40,8 @@ This FORTRAN code simulates the temperature and water content within snow and ic
 - **March 2018:** JC and FZ removed some portions of functional commented-out code from previous version added by Ebnet or Hoffman.  We did not remove their descriptive comments.
 - **June 2018:** JC developed scripts to run ICEMELT on Coeus Cluster.
 - **October 2018:** JC added new albedo method to account for spatial variability of albedo.
-- - **April 2019:** JC adjusted parameters to be the same as Hoffman 2016. Specifically `snowgrain_radius` = 0.064, `dz1` = 0.002, `SRSF` = 0.22 and `nz` = 70.
+- **March 2019:** JC adjusted parameters to be the same as Hoffman 2016. Specifically `snowgrain_radius` = 0.064, `dz1` = 0.002, `SRSF` = 0.22 and `nz` = 70.
+- **April 2019:** JC modified ICEMELT to take additional parameters for better handling of albedo adjustments. Now in the `namelist.input`: `albedo_offset` adds a value to albedo, this can be used to correct for specific error. `albedo_mult` multiplies albedo by some relative error and adds the result, this can be used to account for instrument error. `albedo_surface` adjusts albedo according to surface type.
 
 ## <a name="compiling"></a>Compiling the Model
 

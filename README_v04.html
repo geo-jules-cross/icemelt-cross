@@ -1093,11 +1093,8 @@ body .markdown-body
 <li><strong>March 2018:</strong> JC and FZ removed some portions of functional commented-out code from previous version added by Ebnet or Hoffman.  We did not remove their descriptive comments.</li>
 <li><strong>June 2018:</strong> JC developed scripts to run ICEMELT on Coeus Cluster.</li>
 <li><strong>October 2018:</strong> JC added new albedo method to account for spatial variability of albedo.</li>
-<li>
-<ul>
-<li><strong>April 2019:</strong> JC adjusted parameters to be the same as Hoffman 2016. Specifically <code>snowgrain_radius</code> = 0.064, <code>dz1</code> = 0.002, <code>SRSF</code> = 0.22 and <code>nz</code> = 70.</li>
-</ul>
-</li>
+<li><strong>March 2019:</strong> JC adjusted parameters to be the same as Hoffman 2016. Specifically <code>snowgrain_radius</code> = 0.064, <code>dz1</code> = 0.002, <code>SRSF</code> = 0.22 and <code>nz</code> = 70.</li>
+<li><strong>April 2019:</strong> JC modified ICEMELT to take additional parameters for better handling of albedo adjustments. Now in the <code>namelist.input</code>: <code>albedo_offset</code> adds a value to albedo, this can be used to correct for specific error. <code>albedo_mult</code> multiplies albedo by some relative error and adds the result, this can be used to account for instrument error. <code>albedo_surface</code> adjusts albedo according to surface type.</li>
 </ul>
 <h2 id="compiling-the-model"><a name="compiling"></a>Compiling the Model<a class="headerlink" href="#compiling-the-model" title="Permanent link"></a></h2>
 <h5 id="fortran-format">FORTRAN format:<a class="headerlink" href="#fortran-format" title="Permanent link"></a></h5>
