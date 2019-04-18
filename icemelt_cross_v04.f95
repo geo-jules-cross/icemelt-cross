@@ -163,13 +163,13 @@
         ! the water frac at which water is removed from subsurface
 
 ! Adjustments to turn on or off for adjustments to general met data
-        tempadd         = 0.0  ! FLOOR=1.5   WALL=0.5  
+        tempadd         = 0.0   ! FLOOR=1.5   WALL=0.5  
         ! Temperature added to measured temperature.
-        windmult        = 1.00 ! FLOOR=0.33  WALL=0.67 
+        windmult        = 1.00  ! FLOOR=0.33  WALL=0.67 
         ! Wind multiplier on measured wind speed.
-        albedo_surface  = 0.0
+        albedo_surface  = 0.0   ! FLOOR=-0.17  WALL=-0.065 
         ! Albedo adjustment applied to specific surface type
-        albedo_offset   = 0.0  ! FLOOR=-0.17  WALL=-0.065 
+        albedo_offset   = 0.0  
         ! Albedo offset added to measured albedo.
         albedo_mult     = 1.00
         ! Percent change to albedo. JMC: added
