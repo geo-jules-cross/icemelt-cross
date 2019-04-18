@@ -12,7 +12,7 @@ tempadd = 0.0
 windmult = 1.0
 albedo_surface = 0.0
 albedo_offset = 0.0
-albedo_mult = 1.0
+albedo_mult = 0.0
 ! number of time steps to run
 maxiter = 6426
 ! maxiter = 2
