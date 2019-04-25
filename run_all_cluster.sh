@@ -5,7 +5,7 @@
 #SBATCH --job-name=icemelt
 #SBATCH --partition medium
 #SBATCH --ntasks=4
-#SBATCH --output=logs/base-%A.log
+#SBATCH --output=logs/albedo-%A.log
 #
 # mail alert at start, end and abortion of execution
 #SBATCH --mail-type=ALL
@@ -18,7 +18,7 @@ module purge
 module load gcc-7.2.0
 
 # compile ICEMELT
-gfortran -g -o ./icemelt ./icemelt_cross_v04.f95
+# gfortran -g -o ./icemelt ./icemelt_cross_v04.f95
 
 ### run ICEMELT with for loop and SLURM srun
 
