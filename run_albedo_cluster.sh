@@ -47,7 +47,7 @@ do
     runname_alb=$runname$a
 
     echo""
-    echo using albedo offset of: $albedo
+    echo using albedo multiplier of: $albedo
     echo using runnametext=$runname_alb
 
     echo "setup & run smooth surface"
