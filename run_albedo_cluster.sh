@@ -53,7 +53,7 @@ do
     echo "setup & run smooth surface"
     NL_smooth=$NL.smooth.$SLURM_ARRAY_TASK_ID
     cp $NL $NL_smooth
-    sed -i.SEDBACKUP "s/.*albedo_multiplier.*/albedo_multiplier = "$albedo"/" $NL_smooth
+    sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = "$albedo"/" $NL_smooth
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb\"/" $NL_smooth
 
     # run smooth
@@ -66,7 +66,7 @@ do
     sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 0.5/" $NL_bwall
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.67/" $NL_bwall
     sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.065/"
-    sed -i.SEDBACKUP "s/.*albedo_multiplier.*/albedo_multiplier = "$albedo"/" $NL_bwall
+    sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = "$albedo"/" $NL_bwall
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb-bwall\"/" $NL_bwall
 
     # run basin wall
@@ -79,7 +79,7 @@ do
     sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 1.5/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.33/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.17/" $NL_bfloor
-    sed -i.SEDBACKUP "s/.*albedo_multiplier.*/albedo_multiplier = "$albedo"/" $NL_bfloor
+    sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = "$albedo"/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb-bfloor\"/" $NL_bfloor
 
     # run basin floor
