@@ -30,10 +30,10 @@ CMD="./icemelt"
 # set parameter values and setup jobs (5x4 on one 5x4 on another)
 if [ $SLURM_ARRAY_TASK_ID  == 1 ] 
     then
-    ALBEDO=(0.05 0.03 0.0) # 5 parameters to optimize running time
+    ALBEDO=(0.07 0.04 0.0) # 5 parameters to optimize running time
 elif [ $SLURM_ARRAY_TASK_ID  == 2 ] 
     then
-    ALBEDO=(-0.03 -0.05) # increase array to add more
+    ALBEDO=(-0.04 -0.07) # increase array to add more
     fi
 
 # loops over parameters specific to node
@@ -47,13 +47,13 @@ do
     runname_alb=$runname$a
 
     echo""
-    echo using albedo offset of: $albedo
+    echo using albedo multiplier of: $albedo
     echo using runnametext=$runname_alb
 
     echo "setup & run smooth surface"
     NL_smooth=$NL.smooth.$SLURM_ARRAY_TASK_ID
     cp $NL $NL_smooth
-    sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_offset = "$albedo"/" $NL_smooth
+    sed -i.SEDBACKUP "s/.*albedo_multiplier.*/albedo_multiplier = "$albedo"/" $NL_smooth
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb\"/" $NL_smooth
 
     # run smooth
@@ -66,7 +66,7 @@ do
     sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 0.5/" $NL_bwall
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.67/" $NL_bwall
     sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.065/"
-    sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_offset = "$albedo"/" $NL_bwall
+    sed -i.SEDBACKUP "s/.*albedo_multiplier.*/albedo_multiplier = "$albedo"/" $NL_bwall
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb-bwall\"/" $NL_bwall
 
     # run basin wall
@@ -79,7 +79,7 @@ do
     sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 1.5/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.33/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.17/" $NL_bfloor
-    sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_offset = "$albedo"/" $NL_bfloor
+    sed -i.SEDBACKUP "s/.*albedo_multiplier.*/albedo_multiplier = "$albedo"/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb-bfloor\"/" $NL_bfloor
 
     # run basin floor
