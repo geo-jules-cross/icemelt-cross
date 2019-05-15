@@ -629,8 +629,8 @@
         case (0) ! spatial run
             SELECT CASE (runcell(iii))
                 case (61, 71, 72, 73, 74)
-                    z_0 = 0.5
-                    ! z_0 = 1
+                    ! z_0 = 0.5
+                    z_0 = 1
                     ! z_0 = 2
             end SELECT
     end SELECT
