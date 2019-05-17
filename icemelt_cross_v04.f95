@@ -209,6 +209,9 @@
 ! Set dz1 to the array
     deltaz(1) = dz1
 
+! Save input z_0
+    z_0_input = z_0
+
 ! write hourly melt file?
     iwritehourlymelt=0 ! changed by JMC
 
@@ -625,15 +628,23 @@
 ! Adjustment to COH surface roughness (Added by JMC)
 !---------------------------------------------------------------------
 
-    SELECT CASE (glacnum) 
-        case (0) ! spatial run
-            SELECT CASE (runcell(iii))
-                case (61, 71, 72, 73, 74)
-                    ! z_0 = 0.5
-                    ! z_0 = 1
-                    z_0 = 2
-            end SELECT
-    end SELECT
+    if (runcell(iii)>=60) then
+        z_0 = 0.5
+        ! z_0 = 1
+        ! z_0 = 2
+    else
+        z_0 = z_0_input
+    endif
+
+    ! SELECT CASE (glacnum) 
+    !     case (0) ! spatial run
+    !         SELECT CASE (runcell(iii))
+    !             case (61, 71, 72, 73, 74)
+    !                 ! z_0 = 0.5
+    !                 ! z_0 = 1
+    !                 z_0 = 2
+    !         end SELECT
+    ! end SELECT
 
 !---------------------------------------------------------------------
 ! Spatially Distributed Albedo Section
