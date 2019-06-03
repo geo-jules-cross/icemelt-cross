@@ -127,7 +127,8 @@
 
         namelist /params/ glacnum, z_0, dz1, n_snowgrain_radius, &
                            runmin, runmax, runnametext, &
-                           tempadd, windmult, albedo_surface, albedo_offset, albedo_mult, &
+                           tempadd, windmult, &
+                           albedo_surface, albedo_offset, albedo_mult, &
                            maxiter, yeararg
 
 ! INITIALIZE TO 0 FOR RUN TIME
@@ -628,23 +629,23 @@
 ! Adjustment to COH surface roughness (Added by JMC)
 !---------------------------------------------------------------------
 
-    if (runcell(iii)>=60) then
-        z_0 = 0.5
-        ! z_0 = 1
-        ! z_0 = 2
-    else
-        z_0 = z_0_input
-    endif
+    ! if (runcell(iii)>=60) then
+    !     ! z_0 = 0.5
+    !     ! z_0 = 1
+    !     ! z_0 = 2
+    ! else
+    !     z_0 = z_0_input
+    ! endif
 
-    ! SELECT CASE (glacnum) 
-    !     case (0) ! spatial run
-    !         SELECT CASE (runcell(iii))
-    !             case (61, 71, 72, 73, 74)
-    !                 ! z_0 = 0.5
-    !                 ! z_0 = 1
-    !                 z_0 = 2
-    !         end SELECT
-    ! end SELECT
+    SELECT CASE (runcell(iii))
+        case (10, 15, 19, 11, 16, 25, 21, 26, 29, 22, 24, 23, 36, &
+              37, 38, 39, 31, 32, 33, 34, 41, 42, 43, 44, 45)       ! Up-valley 
+            z_0 = z_0_input
+        case (50, 63, 64, 65, 66, 61, 71, 72, 73, 74, 62, 81, 82)   ! Down-valley
+            z_0 = 0.5
+            ! z_0 = 1
+            ! z_0 = 2
+    end SELECT
 
 !---------------------------------------------------------------------
 ! Spatially Distributed Albedo Section
