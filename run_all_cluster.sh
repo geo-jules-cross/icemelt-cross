@@ -5,7 +5,7 @@
 #SBATCH --job-name=icemelt
 #SBATCH --partition medium
 #SBATCH --ntasks=4
-#SBATCH --output=logs/roughness-%A.log
+#SBATCH --output=logs/albedoX_z10-%A.log
 #
 # mail alert at start, end and abortion of execution
 #SBATCH --mail-type=ALL
@@ -51,7 +51,8 @@ cp $NL $NL.bfloor
 sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1/" $NL.bfloor
 sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 1.5/" $NL.bfloor
 sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.33/" $NL.bfloor
-sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.17/" $NL.bfloor
+# sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.17/" $NL_bfloor
+sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.07/" $NL_bfloor
 sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname-bfloor\"/" $NL.bfloor
 
 # run basin floor

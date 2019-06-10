@@ -78,7 +78,6 @@ do
     sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1.0/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 1.5/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.33/" $NL_bfloor
-    # sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.17/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.07/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = "$albedo"/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb-bfloor\"/" $NL_bfloor
