@@ -5,7 +5,7 @@
 #SBATCH --job-name=icemelt
 #SBATCH --partition medium
 #SBATCH --ntasks=20
-#SBATCH --output=logs/albedoX_z10-%A_%a.log
+#SBATCH --output=logs/albedo_new-%A_%a.log
 #SBATCH --array=1-2
 #
 # mail alert at start, end and abortion of execution
@@ -66,7 +66,8 @@ do
     sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 0.5/" $NL_bwall
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.67/" $NL_bwall
     sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.065/"
-    sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = "$albedo"/" $NL_bwall
+    # Basin albedo is not lowered any further
+    sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL_bwall
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb-bwall\"/" $NL_bwall
 
     # run basin wall
@@ -78,8 +79,9 @@ do
     sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1.0/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 1.5/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.33/" $NL_bfloor
-    sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.07/" $NL_bfloor
-    sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = "$albedo"/" $NL_bfloor
+    sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.17/" $NL_bfloor
+    # Basin albedo is not lowered any further
+    sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb-bfloor\"/" $NL_bfloor
 
     # run basin floor
