@@ -10,6 +10,7 @@ output/*
 logs/*
 input/*
 namelist/*
+icemelt-versions/*
 
 # except these files
 !output/.gitkeep 
