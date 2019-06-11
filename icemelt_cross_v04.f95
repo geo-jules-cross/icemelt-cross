@@ -510,13 +510,17 @@
 !=====================================================================
 
 ! Open grids needed for surface or cliff domains
+! tv_basins grids were modified by JMC to expand the contributing area to 
+! Commonwealth Stream and the Wales Group of Unnamed Glaciers (62, 63, 64)
     if (isstn.eq.1) then
         glacier_cells_file='./input/tv_landcovermetstake.txt'
     else
         if (iscliff.eq.1) then
-            glacier_cells_file='./input/tv_basins_cliff.txt'
+            ! glacier_cells_file='./input/tv_basins_cliff.txt'
+            glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
-            glacier_cells_file='./input/tv_basins_surface.txt'
+            ! glacier_cells_file='./input/tv_basins_surface.txt'
+            glacier_cells_file='./input/tv_basins_surface_jmc.txt'
         endif
     endif
     open (50,file=glacier_cells_file,form='formatted')
