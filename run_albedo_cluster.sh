@@ -5,7 +5,7 @@
 #SBATCH --job-name=icemelt
 #SBATCH --partition medium
 #SBATCH --ntasks=20
-#SBATCH --output=logs/albedo_new-%A_%a.log
+#SBATCH --output=logs/albedo-new-%A_%a.log
 #SBATCH --array=1-2
 #
 # mail alert at start, end and abortion of execution
@@ -30,7 +30,7 @@ CMD="./icemelt"
 # set parameter values and setup jobs (5x4 on one 5x4 on another)
 if [ $SLURM_ARRAY_TASK_ID  == 1 ] 
     then
-    ALBEDO=(-0.07 -0.1 -0.15) # 5 parameters to optimize running time
+    ALBEDO=(0.0 -0.07 -0.10) # 5 parameters to optimize running time
 elif [ $SLURM_ARRAY_TASK_ID  == 2 ] 
     then
     ALBEDO=(-0.20 -0.25) # increase array to add more
@@ -67,7 +67,7 @@ do
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.67/" $NL_bwall
     sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.065/"
     # Basin albedo is not lowered any further
-    sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL_bwall
+    # sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL_bwall
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb-bwall\"/" $NL_bwall
 
     # run basin wall
@@ -81,7 +81,7 @@ do
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.33/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.17/" $NL_bfloor
     # Basin albedo is not lowered any further
-    sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL_bfloor
+    # sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb-bfloor\"/" $NL_bfloor
 
     # run basin floor
