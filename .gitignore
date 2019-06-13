@@ -9,6 +9,7 @@ icemelt.sublime-workspace
 output/*
 logs/*
 input/*
+input_SAVE/*
 namelist/*
 icemelt-versions/*
 
