@@ -5,7 +5,7 @@
 #SBATCH --job-name=icemelt
 #SBATCH --partition medium
 #SBATCH --ntasks=4
-#SBATCH --output=logs/all-%A.log
+#SBATCH --output=logs/new-micromet-%A.log
 #
 # mail alert at start, end and abortion of execution
 #SBATCH --mail-type=ALL

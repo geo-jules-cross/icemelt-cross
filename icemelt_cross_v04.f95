@@ -186,10 +186,10 @@
 !        maxiter=4749
 ! run the model from 1995/7/1 to 2009/1/15 = 4948
 !        maxiter=4948
-! run the model from 1995/7/1 to 2013/1/31 = 6425
-!        maxiter=6425
 ! run the model from 1995/7/1 to 2013/2/01 = 6426
-        maxiter=6426
+!        maxiter=6425
+! run the model from 1995/7/1 to 2015/6/30 = 7304
+        maxiter=7304
 
 ! Set range of years to run in the model (determine correct timesteps)
         yeararg='1995'
