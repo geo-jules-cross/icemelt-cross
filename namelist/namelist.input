@@ -6,7 +6,7 @@ dz1 = 0.0020 ! m
 n_snowgrain_radius = 9 ! index
 runmin = 10 ! index
 runmax = 82 ! index
-runnametext = "new-micromet"
+runnametext = "name"
 ! optional adjustments to met data
 tempadd = 0.0
 windmult = 1.0
@@ -14,8 +14,8 @@ albedo_surface = 0.0
 albedo_offset = 0.0
 albedo_mult = 0.0
 ! number of time steps to run
-maxiter=7304
-! maxiter = 6426
+! maxiter=7304
+maxiter = 6426
 ! maxiter = 2
 ! set start year
 yeararg = "1995"
