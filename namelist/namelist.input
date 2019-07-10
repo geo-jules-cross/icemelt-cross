@@ -1,6 +1,6 @@
 &params
 ! required parameters
-glacnum = 8 ! case
+glacnum = 0 ! case
 z_0 = 0.05 ! mm
 dz1 = 0.0020 ! m
 n_snowgrain_radius = 9 ! index
