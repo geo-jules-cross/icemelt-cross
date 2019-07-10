@@ -1,12 +1,12 @@
 &params
 ! required parameters
-glacnum = 0 ! case
+glacnum = 8 ! case
 z_0 = 0.05 ! mm
 dz1 = 0.0020 ! m
 n_snowgrain_radius = 9 ! index
 runmin = 10 ! index
 runmax = 82 ! index
-runnametext = "name"
+runnametext = "base-params"
 ! optional adjustments to met data
 tempadd = 0.0
 windmult = 1.0
@@ -15,7 +15,7 @@ albedo_offset = 0.0
 albedo_mult = 0.0
 ! number of time steps to run
 ! maxiter=7304
-maxiter = 6426
+maxiter = 6425
 ! maxiter = 2
 ! set start year
 yeararg = "1995"
