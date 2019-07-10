@@ -6,7 +6,7 @@ dz1 = 0.0020 ! m
 n_snowgrain_radius = 9 ! index
 runmin = 10 ! index
 runmax = 82 ! index
-runnametext = "base-MODIS"
+runnametext = "base-params"
 ! optional adjustments to met data
 tempadd = 0.0
 windmult = 1.0
