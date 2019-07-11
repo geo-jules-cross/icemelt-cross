@@ -556,12 +556,12 @@
         glacier_cells_file='./input/tv_landcovermetstake.txt'
     else
         if (iscliff.eq.1) then
-            ! glacier_cells_file='./input/tv_basins_cliff.txt'
-            glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
+            glacier_cells_file='./input/tv_basins_cliff.txt'
+            ! glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
-            ! glacier_cells_file='./input/tv_basins_surface.txt'
+            glacier_cells_file='./input/tv_basins_surface.txt'
             ! glacier_cells_file='./input/tv_basins_surface_jmc.txt'
-            glacier_cells_file='./input/tv_basins_surface_wales_jmc.txt'
+            ! glacier_cells_file='./input/tv_basins_surface_wales_jmc.txt'
         endif
     endif
     open (50,file=glacier_cells_file,form='formatted')
