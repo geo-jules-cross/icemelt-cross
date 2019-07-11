@@ -556,12 +556,12 @@
         glacier_cells_file='./input/tv_landcovermetstake.txt'
     else
         if (iscliff.eq.1) then
-            glacier_cells_file='./input/tv_basins_cliff.txt'
-            ! glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
+            ! glacier_cells_file='./input/tv_basins_cliff.txt'
+            glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
-            glacier_cells_file='./input/tv_basins_surface.txt'
+            ! glacier_cells_file='./input/tv_basins_surface.txt'
             ! glacier_cells_file='./input/tv_basins_surface_jmc.txt'
-            ! glacier_cells_file='./input/tv_basins_surface_wales_jmc.txt'
+            glacier_cells_file='./input/tv_basins_surface_wales_jmc.txt'
         endif
     endif
     open (50,file=glacier_cells_file,form='formatted')
@@ -674,14 +674,14 @@
 ! Adjustment to COH surface roughness (Added by JMC)
 !---------------------------------------------------------------------
 
-    SELECT CASE (runcell(iii))
-        case (10, 15, 19, 11, 16, 25, 21, 26, 29, 22, 24, 23, 36, &
-              37, 38, 39, 31, 32, 33, 34, 41, 42, 43, 44, 45)       ! Up-valley 
-            z_0 = z_0_input
-        case (50, 63, 64, 65, 66, 61, 71, 72, 73, 74, 62, 81, 82)   ! Down-valley
-            ! z_0 = 0.5
-            z_0 = 1
-    end SELECT
+    ! SELECT CASE (runcell(iii))
+    !     case (10, 15, 19, 11, 16, 25, 21, 26, 29, 22, 24, 23, 36, &
+    !           37, 38, 39, 31, 32, 33, 34, 41, 42, 43, 44, 45)       ! Up-valley 
+    !         z_0 = z_0_input
+    !     case (50, 63, 64, 65, 66, 61, 71, 72, 73, 74, 62, 81, 82)   ! Down-valley
+    !         ! z_0 = 0.5
+    !         z_0 = 1
+    ! end SELECT
 
 !---------------------------------------------------------------------
 ! Spatially Distributed Albedo Section
