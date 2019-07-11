@@ -175,7 +175,7 @@
         ! Albedo adjustment applied to specific surface type
         albedo_offset   = 0.0  
         ! Albedo offset added to measured albedo.
-        albedo_mult     = 1.00
+        albedo_mult     = 0.0
         ! Percent change to albedo. JMC: added
 
 ! Define maxiter, the number of time steps in the model run.
@@ -421,10 +421,7 @@
     max_annual_loops = 1
 
 ! Julian day of the model start.
-    J_day_start = 182 
-    ! JMC: Matt usually started the melt runs mid-winter (July 1st)
-    ! J_day_start = 1 
-    ! JMC: Or start at beginning of calendar year JMC (January 1st) 
+    J_day_start = 182  ! JMC: Matt usually started the melt runs mid-winter (July 1st)
 
 ! Height of wind and temperature observations.
     z_windobs = 3.0
@@ -677,14 +674,14 @@
 ! Adjustment to COH surface roughness (Added by JMC)
 !---------------------------------------------------------------------
 
-    ! SELECT CASE (runcell(iii))
-    !     case (10, 15, 19, 11, 16, 25, 21, 26, 29, 22, 24, 23, 36, &
-    !           37, 38, 39, 31, 32, 33, 34, 41, 42, 43, 44, 45)       ! Up-valley 
-    !         z_0 = z_0_input
-    !     case (50, 63, 64, 65, 66, 61, 71, 72, 73, 74, 62, 81, 82)   ! Down-valley
-    !         ! z_0 = 0.5
-    !         z_0 = 1
-    ! end SELECT
+    SELECT CASE (runcell(iii))
+        case (10, 15, 19, 11, 16, 25, 21, 26, 29, 22, 24, 23, 36, &
+              37, 38, 39, 31, 32, 33, 34, 41, 42, 43, 44, 45)       ! Up-valley 
+            z_0 = z_0_input
+        case (50, 63, 64, 65, 66, 61, 71, 72, 73, 74, 62, 81, 82)   ! Down-valley
+            ! z_0 = 0.5
+            z_0 = 1
+    end SELECT
 
 !---------------------------------------------------------------------
 ! Spatially Distributed Albedo Section
