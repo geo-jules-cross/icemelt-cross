@@ -610,20 +610,6 @@
         ! print *,'WORKING ON CELL = ',iii, ' , ' , jjj,',num',cellcount
         ! print *, 'BELONGS TO BASIN =', runcell(iii) ! Added by JMC
 
-
-        ! MJH: We want to use a lower albedo for HOD and COH glaciers
-        ! Set that here, but only for 'clean' ice
-        !
-        ! JMC: Turn this off because I  can't make this assumption...
-        ! MODIS albedo should account for true albedo at these glaciers
-        !
-        ! if (runcell(iii)>=50) then
-        !    if (albedo_offset == 0.0) then
-        !         albedo_offset = albedo_offset - 0.05
-        !    endif
-        ! endif
-        !
-
 ! reset everything for each cell to use clean
         slope_az = 0.0
         terrain_slope = 0.0
@@ -671,17 +657,25 @@
     endif
 
 !---------------------------------------------------------------------
-! Adjustment to COH surface roughness (Added by JMC)
+! Adjustment to Fryxell Basin albedo and surface roughness (Added by JMC)
 !---------------------------------------------------------------------
 
-    ! SELECT CASE (runcell(iii))
-    !     case (10, 15, 19, 11, 16, 25, 21, 26, 29, 22, 24, 23, 36, &
-    !           37, 38, 39, 31, 32, 33, 34, 41, 42, 43, 44, 45)       ! Up-valley 
-    !         z_0 = z_0_input
-    !     case (50, 63, 64, 65, 66, 61, 71, 72, 73, 74, 62, 81, 82)   ! Down-valley
-    !         ! z_0 = 0.5
-    !         z_0 = 1
-    ! end SELECT
+    ! MJH: We want to use a lower albedo for HOD and COH glaciers
+    ! Set that here, but only for 'clean' ice
+    ! JMC: Turn this off because I  can't make this assumption...
+    ! MODIS albedo should account for true albedo at these glaciers
+
+    if (runcell(iii)>=50) then ! Down-valley
+       ! ALBEDO
+       ! if (albedo_offset == 0.0) then
+       !      albedo_offset = albedo_offset - 0.05
+       ! endif
+       ! SURFACE ROUGNESS
+       ! z_0 = 0.5
+        z_0 = 1
+    elseif (runcell(iii)<50) then ! Up-valley
+        z_0 = z_0_input
+    endif
 
 !---------------------------------------------------------------------
 ! Spatially Distributed Albedo Section
