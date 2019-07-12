@@ -556,12 +556,12 @@
         glacier_cells_file='./input/tv_landcovermetstake.txt'
     else
         if (iscliff.eq.1) then
-            glacier_cells_file='./input/tv_basins_cliff.txt'
-            ! glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
+            ! glacier_cells_file='./input/tv_basins_cliff.txt'
+            glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
-            glacier_cells_file='./input/tv_basins_surface.txt'
+            ! glacier_cells_file='./input/tv_basins_surface.txt'
             ! glacier_cells_file='./input/tv_basins_surface_jmc.txt'
-            ! glacier_cells_file='./input/tv_basins_surface_wales_jmc.txt'
+            glacier_cells_file='./input/tv_basins_surface_wales_jmc.txt'
         endif
     endif
     open (50,file=glacier_cells_file,form='formatted')
@@ -665,17 +665,17 @@
     ! JMC: Turn this off because I  can't make this assumption...
     ! MODIS albedo should account for true albedo at these glaciers
 
-    if (runcell(iii)>=50) then ! Down-valley
-       ! ALBEDO
-       ! if (albedo_offset == 0.0) then
-       !      albedo_offset = albedo_offset - 0.05
-       ! endif
-       ! SURFACE ROUGNESS
-       ! z_0 = 0.5
-        z_0 = 1
-    elseif (runcell(iii)<50) then ! Up-valley
-        z_0 = z_0_input
-    endif
+    ! if (runcell(iii)>=50) then ! Down-valley
+    !    ! ALBEDO
+    !    ! if (albedo_offset == 0.0) then
+    !    !      albedo_offset = albedo_offset - 0.05
+    !    ! endif
+    !    ! SURFACE ROUGNESS
+    !    ! z_0 = 0.5
+    !     z_0 = 1
+    ! elseif (runcell(iii)<50) then ! Up-valley
+    !     z_0 = z_0_input
+    ! endif
 
 !---------------------------------------------------------------------
 ! Spatially Distributed Albedo Section
