@@ -905,7 +905,15 @@
     windspd=xmmdata(3,iarraypos)
     winddir=xmmdata(4,iarraypos)
     Qsi=xmmdata(5,iarraypos)
-    Qli=xmmdata(6,iarraypos)
+    
+    ! Increase longwave in to test radiation paradox
+    if (runcell(iii)>50) then ! Fryxell / Kukri Hills
+        Qli=xmmdata(6,iarraypos)+20
+    elseif (runcell(iii)<=50) then ! Up-valley
+        Qli=xmmdata(6,iarraypos)
+    endif
+
+    ! Qli=xmmdata(6,iarraypos)
 
 ! Read Station data and use it if good
 ! If Stn data is bad, then use MM data
