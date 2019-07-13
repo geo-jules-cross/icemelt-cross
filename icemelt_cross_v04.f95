@@ -961,8 +961,15 @@
             Tair = Tair + clifftempadd
         endif
     else
+
 ! Adjustments anywhere else
-        windspd = windspd * windmult
+        ! Lower wind in Taylor Glacier basins more
+        if ((runcell(iii).eq.10).or.(runcell(iii).eq.15).or.(runcell(iii).eq.19)) then
+            windspd = windspd * (windmult - 0.20)
+        else
+            windspd = windspd * windmult
+        endif
+        ! Temp adjustment
         if (Qsi.gt.50.0) then
             Tair = Tair + tempadd
         endif
