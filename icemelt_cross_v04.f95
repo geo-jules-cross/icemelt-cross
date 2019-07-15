@@ -553,16 +553,15 @@
 ! tv_basins grids were modified by JMC to expand the contributing area to 
 ! Commonwealth Stream and the Wales Group of Unnamed Glaciers (62, 63, 64)
     if (isstn.eq.1) then
-        ! glacier_cells_file='./input/tv_landcovermetstake.txt'
-        glacier_cells_file='./input/tv_landcovermetstake_jmc.txt'
+        glacier_cells_file='./input/tv_landcovermetstake.txt'
     else
         if (iscliff.eq.1) then
-            ! glacier_cells_file='./input/tv_basins_cliff.txt'
-            glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
+            glacier_cells_file='./input/tv_basins_cliff.txt'
+            ! glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
-            ! glacier_cells_file='./input/tv_basins_surface.txt'
+            glacier_cells_file='./input/tv_basins_surface.txt'
             ! glacier_cells_file='./input/tv_basins_surface_jmc.txt'
-            glacier_cells_file='./input/tv_basins_surface_wales_jmc.txt'
+            ! glacier_cells_file='./input/tv_basins_surface_wales_jmc.txt'
         endif
     endif
     open (50,file=glacier_cells_file,form='formatted')
@@ -661,22 +660,22 @@
 ! Adjustment to Fryxell Basin albedo and surface roughness (Added by JMC)
 !---------------------------------------------------------------------
 
-    ! if (runcell(iii).ge.50) then ! Down-valley
+    if (runcell(iii).ge.50) then ! Down-valley
         ! ALBEDO
         ! MJH: We want to use a lower albedo for HOD and COH glaciers
         ! Set that here, but only for 'clean' ice
         ! JMC: Turn this off because I  can't make this assumption...
         ! MODIS albedo should account for true albedo at these glaciers
-    !    ! if (albedo_offset.eq.0.0) then
-    !    !      albedo_offset = albedo_offset - 0.05
-    !    ! endif
+       ! if (albedo_offset.eq.0.0) then
+       !      albedo_offset = albedo_offset - 0.05
+       ! endif
 
-    !    ! SURFACE ROUGNESS
-    !    ! z_0 = 0.5
-    !     z_0 = 1
-    ! else if (runcell(iii).le.50) then ! Up-valley
-    !     z_0 = z_0_input
-    ! end if
+       ! SURFACE ROUGNESS
+       ! z_0 = 0.5
+        z_0 = 1
+    else if (runcell(iii).le.50) then ! Up-valley
+        z_0 = z_0_input
+    end if
 
 !---------------------------------------------------------------------
 ! Spatially Distributed Albedo Section
