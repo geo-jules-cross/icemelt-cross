@@ -456,7 +456,7 @@
     xlat = -77.74
 
 ! Fractional cloud cover and transmissivity.  These values can be
-!   used to adjust the incoming solar radiation.
+! used to adjust the incoming solar radiation.
 ! clear_sky is a var jon added.
     cloud_frac = 0.05
     transmiss = 1.08
@@ -553,15 +553,16 @@
 ! tv_basins grids were modified by JMC to expand the contributing area to 
 ! Commonwealth Stream and the Wales Group of Unnamed Glaciers (62, 63, 64)
     if (isstn.eq.1) then
-        glacier_cells_file='./input/tv_landcovermetstake.txt'
+        ! glacier_cells_file='./input/tv_landcovermetstake.txt'
+        glacier_cells_file='./input/tv_landcovermetstake_jmc.txt'
     else
         if (iscliff.eq.1) then
-            glacier_cells_file='./input/tv_basins_cliff.txt'
-            ! glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
+            ! glacier_cells_file='./input/tv_basins_cliff.txt'
+            glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
-            glacier_cells_file='./input/tv_basins_surface.txt'
+            ! glacier_cells_file='./input/tv_basins_surface.txt'
             ! glacier_cells_file='./input/tv_basins_surface_jmc.txt'
-            ! glacier_cells_file='./input/tv_basins_surface_wales_jmc.txt'
+            glacier_cells_file='./input/tv_basins_surface_wales_jmc.txt'
         endif
     endif
     open (50,file=glacier_cells_file,form='formatted')
@@ -660,22 +661,22 @@
 ! Adjustment to Fryxell Basin albedo and surface roughness (Added by JMC)
 !---------------------------------------------------------------------
 
-    ! MJH: We want to use a lower albedo for HOD and COH glaciers
-    ! Set that here, but only for 'clean' ice
-    ! JMC: Turn this off because I  can't make this assumption...
-    ! MODIS albedo should account for true albedo at these glaciers
-
-    ! if (runcell(iii)>=50) then ! Down-valley
-    !    ! ALBEDO
-    !    ! if (albedo_offset == 0.0) then
+    ! if (runcell(iii).ge.50) then ! Down-valley
+        ! ALBEDO
+        ! MJH: We want to use a lower albedo for HOD and COH glaciers
+        ! Set that here, but only for 'clean' ice
+        ! JMC: Turn this off because I  can't make this assumption...
+        ! MODIS albedo should account for true albedo at these glaciers
+    !    ! if (albedo_offset.eq.0.0) then
     !    !      albedo_offset = albedo_offset - 0.05
     !    ! endif
+
     !    ! SURFACE ROUGNESS
     !    ! z_0 = 0.5
     !     z_0 = 1
-    ! elseif (runcell(iii)<50) then ! Up-valley
+    ! else if (runcell(iii).le.50) then ! Up-valley
     !     z_0 = z_0_input
-    ! endif
+    ! end if
 
 !---------------------------------------------------------------------
 ! Spatially Distributed Albedo Section
@@ -907,9 +908,9 @@
     Qsi=xmmdata(5,iarraypos)
     
     ! Increase longwave in to test radiation paradox
-    ! if (runcell(iii)>50) then ! Fryxell / Kukri Hills
+    ! if (runcell(iii).ge.50) then ! Fryxell / Kukri Hills
     !     Qli=xmmdata(6,iarraypos)+20
-    ! elseif (runcell(iii)<=50) then ! Up-valley
+    ! else if (runcell(iii).le.50) then ! Up-valley
     !     Qli=xmmdata(6,iarraypos)
     ! endif
 
@@ -966,7 +967,7 @@
 ! Adjustments anywhere else
         
         ! Lower wind in Taylor Glacier basins more
-        ! if (windmult > 0) then
+        ! if (windmult.gt.0) then
         !     if ((runcell(iii).eq.10).or.(runcell(iii).eq.15).or.(runcell(iii).eq.19)) then
         !         windspd = windspd * (windmult - 0.20)
         !     else
