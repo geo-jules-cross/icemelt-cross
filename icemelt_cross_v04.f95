@@ -937,6 +937,7 @@
 ! MM already does this, but station data does not
         if (windspd .lt. 1.0) then
             windspd = 1.0
+        endif
 
 ! Calc Pressure using Lk Hoare Pa measurements
 ! There are 36 hours in the whole 14 years with Pa missing at LH
