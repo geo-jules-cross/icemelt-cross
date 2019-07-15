@@ -907,13 +907,13 @@
     Qsi=xmmdata(5,iarraypos)
     
     ! Increase longwave in to test radiation paradox
-    if (runcell(iii)>50) then ! Fryxell / Kukri Hills
-        Qli=xmmdata(6,iarraypos)+20
-    elseif (runcell(iii)<=50) then ! Up-valley
-        Qli=xmmdata(6,iarraypos)
-    endif
+    ! if (runcell(iii)>50) then ! Fryxell / Kukri Hills
+    !     Qli=xmmdata(6,iarraypos)+20
+    ! elseif (runcell(iii)<=50) then ! Up-valley
+    !     Qli=xmmdata(6,iarraypos)
+    ! endif
 
-    ! Qli=xmmdata(6,iarraypos)
+    Qli=xmmdata(6,iarraypos)
 
 ! Read Station data and use it if good
 ! If Stn data is bad, then use MM data
@@ -963,12 +963,18 @@
     else
 
 ! Adjustments anywhere else
+        
         ! Lower wind in Taylor Glacier basins more
-        if ((runcell(iii).eq.10).or.(runcell(iii).eq.15).or.(runcell(iii).eq.19)) then
-            windspd = windspd * (windmult - 0.20)
+        if (windmult > 0) then
+            if ((runcell(iii).eq.10).or.(runcell(iii).eq.15).or.(runcell(iii).eq.19)) then
+                windspd = windspd * (windmult - 0.20)
+            else
+                windspd = windspd * windmult
+            endif
         else
             windspd = windspd * windmult
         endif
+
         ! Temp adjustment
         if (Qsi.gt.50.0) then
             Tair = Tair + tempadd
