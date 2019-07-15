@@ -931,12 +931,13 @@
         end if
 
         Tair = Tair + Tf
+
 ! Windspeed needs to be above a threshold value 
 ! to avoid computational problems. 0.1
 ! MM already does this, but station data does not
         if (windspd .lt. 1.0) then
             windspd = 1.0
-        endif
+
 ! Calc Pressure using Lk Hoare Pa measurements
 ! There are 36 hours in the whole 14 years with Pa missing at LH
 ! For those times, just use the previous time step value.
@@ -965,15 +966,17 @@
 ! Adjustments anywhere else
         
         ! Lower wind in Taylor Glacier basins more
-        if (windmult > 0) then
-            if ((runcell(iii).eq.10).or.(runcell(iii).eq.15).or.(runcell(iii).eq.19)) then
-                windspd = windspd * (windmult - 0.20)
-            else
-                windspd = windspd * windmult
-            endif
-        else
-            windspd = windspd * windmult
-        endif
+        ! if (windmult > 0) then
+        !     if ((runcell(iii).eq.10).or.(runcell(iii).eq.15).or.(runcell(iii).eq.19)) then
+        !         windspd = windspd * (windmult - 0.20)
+        !     else
+        !         windspd = windspd * windmult
+        !     endif
+        ! else
+        !     windspd = windspd * windmult
+        ! endif
+
+        windspd = windspd * windmult
 
         ! Temp adjustment
         if (Qsi.gt.50.0) then

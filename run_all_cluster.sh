@@ -5,7 +5,7 @@
 #SBATCH --job-name=icemelt
 #SBATCH --partition medium
 #SBATCH --ntasks=4
-#SBATCH --output=logs/adj-windTAR-%A.log
+#SBATCH --output=logs/adj-albedo-notbasins-%A.log
 #
 # mail alert at start, end and abortion of execution
 #SBATCH --mail-type=ALL
@@ -34,6 +34,7 @@ cp $NL $NL.smooth
 
 # run smooth
 $CMD $NL.smooth &
+echo $NL.smooth
 
 echo "setup & run basin wall"
 cp $NL $NL.bwall
@@ -44,6 +45,7 @@ sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.065/" $NL.bwall
 # Basin albedo is not lowered any further
 sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL.bwall
 sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname-bwall\"/" $NL.bwall
+echo $NL.bwall
 
 # run basin wall
 $CMD $NL.bwall &
@@ -57,6 +59,7 @@ sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.17/" $NL.bfloor
 # Basin albedo is not lowered any further
 sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL.bfloor
 sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname-bfloor\"/" $NL.bfloor
+echo $NL.bfloor
 
 # run basin floor
 $CMD $NL.bfloor &
