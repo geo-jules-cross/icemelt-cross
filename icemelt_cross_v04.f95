@@ -928,7 +928,7 @@
 
         if (Qsi .lt. 1.0) then
             Qsi=0.0
-        end if
+        endif
 
         Tair = Tair + Tf
 
@@ -962,7 +962,6 @@
             Tair = Tair + clifftempadd
         endif
     else
-
 ! Adjustments anywhere else
         
         ! Lower wind in Taylor Glacier basins more
