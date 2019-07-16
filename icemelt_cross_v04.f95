@@ -660,7 +660,7 @@
 ! Adjustment to Fryxell Basin albedo and surface roughness (Added by JMC)
 !---------------------------------------------------------------------
 
-    if (runcell(iii).ge.50) then ! Down-valley
+    ! if (runcell(iii).ge.50) then ! Down-valley
         ! ALBEDO
         ! MJH: We want to use a lower albedo for HOD and COH glaciers
         ! Set that here, but only for 'clean' ice
@@ -673,9 +673,9 @@
        ! SURFACE ROUGNESS
        ! z_0 = 0.5
         z_0 = 1
-    else if (runcell(iii).le.50) then ! Up-valley
-        z_0 = z_0_input
-    end if
+    ! else if (runcell(iii).le.50) then ! Up-valley
+    !     z_0 = z_0_input
+    ! end if
 
 !---------------------------------------------------------------------
 ! Spatially Distributed Albedo Section
