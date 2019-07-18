@@ -657,27 +657,6 @@
     endif
 
 !---------------------------------------------------------------------
-! Adjustment to Fryxell Basin albedo and surface roughness (Added by JMC)
-!---------------------------------------------------------------------
-
-    ! if (runcell(iii).ge.50) then ! Down-valley
-        ! ALBEDO
-        ! MJH: We want to use a lower albedo for HOD and COH glaciers
-        ! Set that here, but only for 'clean' ice
-        ! JMC: Turn this off because I  can't make this assumption...
-        ! MODIS albedo should account for true albedo at these glaciers
-       ! if (albedo_offset.eq.0.0) then
-       !      albedo_offset = albedo_offset - 0.05
-       ! endif
-
-       ! SURFACE ROUGNESS
-       ! z_0 = 0.5
-       ! z_0 = 1
-    ! else if (runcell(iii).le.50) then ! Up-valley
-    !     z_0 = z_0_input
-    ! end if
-
-!---------------------------------------------------------------------
 ! Spatially Distributed Albedo Section
 !---------------------------------------------------------------------
 
@@ -836,10 +815,10 @@
 !=====================================================================
 !                       START ANNUAL ITERATION
 !=====================================================================
-        do kkk=1,max_annual_loops
-          ! print *,'Annual Loop Number =',kkk
-          ! MJH: Note the annual iteration will be phased out.  
-          ! So don't add anything important to this little section.
+    do kkk=1,max_annual_loops
+      ! print *,'Annual Loop Number =',kkk
+      ! MJH: Note the annual iteration will be phased out.  
+      ! So don't add anything important to this little section.
 
     if (kkk .gt. 1) then
 !        snow_cover_depth_old = 0.0
@@ -888,10 +867,31 @@
         dayablation = 0.0
         daysubdrain = 0.0
 
-! Albedo adjustment based on year or basin
+!---------------------------------------------------------------------
+! Adjustments by year or basin to Albedo and Surface Roughness (Added by JMC)
+!---------------------------------------------------------------------
 
-        if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0)) then ! 2008/7/1 onwards apply albedo_mult of -15%
-            albedo_mult = -0.15
+    ! if (runcell(iii).ge.50) then ! Down-valley
+        
+        ! ALBEDO
+       ! if (albedo_offset.eq.0.0) then
+       !      albedo_offset = albedo_offset - 0.05
+       ! endif
+
+       ! SURFACE ROUGNESS
+       ! z_0 = 0.5
+       ! z_0 = 1
+    ! else if (runcell(iii).le.50) then ! Up-valley
+    !     z_0 = z_0_input
+    ! end if
+
+        if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0.0)) then
+            ! 2008/7/1 onwards apply albedo_mult of -15%
+            if (runcell(iii).ge.50) then
+                albedo_mult = -0.20
+            else
+                albedo_mult = -0.15
+            endif
         endif
 
 ! Albedo Offset and Percent Adjustment for the Day (constant for each day)
@@ -911,7 +911,8 @@
     windspd=xmmdata(3,iarraypos)
     winddir=xmmdata(4,iarraypos)
     Qsi=xmmdata(5,iarraypos)
-    
+    Qli=xmmdata(6,iarraypos)
+
     ! Increase longwave in to test radiation paradox
     ! if (runcell(iii).ge.50) then ! Fryxell / Kukri Hills
     !     Qli=xmmdata(6,iarraypos)+20
@@ -919,7 +920,10 @@
     !     Qli=xmmdata(6,iarraypos)
     ! endif
 
-    Qli=xmmdata(6,iarraypos)
+    ! MJH: Manual sensitivity adjustments here
+        ! Tair=Tair+0.0
+        ! windspd=windspd*1.0
+        ! Qli=Qli+0.0
 
 ! Read Station data and use it if good
 ! If Stn data is bad, then use MM data
@@ -957,11 +961,6 @@
               (-287.04*0.5*(T_ref+Tf + Tair)/gravity) )
         endif
 
-! MJH: Manual sensitivity adjustments here
-        ! Tair=Tair+0.0
-        ! windspd=windspd*1.0
-        ! Qli=Qli+0.0
-
 ! Cliff Met adjustments
     if (((iscliff.eq.1).or.(glacnum.eq.3)).or.(glacnum.eq.6)) then
         windspd = windspd * cliffwindmult
@@ -969,50 +968,37 @@
             Tair = Tair + clifftempadd
         endif
     else
+
 ! Adjustments anywhere else
-        
-        ! Lower wind in Taylor Glacier basins more
-        ! if (windmult.gt.0) then
-        !     if ((runcell(iii).eq.10).or.(runcell(iii).eq.15).or.(runcell(iii).eq.19)) then
-        !         windspd = windspd * (windmult - 0.20)
-        !     else
-        !         windspd = windspd * windmult
-        !     endif
-        ! else
-        !     windspd = windspd * windmult
-        ! endif
-
         windspd = windspd * windmult
-
         ! Temp adjustment
         if (Qsi.gt.50.0) then
             Tair = Tair + tempadd
         endif
-
     endif
 
 !---------------------------------------------------------------------
 ! Call Main Subroutines
 !---------------------------------------------------------------------
 
-            CALL ENBALANCE(Tair,windspd,rh,  &
-                Tsfc,Qsi,Qli,Qle,Qh, &
-                Qe,Qc,Qm,balance,Qf, &
-                swe_depth,topo,z_windobs,dt,gamma, &
-                T_old,dy_p,JJ,icond_flag,cloud_frac,albedo,z_0, &
-                J_day_start,xlat,slope_az,terrain_slope, &
-                transmiss,clear_sky, &
-                snow_cover_depth_old,surface_melt,ro_snow_on_top, &
-                ablation,iter,xLs,xLf,i_yearstart, &
-                ablation_output,stability,hr,Qsi_fraction, &
-                y_crds,f_n,dely_p,Qsip,extcoef,xk_snow,ro_snow, &
-                Cp_snow,xk_water,water_frac,up,down,total_solar, &
-                Rv,ro_water,xmelt,ro_ice,water_depth, &
-                water_depth_old,water_flux,ro_pure_ice,kkk, &
-                 xinternal_heating_corr,qsfactor,ndarklayers,Pa)
+        CALL ENBALANCE(Tair,windspd,rh,  &
+            Tsfc,Qsi,Qli,Qle,Qh, &
+            Qe,Qc,Qm,balance,Qf, &
+            swe_depth,topo,z_windobs,dt,gamma, &
+            T_old,dy_p,JJ,icond_flag,cloud_frac,albedo,z_0, &
+            J_day_start,xlat,slope_az,terrain_slope, &
+            transmiss,clear_sky, &
+            snow_cover_depth_old,surface_melt,ro_snow_on_top, &
+            ablation,iter,xLs,xLf,i_yearstart, &
+            ablation_output,stability,hr,Qsi_fraction, &
+            y_crds,f_n,dely_p,Qsip,extcoef,xk_snow,ro_snow, &
+            Cp_snow,xk_water,water_frac,up,down,total_solar, &
+            Rv,ro_water,xmelt,ro_ice,water_depth, &
+            water_depth_old,water_flux,ro_pure_ice,kkk, &
+             xinternal_heating_corr,qsfactor,ndarklayers,Pa)
 
-
-    ifinalcall = 1 !Iterating is complete
+        ifinalcall = 1 !Iterating is complete
+        
         CALL ICE_ENERGY(gamma,T_old,Tsfc,JJ,dy_p,y_crds, &
             dt,f_n,dely_p,Qsip,Qsi,albedo,extcoef,xk_snow, &
             ro_snow,Cp_snow,xk_water,water_frac,up,down,total_solar, &
@@ -1175,8 +1161,6 @@
             endofsummerdensity(i)=ro_snow
         enddo
     endif
-
-
 
       enddo
 !            ^---------- End Daily Loop ------------------^
