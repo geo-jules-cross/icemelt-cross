@@ -890,7 +890,7 @@
 
 ! Albedo adjustment based on year or basin
 
-        if (iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0) then ! 2008/7/1 onwards apply albedo_mult of -15%
+        if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0)) then ! 2008/7/1 onwards apply albedo_mult of -15%
             albedo_mult = -0.15
         end
 
