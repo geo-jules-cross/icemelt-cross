@@ -892,7 +892,7 @@
 
         if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0)) then ! 2008/7/1 onwards apply albedo_mult of -15%
             albedo_mult = -0.15
-        end
+        endif
 
 ! Albedo Offset and Percent Adjustment for the Day (constant for each day)
         read (33,*) junk1,junk2,junk3,albedo
