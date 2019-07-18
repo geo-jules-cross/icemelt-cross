@@ -672,7 +672,7 @@
 
        ! SURFACE ROUGNESS
        ! z_0 = 0.5
-        z_0 = 1
+       ! z_0 = 1
     ! else if (runcell(iii).le.50) then ! Up-valley
     !     z_0 = z_0_input
     ! end if
@@ -887,6 +887,12 @@
         daymelt = 0.0
         dayablation = 0.0
         daysubdrain = 0.0
+
+! Albedo adjustment based on year or basin
+
+        if (iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0) then ! 2008/7/1 onwards apply albedo_mult of -15%
+            albedo_mult = -0.15
+        end
 
 ! Albedo Offset and Percent Adjustment for the Day (constant for each day)
         read (33,*) junk1,junk2,junk3,albedo
