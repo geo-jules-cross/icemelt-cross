@@ -119,20 +119,20 @@
     real albedo_evo_poly_d,snow_albedo_thresh
 
 ! constants for calculating the best fit polynomial of albedo.
-        parameter(albedo_evo_poly_a = 9.749256e-10)
-        parameter(albedo_evo_poly_b = -7.432486e-07)
-        parameter(albedo_evo_poly_c = 2.099152e-04)
-        parameter(albedo_evo_poly_d = -0.025216)
-        parameter(albedo_evo_poly_e = 1.614333)
+    parameter(albedo_evo_poly_a = 9.749256e-10)
+    parameter(albedo_evo_poly_b = -7.432486e-07)
+    parameter(albedo_evo_poly_c = 2.099152e-04)
+    parameter(albedo_evo_poly_d = -0.025216)
+    parameter(albedo_evo_poly_e = 1.614333)
 
     data stnx/53,63,65,133,143,127,164,0/
     data stny/36,43,45,93,66,88,114,0/
 
-        namelist /params/ glacnum, z_0, dz1, n_snowgrain_radius, &
-                           runmin, runmax, runnametext, &
-                           tempadd, windmult, &
-                           albedo_surface, albedo_offset, albedo_mult, &
-                           maxiter, yeararg
+    namelist /params/ glacnum, z_0, dz1, n_snowgrain_radius, &
+                       runmin, runmax, runnametext, &
+                       tempadd, windmult, &
+                       albedo_surface, albedo_offset, albedo_mult, &
+                       maxiter, yeararg
 
 ! INITIALIZE TO 0 FOR RUN TIME
     xdur=secnds(0.0)
@@ -142,60 +142,59 @@
 !---------------------------------------------------------------------
 
 ! Check if namelist.input file is provided  
-
-        if (IARGC() .eq. 1) then
-          CALL GETARG(1, nlfname)
-        else
-          nlfname='namelist.input'
-        endif
+    if (IARGC() .eq. 1) then
+      CALL GETARG(1, nlfname)
+    else
+      nlfname='namelist.input'
+    endif
 
 ! Otherwise run default parameters below
-        glacnum = 0 ! spatial run
-        z_0 = 1.0  ! mm
-        dz1 = 1.0  ! m
-        n_snowgrain_radius = 10  ! index
-        runmin = 10
-        runmax = 82
-        ! Parameters runmin and runmax are necessary for a spatial run
-        ! they refer to the basins input grid and indicate what range
-        ! of basin indices (inclusive) to run, which allows a run for
-        ! just a particular basin or glacier (range 10-82)
+    glacnum = 0 ! spatial run
+    z_0 = 1.0  ! mm
+    dz1 = 1.0  ! m
+    n_snowgrain_radius = 10  ! index
+    runmin = 10
+    runmax = 82
+    ! Parameters runmin and runmax are necessary for a spatial run
+    ! they refer to the basins input grid and indicate what range
+    ! of basin indices (inclusive) to run, which allows a run for
+    ! just a particular basin or glacier (range 10-82)
 
-        runnametext = "DEFAULT_NAME"
+    runnametext = "DEFAULT_NAME"
 
-        drainthresh = 0.10  
-        ! the water frac at which water is removed from subsurface
+    drainthresh = 0.10  
+    ! the water frac at which water is removed from subsurface
 
 ! Adjustments to turn on or off for adjustments to general met data
-        tempadd         = 0.0   ! FLOOR=1.5   WALL=0.5  
-        ! Temperature added to measured temperature.
-        windmult        = 1.00  ! FLOOR=0.33  WALL=0.67 
-        ! Wind multiplier on measured wind speed.
-        albedo_surface  = 0.0   ! FLOOR=-0.17  WALL=-0.065 
-        ! Albedo adjustment applied to specific surface type
-        albedo_offset   = 0.0  
-        ! Albedo offset added to measured albedo.
-        albedo_mult     = 0.0
-        ! Percent change to albedo. JMC: added
+    tempadd         = 0.0   ! FLOOR=1.5   WALL=0.5  
+    ! Temperature added to measured temperature.
+    windmult        = 1.00  ! FLOOR=0.33  WALL=0.67 
+    ! Wind multiplier on measured wind speed.
+    albedo_surface  = 0.0   ! FLOOR=-0.17  WALL=-0.065 
+    ! Albedo adjustment applied to specific surface type
+    albedo_offset   = 0.0  
+    ! Albedo offset added to measured albedo.
+    albedo_mult     = 0.0
+    ! Percent change to albedo. JMC: added
 
 ! Define maxiter, the number of time steps in the model run.
 ! In the hourly model it's the number of days, hours are handled later
 
 ! run the model from 1995/7/1 to 2006/6/30 = 4018
-!        maxiter=4018
+!    maxiter=4018
 ! run the model from 1995/7/1 to 2008/1/22 = 4589
-!        maxiter=4589
+!    maxiter=4589
 ! run the model from 1995/7/1 to 2008/6/30 = 4749
-!        maxiter=4749
+!    maxiter=4749
 ! run the model from 1995/7/1 to 2009/1/15 = 4948
-!        maxiter=4948
+!    maxiter=4948
 ! run the model from 1995/7/1 to 2013/2/01 = 6425
-        maxiter=6425
+    maxiter=6425
 ! run the model from 1995/7/1 to 2015/6/30 = 7304
-!        maxiter=7304
+!    maxiter=7304
 
 ! Set range of years to run in the model (determine correct timesteps)
-        yeararg='1995'
+    yeararg='1995'
 
 !---------------------------------------------------------------------
 ! Read parameters from namelist.input file
@@ -505,13 +504,13 @@
 !---------------------------------------------------------------------
 
 ! Get the general constants to be used.
-        CALL CONSTS_ICE(xLs,xLf,Tf,ro_water,Cp_water,xk_water,  &
-         xk_ice,ro_ice,Cp_snow,Rv,ro_snow,xk_snow,ro_pure_ice)
+    CALL CONSTS_ICE(xLs,xLf,Tf,ro_water,Cp_water,xk_water,  &
+     xk_ice,ro_ice,Cp_snow,Rv,ro_snow,xk_snow,ro_pure_ice)
 
 ! Supply the initial configurations for the ice-free lake model.
-        CALL ICEINIT(Tsfc,T_old,dely_p,f_n,y_crds,y_wall,dy_p,JJ,  &
-         Tf,water_frac,gamma,xk_snow,water_depth_old,  &
-         temp_ice_init_array,deltaz)
+    CALL ICEINIT(Tsfc,T_old,dely_p,f_n,y_crds,y_wall,dy_p,JJ,  &
+     Tf,water_frac,gamma,xk_snow,water_depth_old,  &
+     temp_ice_init_array,deltaz)
 
 ! Calculate the solar radiation within the snow/ice matrix.
 ! Run extcoefs, or use last run's extcoefs results?
@@ -593,19 +592,19 @@
         do iii=1,nx
 
 ! check if we should run this cell
-    if (isstn.eq.0) then
-        runcond = ( (runcell(iii).ge.runmin) .and. &
-              (runcell(iii).le.runmax) )
-    else if (isstn.eq.3) then
-        runcond = ((runcell(iii).eq.celliii).and.(runcell(jjj).eq.celljjj))
-    else
-        runcond = ((iii.eq.stnx(glacnum)).and.(jjj.eq.stny(glacnum)))
-    endif
+        if (isstn.eq.0) then
+            runcond = ( (runcell(iii).ge.runmin) .and. &
+                  (runcell(iii).le.runmax) )
+        else if (isstn.eq.3) then
+            runcond = ((runcell(iii).eq.celliii).and.(runcell(jjj).eq.celljjj))
+        else
+            runcond = ((iii.eq.stnx(glacnum)).and.(jjj.eq.stny(glacnum)))
+        endif
 
-    if (runcond) then
-        cellcount=cellcount+1
-        ! print *,'WORKING ON CELL = ',iii, ' , ' , jjj,',num',cellcount
-        ! print *, 'BELONGS TO BASIN =', runcell(iii) ! Added by JMC
+        if (runcond) then
+            cellcount=cellcount+1
+            ! print *,'WORKING ON CELL = ',iii, ' , ' , jjj,',num',cellcount
+            ! print *, 'BELONGS TO BASIN =', runcell(iii) ! Added by JMC
 
 ! reset everything for each cell to use clean
         slope_az = 0.0
@@ -617,13 +616,13 @@
 
 ! Output options can be put here.  Maybe later in a param file
 ! this needs to start off, so we only write on the last iteration
-    ablation_output=0
+        ablation_output=0
 
 ! Open the atmospheric forcing data data files for the year.
 ! Make sure start date is July 1st in data file!
 ! output name indicates location in ascii grid dimensions
-    write(c_i,'(i3.3)') iii
-    write(c_j,'(i3.3)') jjj
+        write(c_i,'(i3.3)') iii
+        write(c_j,'(i3.3)') jjj
 
 !---------------------------------------------------------------------
 ! Read Met Input Files
@@ -631,121 +630,121 @@
 
 ! Data out of MicroMet is binary and has 6 variables
 ! Note the wordlength (4) is dependent on compiler settings!
-    if (iscliff.eq.1) then
-    mm_met_file='./input/input_cliff/' //   c_i // c_j // '.bin'
-    else
-    mm_met_file='./input/' //   c_i // c_j // '.bin'
-    endif
+        if (iscliff.eq.1) then
+        mm_met_file='./input/input_cliff/' //   c_i // c_j // '.bin'
+        else
+        mm_met_file='./input/' //   c_i // c_j // '.bin'
+        endif
 
-    open (31,file=mm_met_file,access='direct',form='unformatted', &
-         recl=iwordlength*6*(immoffset-1+maxiter*24))
+        open (31,file=mm_met_file,access='direct',form='unformatted', &
+             recl=iwordlength*6*(immoffset-1+maxiter*24))
 ! Read entirety of binary input files into memory to speed program
-    read (31,rec=1) ((xmmdata(i2,j2),i2=1,6) &
-           ,j2=1,immoffset-1+maxiter*24)
+        read (31,rec=1) ((xmmdata(i2,j2),i2=1,6) &
+               ,j2=1,immoffset-1+maxiter*24)
 
 !  For Station Runs, we also need this (in same structure as mm file)
 !    stn_met_file='./input/TAR_stn.bin'
-    if ((isstn.eq.1).and.(glacnum.ne.2)) then
-    stn_met_file='./input/'//glaccode//'_stn.bin'
-        open (32,file=stn_met_file,access='direct',form='unformatted', &
-               recl=iwordlength*6*(immoffset-1+maxiter*24))
-        read (32,rec=1) ((xstndata(i2,j2),i2=1,6) &
-              ,j2=1,immoffset-1+maxiter*24)
-    endif
+        if ((isstn.eq.1).and.(glacnum.ne.2)) then
+        stn_met_file='./input/'//glaccode//'_stn.bin'
+            open (32,file=stn_met_file,access='direct',form='unformatted', &
+                   recl=iwordlength*6*(immoffset-1+maxiter*24))
+            read (32,rec=1) ((xstndata(i2,j2),i2=1,6) &
+                  ,j2=1,immoffset-1+maxiter*24)
+        endif
 
 !---------------------------------------------------------------------
 ! Spatially Distributed Albedo Section
 !---------------------------------------------------------------------
 
-    SELECT CASE (glacnum) ! spatial run
+        SELECT CASE (glacnum) ! spatial run
+            
+            ! Using albedo files generated by JMC using MODIS data
+            case (0)
+                SELECT CASE (runcell(iii))
+                    case (10, 15, 19)                           ! Taylor Glacier
+                        albedo_file = './input/MODIS_alb.TAR'
+                        print *,'ALBEDO set for TAR'
+                    case (11, 16, 25)                           ! Borns group of glaciers
+                        albedo_file = './input/MODIS_alb.BNS'
+                    case (21)                                   ! LaCroix Glacier
+                        albedo_file = './input/MODIS_alb.LCX'
+                    case (26)                                   ! Matterhorn Glacier
+                        albedo_file = './input/MODIS_alb.MTN'
+                    case (29)                                   ! Rhone Glacier
+                        albedo_file = './input/MODIS_alb.RHO'
+                    case (22, 24, 23, 36, 37, 38, 39)           ! Sollas group of glaciers
+                        albedo_file = './input/MODIS_alb.SLS'
+                    case (31, 32, 33, 34)                       ! Suess Glacier
+                        albedo_file = './input/MODIS_alb.SUS'
+                    case (41, 42, 43, 44, 45)                   ! Canada Glacier
+                        albedo_file = './input/MODIS_alb.CAA'
+                        print *,'ALBEDO set for CAA'
+                    case (50)                                   ! Howard Glacier
+                        albedo_file = './input/MODIS_alb.HOD'
+                    case (63, 64, 65, 66)                       ! Crescent Glacier
+                        albedo_file = './input/MODIS_alb.CRS'
+                    case (61, 71, 72, 73, 74)                   ! Commonwealth Glacier
+                        albedo_file = './input/MODIS_alb.COH'
+                    case (62, 81, 82)                           ! Wales group of glaciers
+                        albedo_file = './input/MODIS_alb.WLS'
+                        print *,'ALBEDO set for WLS'
+                end SELECT
         
-        ! Using albedo files generated by JMC using MODIS data
-        case (0)
-            SELECT CASE (runcell(iii))
-                case (10, 15, 19)                           ! Taylor Glacier
-                    albedo_file = './input/MODIS_alb.TAR'
-                    print *,'ALBEDO set for TAR'
-                case (11, 16, 25)                           ! Borns group of glaciers
-                    albedo_file = './input/MODIS_alb.BNS'
-                case (21)                                   ! LaCroix Glacier
-                    albedo_file = './input/MODIS_alb.LCX'
-                case (26)                                   ! Matterhorn Glacier
-                    albedo_file = './input/MODIS_alb.MTN'
-                case (29)                                   ! Rhone Glacier
-                    albedo_file = './input/MODIS_alb.RHO'
-                case (22, 24, 23, 36, 37, 38, 39)           ! Sollas group of glaciers
-                    albedo_file = './input/MODIS_alb.SLS'
-                case (31, 32, 33, 34)                       ! Suess Glacier
-                    albedo_file = './input/MODIS_alb.SUS'
-                case (41, 42, 43, 44, 45)                   ! Canada Glacier
-                    albedo_file = './input/MODIS_alb.CAA'
-                    print *,'ALBEDO set for CAA'
-                case (50)                                   ! Howard Glacier
-                    albedo_file = './input/MODIS_alb.HOD'
-                case (63, 64, 65, 66)                       ! Crescent Glacier
-                    albedo_file = './input/MODIS_alb.CRS'
-                case (61, 71, 72, 73, 74)                   ! Commonwealth Glacier
-                    albedo_file = './input/MODIS_alb.COH'
-                case (62, 81, 82)                           ! Wales group of glaciers
-                    albedo_file = './input/MODIS_alb.WLS'
-                    print *,'ALBEDO set for WLS'
-            end SELECT
-        
-        ! Old albedo
-        ! case (0)
-        !     if (runmax .ge. 30) then 
-        !         albedo_file = './input/9513_alb.CAA' 
-        !         albedo_file = './input/9513_alb.TAR' 
-        !     endif
-        
-        ! Single Station Runs:
-        case (-1)                                           ! Cliff
-            albedo_file = './input/9513_alb.clf' 
-        case (2)                                            ! TAR2
-            albedo_file = './input/9513_alb.TAR' 
-        case (3)                                            ! Blood Falls
-            albedo_file = './input/9509_alb.BFS' 
-        case (6)                                            ! Blood Falls
-            albedo_file = './input/9509_alb.BFS'
-        case default
-            albedo_file = './input/9513_alb.' // glaccode 
-            !JMC changed 9509_alb. to 9513_alb.
-    end SELECT
+            ! Old albedo
+            ! case (0)
+            !     if (runmax .ge. 30) then 
+            !         albedo_file = './input/9513_alb.CAA' 
+            !         albedo_file = './input/9513_alb.TAR' 
+            !     endif
+            
+            ! Single Station Runs:
+            case (-1)                                           ! Cliff
+                albedo_file = './input/9513_alb.clf' 
+            case (2)                                            ! TAR2
+                albedo_file = './input/9513_alb.TAR' 
+            case (3)                                            ! Blood Falls
+                albedo_file = './input/9509_alb.BFS' 
+            case (6)                                            ! Blood Falls
+                albedo_file = './input/9509_alb.BFS'
+            case default
+                albedo_file = './input/9513_alb.' // glaccode 
+                !JMC changed 9509_alb. to 9513_alb.
+        end SELECT
     
     ! Open albedo file
-    open (33,file=albedo_file,form='formatted')
+        open (33,file=albedo_file,form='formatted')
 
 !---------------------------------------------------------------------
 ! End Albedo Section
 !---------------------------------------------------------------------
 
 ! read off albedo file until we reach the start date
-    do i=1,immoffset-1
-        if (mod(i,24).eq.1) read (33,*) junk1,junk2,junk3,xjunk4
-    enddo
+        do i=1,immoffset-1
+            if (mod(i,24).eq.1) read (33,*) junk1,junk2,junk3,xjunk4
+        enddo
 
 ! Read entire Pa file
-    Pa_file = './input/hoe_pa.bin'
+        Pa_file = './input/hoe_pa.bin'
 !    open (36,file=Pa_file,access='direct',form='unformatted',
 !     &  recl=iwordlength*2)
-    open (36,file=Pa_file,access='direct',form='unformatted', &
-      recl=iwordlength*2*(immoffset-1+maxiter*24))
-    read (36,rec=1) ((xpadata(i2,j2),i2=1,2) &
-         ,j2=1,immoffset-1+maxiter*24)
+        open (36,file=Pa_file,access='direct',form='unformatted', &
+          recl=iwordlength*2*(immoffset-1+maxiter*24))
+        read (36,rec=1) ((xpadata(i2,j2),i2=1,2) &
+             ,j2=1,immoffset-1+maxiter*24)
 
 ! Elevation of Lake Hoare station
-    elev_ref=77.1
+        elev_ref=77.1
 
 ! MJH: I will just use a random icetempinit.txt file from a TAR run
 ! it shouldn't vary that much once we get to summer I hope.
         open (39,file='./input/icetempinit2008good.txt')
 ! Supply the initial conditions.
         do j=1,JJ
-         read (39,'(f10.4)') T_old(j)
+            read (39,'(f10.4)') T_old(j)
 ! Shift ice temp column based on mean annual air temp
-    T_old(j)=T_old(j)+Tannualmean(iii,jjj)-TannualmeanRef
-         water_frac(j) = 0.0
-         gamma(j) = xk_snow
+            T_old(j)=T_old(j)+Tannualmean(iii,jjj)-TannualmeanRef
+            water_frac(j) = 0.0
+            gamma(j) = xk_snow
         end do
         close (39)
 !    print *,'Ttop,Tbottom: ',T_old(1),T_old(170)
@@ -756,47 +755,47 @@
 
 ! DETAILED OUTPUT - for met stations, and ablation stakes
 
-    if (makedetailedoutput .eq. 1) then
+        if (makedetailedoutput .eq. 1) then
 
-    open (26,file='./output/' // runname(1:strlen(runname)) &
-       //'/'//c_i// c_j // '.subsurf' &
-       , access='direct',form= &
-       'unformatted',recl=iwordlength*1*100 )
+            open (26,file='./output/' // runname(1:strlen(runname)) &
+               //'/'//c_i// c_j // '.subsurf' &
+               , access='direct',form= &
+               'unformatted',recl=iwordlength*1*100 )
 !    open (27,file='./output/'//runname(1:strlen(runname))
 !     &    //'/'//c_i//c_j//'.subsurfMelt'
 !     &    , access='direct',form=
 !     &    'unformatted',recl=iwordlength*1*100)
-    open (28,file='./output/'//runname(1:strlen(runname)) &
-       //'/'//c_i//c_j//'.out' &
-       , access='direct',form= &
-      'unformatted',recl=iwordlength*20)
+            open (28,file='./output/'//runname(1:strlen(runname)) &
+               //'/'//c_i//c_j//'.out' &
+               , access='direct',form= &
+              'unformatted',recl=iwordlength*20)
 !    open (27,file='./output/'//runname(1:strlen(runname))
 !     &    //'/'//c_i//c_j//'.drain'
 !     &    , form='formatted')
 
 ! to write all data in 1 record, use recl=iwordlength*maxiter*24*20
-    endif
+        endif
 
 ! GENERAL OUTPUT - for all cells
 
 ! optional file to write out melt, ablation, submelt hourly
-    if (iwritehourlymelt.eq.1) then
-    open (21,file='./output/'//runname(1:strlen(runname)) &
-       //'/'//c_i // c_j //'.ablation.hourly' &
-       , access='direct',form= &
-       'unformatted',recl=iwordlength*3)
-    endif
-    open (20,file='./output/'//runname(1:strlen(runname)) &
-       //'/'//c_i // c_j //'.ablation.daily' &
-       , access='direct',form= &
-       'unformatted',recl=iwordlength*7*maxiter) 
+        if (iwritehourlymelt.eq.1) then
+            open (21,file='./output/'//runname(1:strlen(runname)) &
+               //'/'//c_i // c_j //'.ablation.hourly' &
+               , access='direct',form= &
+               'unformatted',recl=iwordlength*3)
+        endif
+        open (20,file='./output/'//runname(1:strlen(runname)) &
+           //'/'//c_i // c_j //'.ablation.daily' &
+           , access='direct',form= &
+           'unformatted',recl=iwordlength*7*maxiter) 
     ! Changed to 7 for extra vars to daily output JMC
 
 ! OTHER OPTIONAL OUTPUT - for all cells
 
-    open (66, file='./output/'//runname(1:strlen(runname)) &
-    //'/'//c_i // c_j //'.densityprofile')
-    ! JMC: Need this to post-process all surfaces
+        open (66, file='./output/'//runname(1:strlen(runname)) &
+        //'/'//c_i // c_j //'.densityprofile')
+        ! JMC: Need this to post-process all surfaces
 
 ! Turned off by JMC
 !         open (79,file='./output/'//runname(1:strlen(runname)) &
@@ -808,215 +807,215 @@
 !         open (83,file='./output/'//runname(1:strlen(runname)) &
 !         //'/'//c_i // c_j //'.totalheat3' )
 
-    water_depth_old = 0.0
+        water_depth_old = 0.0
 
-    gravity = 9.81 ! is this part of Jon's stuff?
+        gravity = 9.81 ! is this part of Jon's stuff?
 
 !=====================================================================
 !                       START ANNUAL ITERATION
 !=====================================================================
-    do kkk=1,max_annual_loops
-        ! print *,'Annual Loop Number =',kkk
-    
-        ! MJH: Note the annual iteration will be phased out.  
-        ! So don't add anything important to this little section.
-        !     if (kkk .gt. 1) then
-        !        snow_cover_depth_old = 0.0
-        ! ! Rewind files on each annual iteration - 31 only if ascii
-        !        rewind(31)
-        !        rewind(32)
-        !        rewind(33)
-        !        rewind(34)
-        !        rewind(35)
-        !        rewind(36)
-        !        rewind(37)
-        !        rewind(38)
-        !        rewind(40)
-        !        rewind(41)
-        !     endif
-        !     Tsfc=xmmdata(1,immoffset)+Tf !initialize tsfc for the brent solver
-        ! ! set/reset the density to ice before starting the run
-        !     do i=1,JJ
-        !         endofsummerdensity(i)=ro_snow
-        !     enddo
-        !     if (kkk.eq.max_annual_loops) then
-        !         ablation_output = 1
-        !     endif
+        do kkk=1,max_annual_loops
+            ! print *,'Annual Loop Number =',kkk
+        
+            ! MJH: Note the annual iteration will be phased out.  
+            ! So don't add anything important to this little section.
+            !     if (kkk .gt. 1) then
+            !        snow_cover_depth_old = 0.0
+            ! ! Rewind files on each annual iteration - 31 only if ascii
+            !        rewind(31)
+            !        rewind(32)
+            !        rewind(33)
+            !        rewind(34)
+            !        rewind(35)
+            !        rewind(36)
+            !        rewind(37)
+            !        rewind(38)
+            !        rewind(40)
+            !        rewind(41)
+            !     endif
+            !     Tsfc=xmmdata(1,immoffset)+Tf !initialize tsfc for the brent solver
+            ! ! set/reset the density to ice before starting the run
+            !     do i=1,JJ
+            !         endofsummerdensity(i)=ro_snow
+            !     enddo
+            !     if (kkk.eq.max_annual_loops) then
+            !         ablation_output = 1
+            !     endif
 
 !=====================================================================
 !            START DAILY TIMESTEP LOOP
 !=====================================================================
 
-    ! Store original albedo and z0 from namelist parameters
-    z_0_base = z_0
-    albedo_mult_base = albedo_mult
-    albedo_offset_base = albedo_offset
+            ! Store original albedo and z0 from namelist parameters
+            z_0_base = z_0
+            albedo_mult_base = albedo_mult
+            albedo_offset_base = albedo_offset
 
-    out_year = i_yearstart ! for adding year to output
+            out_year = i_yearstart ! for adding year to output
 
-      do iter=1,maxiter
-        if (iter.le.3) then !changed from every 1000 to 365
-         ! print *,'WORKING ON DAY =',iter !turned off by JMC
-        elseif (mod(iter,365).eq.0) then
-         ! print *,'WORKING ON YEAR =',out_year ! Added here by JMC
-        endif
+            do iter=1,maxiter
+                if (iter.le.3) then !changed from every 1000 to 365
+                 ! print *,'WORKING ON DAY =',iter !turned off by JMC
+                elseif (mod(iter,365).eq.0) then
+                 ! print *,'WORKING ON YEAR =',out_year ! Added here by JMC
+                endif
 
-        ! print *,'WORKING ON DAY =',iter
+                ! print *,'WORKING ON DAY =',iter
 
-        daymelt = 0.0
-        dayablation = 0.0
-        daysubdrain = 0.0
+                daymelt = 0.0
+                dayablation = 0.0
+                daysubdrain = 0.0
 
 !---------------------------------------------------------------------
 ! Adjustments by year or basin to Albedo and Surface Roughness (Added by JMC)
 !---------------------------------------------------------------------        
 
-        ! Reset parameters to base
-        z_0 = z_0_base
-        albedo_mult = albedo_mult_base
-        albedo_offset = albedo_offset_base
+                ! Reset parameters to base
+                z_0 = z_0_base
+                albedo_mult = albedo_mult_base
+                albedo_offset = albedo_offset_base
 
-        if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0.0)) then
-            ! 2008/7/1 onwards apply albedo_mult of -15%
-            if (runcell(iii).ge.50) then
-                albedo_mult = -0.20
-            else
-                albedo_mult = -0.15
-            endif
-        else
-            ! Reset parameters to base if not
-            z_0 = z_0_base
-            albedo_mult = albedo_mult_base
-            albedo_offset = albedo_offset_base
-        endif
+                if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0.0)) then
+                    ! 2008/7/1 onwards apply albedo_mult of -15%
+                    if (runcell(iii).ge.50) then
+                        albedo_mult = -0.20
+                    else
+                        albedo_mult = -0.15
+                    endif
+                else
+                    ! Reset parameters to base if not
+                    z_0 = z_0_base
+                    albedo_mult = albedo_mult_base
+                    albedo_offset = albedo_offset_base
+                endif
 
-        if  (mod(iter,365).eq.0) then
-            print *,'WORKING ON YEAR =', out_year ! Added here by JMC
-            print *,'ALBEDO MULTIPLIER =', albedo_mult
-            print *,'BASIN =', runcell(iii)
-        endif
-        
+                if  (mod(iter,365).eq.0) then
+                    print *,'WORKING ON YEAR =', out_year ! Added here by JMC
+                    print *,'ALBEDO MULTIPLIER =', albedo_mult
+                    print *,'BASIN =', runcell(iii)
+                endif
+            
 
-! Albedo Offset and Percent Adjustment for the Day (constant for each day)
-        read (33,*) junk1,junk2,junk3,albedo
-        albedo = albedo + albedo_surface + albedo_offset + (albedo*albedo_mult)
+                ! Albedo Offset and Percent Adjustment for the Day (constant for each day)
+                read (33,*) junk1,junk2,junk3,albedo
+                albedo = albedo + albedo_surface + albedo_offset + (albedo*albedo_mult)
 
 !=====================================================================
 !            START HOURLY TIMESTEP LOOP
 !=====================================================================
 
-    do hr=0,23
-             ! print *,'WORKING ON HOUR =',hr
+                do hr=0,23
+                         ! print *,'WORKING ON HOUR =',hr
 
-    iarraypos=immoffset+(iter-1)*24+hr
-    Tair=xmmdata(1,iarraypos)
-    rh=xmmdata(2,iarraypos)
-    windspd=xmmdata(3,iarraypos)
-    winddir=xmmdata(4,iarraypos)
-    Qsi=xmmdata(5,iarraypos)
-    Qli=xmmdata(6,iarraypos)
+                    iarraypos=immoffset+(iter-1)*24+hr
+                    Tair=xmmdata(1,iarraypos)
+                    rh=xmmdata(2,iarraypos)
+                    windspd=xmmdata(3,iarraypos)
+                    winddir=xmmdata(4,iarraypos)
+                    Qsi=xmmdata(5,iarraypos)
+                    Qli=xmmdata(6,iarraypos)
 
-    ! Increase longwave in to test radiation paradox
-    ! if (runcell(iii).ge.50) then ! Fryxell / Kukri Hills
-    !     Qli=xmmdata(6,iarraypos)+20
-    ! else if (runcell(iii).le.50) then ! Up-valley
-    !     Qli=xmmdata(6,iarraypos)
-    ! endif
+! Increase longwave in to test radiation paradox
+                    ! if (runcell(iii).ge.50) then ! Fryxell / Kukri Hills
+                    !     Qli=xmmdata(6,iarraypos)+20
+                    ! else if (runcell(iii).le.50) then ! Up-valley
+                    !     Qli=xmmdata(6,iarraypos)
+                    ! endif
 
-    ! MJH: Manual sensitivity adjustments here
-        ! Tair=Tair+0.0
-        ! windspd=windspd*1.0
-        ! Qli=Qli+0.0
+! MJH: Manual sensitivity adjustments here
+                    ! Tair=Tair+0.0
+                    ! windspd=windspd*1.0
+                    ! Qli=Qli+0.0
 
 ! Read Station data and use it if good
 ! If Stn data is bad, then use MM data
-    if ((isstn.eq.1).and.(glacnum.ne.2)) then
-    if (xstndata(1,iarraypos).gt.-9999.0) Tair=xstndata(1,iarraypos)
-    if (xstndata(2,iarraypos).gt.-9999.0) rh=xstndata(2,iarraypos)
-    if (xstndata(3,iarraypos).gt.-9999.0)  &
-          windspd=xstndata(3,iarraypos)
-!    if (xstndata(5,iarraypos).gt.-9999.0) Qsi=xstndata(5,iarraypos)
-!    if (xstndata(6,iarraypos).gt.-9999.0) Qli=xstndata(6,iarraypos)
-    endif
+                    if ((isstn.eq.1).and.(glacnum.ne.2)) then
+                    if (xstndata(1,iarraypos).gt.-9999.0) Tair=xstndata(1,iarraypos)
+                    if (xstndata(2,iarraypos).gt.-9999.0) rh=xstndata(2,iarraypos)
+                    if (xstndata(3,iarraypos).gt.-9999.0)  &
+                          windspd=xstndata(3,iarraypos)
+                !    if (xstndata(5,iarraypos).gt.-9999.0) Qsi=xstndata(5,iarraypos)
+                !    if (xstndata(6,iarraypos).gt.-9999.0) Qli=xstndata(6,iarraypos)
+                    endif
 
-        if (Qsi .lt. 1.0) then
-            Qsi=0.0
-        endif
+                    if (Qsi .lt. 1.0) then
+                        Qsi=0.0
+                    endif
 
-        Tair = Tair + Tf
+                    Tair = Tair + Tf
 
 ! Windspeed needs to be above a threshold value 
 ! to avoid computational problems. 0.1
 ! MM already does this, but station data does not
-        if (windspd .lt. 1.0) then
-            windspd = 1.0
-        endif
+                    if (windspd .lt. 1.0) then
+                        windspd = 1.0
+                    endif
 
 ! Calc Pressure using Lk Hoare Pa measurements
 ! There are 36 hours in the whole 14 years with Pa missing at LH
 ! For those times, just use the previous time step value.
 !        read (36,rec=(immoffset + (iter-1)*24 + hr) )
 !     &        Pa_ref,T_ref
-        Pa_ref=xpadata(1,iarraypos)
-        T_ref=xpadata(2,iarraypos)
-        if ((Pa_ref .gt. 0.0) .and. (T_ref .gt. -9000)) then
-        Pa=(Pa_ref*100.0) * exp( (topo-elev_ref) /  &
-              (-287.04*0.5*(T_ref+Tf + Tair)/gravity) )
-        endif
+                    Pa_ref=xpadata(1,iarraypos)
+                    T_ref=xpadata(2,iarraypos)
+                    if ((Pa_ref .gt. 0.0) .and. (T_ref .gt. -9000)) then
+                    Pa=(Pa_ref*100.0) * exp( (topo-elev_ref) /  &
+                          (-287.04*0.5*(T_ref+Tf + Tair)/gravity) )
+                    endif
 
 ! Cliff Met adjustments
-    if (((iscliff.eq.1).or.(glacnum.eq.3)).or.(glacnum.eq.6)) then
-        windspd = windspd * cliffwindmult
-        if (Qsi.gt.50.0) then
-            Tair = Tair + clifftempadd
-        endif
-    else
+                    if (((iscliff.eq.1).or.(glacnum.eq.3)).or.(glacnum.eq.6)) then
+                        windspd = windspd * cliffwindmult
+                        if (Qsi.gt.50.0) then
+                            Tair = Tair + clifftempadd
+                        endif
+                    else
 
 ! Adjustments anywhere else
-        windspd = windspd * windmult
-        ! Temp adjustment
-        if (Qsi.gt.50.0) then
-            Tair = Tair + tempadd
-        endif
-    endif
+                    windspd = windspd * windmult
+                    ! Temp adjustment
+                    if (Qsi.gt.50.0) then
+                        Tair = Tair + tempadd
+                    endif
+                    endif
 
 !---------------------------------------------------------------------
 ! Call Main Subroutines
 !---------------------------------------------------------------------
 
-        CALL ENBALANCE(Tair,windspd,rh,  &
-            Tsfc,Qsi,Qli,Qle,Qh, &
-            Qe,Qc,Qm,balance,Qf, &
-            swe_depth,topo,z_windobs,dt,gamma, &
-            T_old,dy_p,JJ,icond_flag,cloud_frac,albedo,z_0, &
-            J_day_start,xlat,slope_az,terrain_slope, &
-            transmiss,clear_sky, &
-            snow_cover_depth_old,surface_melt,ro_snow_on_top, &
-            ablation,iter,xLs,xLf,i_yearstart, &
-            ablation_output,stability,hr,Qsi_fraction, &
-            y_crds,f_n,dely_p,Qsip,extcoef,xk_snow,ro_snow, &
-            Cp_snow,xk_water,water_frac,up,down,total_solar, &
-            Rv,ro_water,xmelt,ro_ice,water_depth, &
-            water_depth_old,water_flux,ro_pure_ice,kkk, &
-             xinternal_heating_corr,qsfactor,ndarklayers,Pa)
+                    CALL ENBALANCE(Tair,windspd,rh,  &
+                        Tsfc,Qsi,Qli,Qle,Qh, &
+                        Qe,Qc,Qm,balance,Qf, &
+                        swe_depth,topo,z_windobs,dt,gamma, &
+                        T_old,dy_p,JJ,icond_flag,cloud_frac,albedo,z_0, &
+                        J_day_start,xlat,slope_az,terrain_slope, &
+                        transmiss,clear_sky, &
+                        snow_cover_depth_old,surface_melt,ro_snow_on_top, &
+                        ablation,iter,xLs,xLf,i_yearstart, &
+                        ablation_output,stability,hr,Qsi_fraction, &
+                        y_crds,f_n,dely_p,Qsip,extcoef,xk_snow,ro_snow, &
+                        Cp_snow,xk_water,water_frac,up,down,total_solar, &
+                        Rv,ro_water,xmelt,ro_ice,water_depth, &
+                        water_depth_old,water_flux,ro_pure_ice,kkk, &
+                         xinternal_heating_corr,qsfactor,ndarklayers,Pa)
 
-        ifinalcall = 1 !Iterating is complete
-        
-        CALL ICE_ENERGY(gamma,T_old,Tsfc,JJ,dy_p,y_crds, &
-            dt,f_n,dely_p,Qsip,Qsi,albedo,extcoef,xk_snow, &
-            ro_snow,Cp_snow,xk_water,water_frac,up,down,total_solar, &
-            xLs,Rv,Tf,ro_water,xmelt,ro_ice,water_depth, &
-            water_depth_old,water_flux,xLf,ro_pure_ice, &
-            xinternal_heating_corr,ndarklayers,ifinalcall,qsfactor,Qc)
+                    ifinalcall = 1 !Iterating is complete
+                    
+                    CALL ICE_ENERGY(gamma,T_old,Tsfc,JJ,dy_p,y_crds, &
+                        dt,f_n,dely_p,Qsip,Qsi,albedo,extcoef,xk_snow, &
+                        ro_snow,Cp_snow,xk_water,water_frac,up,down,total_solar, &
+                        xLs,Rv,Tf,ro_water,xmelt,ro_ice,water_depth, &
+                        water_depth_old,water_flux,xLf,ro_pure_ice, &
+                        xinternal_heating_corr,ndarklayers,ifinalcall,qsfactor,Qc)
 
-    totalheat2=totalheat
-    totalheat=dble(0.0)
-    do mmm=1,JJ
-    totalheat=totalheat+dble((T_old(mmm)-270.0)* &
-         dble(Cp_snow)*dble(dy_p(mmm))*dble(ro_snow))
-    totalheat=totalheat+dble(water_frac(mmm))*dble(dy_p(mmm))* &
-         dble(ro_snow)*dble(xLf)
-    enddo
+                    totalheat2=totalheat
+                    totalheat=dble(0.0)
+                    do mmm=1,JJ
+                    totalheat=totalheat+dble((T_old(mmm)-270.0)* &
+                         dble(Cp_snow)*dble(dy_p(mmm))*dble(ro_snow))
+                    totalheat=totalheat+dble(water_frac(mmm))*dble(dy_p(mmm))* &
+                         dble(ro_snow)*dble(xLf)
+                    enddo
 
 !    print *,'day,hr',iter.hr,net heat,internal,internal change,Qc,Qsip
 !    print '(f7.2, f12.1, f15.1, 3f12.1)',dble(iter)+hr/24.0,
@@ -1027,98 +1026,98 @@
 !     &    Qsi*(1-albedo)*(1-qsfactor)*dt
 
 
-    do i=1,JJ !update for next time step
-    water_frac_old(i) = water_frac(i)
-    enddo
+                    do i=1,JJ !update for next time step
+                    water_frac_old(i) = water_frac(i)
+                    enddo
 
 ! Calculate drainage amount
-    subdrain=0.0 !total amount of water we've removed for the column
-    do i=1,JJ
-    if (water_frac(i).gt.drainthresh) then
-        subdrain=subdrain+(water_frac(i)-drainthresh)*dy_p(i)*100.0 &
-              *ro_snow/ro_water !in cm weq
+                    subdrain=0.0 !total amount of water we've removed for the column
+                    do i=1,JJ
+                    if (water_frac(i).gt.drainthresh) then
+                        subdrain=subdrain+(water_frac(i)-drainthresh)*dy_p(i)*100.0 &
+                              *ro_snow/ro_water !in cm weq
 ! adjust density profile by the amount that drained from each depth
-        endofsummerdensity(i)=endofsummerdensity(i) - &
-              (water_frac(i)-drainthresh) * ro_snow
-    endif
-    enddo
+                    endofsummerdensity(i)=endofsummerdensity(i) - &
+                          (water_frac(i)-drainthresh) * ro_snow
+                    endif
+                    enddo
 
 ! calcs for daily total
-    daymelt = daymelt + surface_melt
-    dayablation = dayablation + ablation
-    daysubdrain = daysubdrain + subdrain
+                    daymelt = daymelt + surface_melt
+                    dayablation = dayablation + ablation
+                    daysubdrain = daysubdrain + subdrain
 
 !---------------------------------------------------------------------
 ! Write Output Files
 !---------------------------------------------------------------------
 
 ! Only write output on final iteration, if doing multiple
-    if (kkk.eq.max_annual_loops) then
+                    if (kkk.eq.max_annual_loops) then
 
-    iarraypos=(iter-1)*24+hr+1
+                    iarraypos=(iter-1)*24+hr+1
 
-    xdataout(1,iarraypos)=real(iter)+real(hr)/24
-    xdataout(2,iarraypos)=Tair-Tf
-    xdataout(3,iarraypos)=Tsfc-Tf
-    xdataout(4,iarraypos)=Qsi
-    xdataout(5,iarraypos)=Qli
-    xdataout(6,iarraypos)=Qle
-    xdataout(7,iarraypos)=Qh
-    xdataout(8,iarraypos)=Qe
-    xdataout(9,iarraypos)=Qc
-    xdataout(10,iarraypos)=Qm
-    xdataout(11,iarraypos)=balance
-    xdataout(12,iarraypos)=albedo
-    xdataout(13,iarraypos)=stability
-    xdataout(14,iarraypos)=surface_melt
-    xdataout(15,iarraypos)=ablation
-    xdataout(16,iarraypos)=snow_cover_depth_old
-    xdataout(17,iarraypos)=water_depth
-    xdataout(18,iarraypos)=water_flux
-!   xdataout(19,iarraypos)=rh
-    xdataout(19,iarraypos)=subdrain
-    xdataout(20,iarraypos)=windspd
+                    xdataout(1,iarraypos)=real(iter)+real(hr)/24
+                    xdataout(2,iarraypos)=Tair-Tf
+                    xdataout(3,iarraypos)=Tsfc-Tf
+                    xdataout(4,iarraypos)=Qsi
+                    xdataout(5,iarraypos)=Qli
+                    xdataout(6,iarraypos)=Qle
+                    xdataout(7,iarraypos)=Qh
+                    xdataout(8,iarraypos)=Qe
+                    xdataout(9,iarraypos)=Qc
+                    xdataout(10,iarraypos)=Qm
+                    xdataout(11,iarraypos)=balance
+                    xdataout(12,iarraypos)=albedo
+                    xdataout(13,iarraypos)=stability
+                    xdataout(14,iarraypos)=surface_melt
+                    xdataout(15,iarraypos)=ablation
+                    xdataout(16,iarraypos)=snow_cover_depth_old
+                    xdataout(17,iarraypos)=water_depth
+                    xdataout(18,iarraypos)=water_flux
+                !   xdataout(19,iarraypos)=rh
+                    xdataout(19,iarraypos)=subdrain
+                    xdataout(20,iarraypos)=windspd
 
 ! Write General Output - hourly? no - save it for daily totals
 !    write(21,rec=iarraypos) (xdataout(i2,iarraypos),i2=14,15)
 
 ! Write Detailed Ouput---------------
-    if (makedetailedoutput .eq. 1) then
+                    if (makedetailedoutput .eq. 1) then
 ! combine t_old and water_frac into 1 array for storage
-    do k=1,100
-        subout(k)=t_old(k)-Tf
-        if (t_old(k).eq.Tf) subout(k) = water_frac(k)
-    enddo
+                    do k=1,100
+                        subout(k)=t_old(k)-Tf
+                        if (t_old(k).eq.Tf) subout(k) = water_frac(k)
+                    enddo
 
-        write(28,rec=iarraypos) &
-              (xdataout(i2,iarraypos),i2=1,20)
-        write (26,rec=(iter-1)*24 + hr +1) (subout(k),k=1,100)
+                        write(28,rec=iarraypos) &
+                              (xdataout(i2,iarraypos),i2=1,20)
+                        write (26,rec=(iter-1)*24 + hr +1) (subout(k),k=1,100)
 
-    endif !detailed output-------------
+                    endif !detailed output-------------
 
 !---------------------------------------------------------------------
 ! Write Hourly Totals to File
 !---------------------------------------------------------------------
 
 ! optional print out melt, ablation and drained submelt for every hour
-    if (iwritehourlymelt.eq.1) then
-    write(21,rec=iarraypos) surface_melt, ablation, subdrain 
-    ! changed from submelt JMC
-    ! Write hr and iter to output? JMC
-    endif  !hourly melt file
+                    if (iwritehourlymelt.eq.1) then
+                    write(21,rec=iarraypos) surface_melt, ablation, subdrain 
+                    ! changed from submelt JMC
+                    ! Write hr and iter to output? JMC
+                    endif  !hourly melt file
 
 
-    endif !final annual loop check -> output  ******************
+                    endif !final annual loop check -> output  ******************
 
 ! REMOVE EXCESS WATER NOW that we have calculated this hour's output!
-    do i=1,JJ
-    if (water_frac(i).gt.drainthresh) then
-        water_frac(i)=drainthresh
-    endif
-    enddo
+                    do i=1,JJ
+                    if (water_frac(i).gt.drainthresh) then
+                        water_frac(i)=drainthresh
+                    endif
+                    enddo
 
 
-    enddo
+                enddo
 !---------------------------------------------------------------------
 
 !            ^----------End hourly timestep-------------^
@@ -1133,43 +1132,43 @@
     ! endif
 
 ! set first iteration equal to Julian Day start (182 in this case)
-    day_offset = (iter - 1) + J_day_start
+                day_offset = (iter - 1) + J_day_start
 ! calculate the Day of Year, this might be off by a day now and then
-    day_frac = 365 * FLOOR(real(day_offset/365))
-    out_day = (day_offset - day_frac)
+                day_frac = 365 * FLOOR(real(day_offset/365))
+                out_day = (day_offset - day_frac)
 ! calcualte new year
-    out_year = i_yearstart + FLOOR(real(day_offset/365))
+                out_year = i_yearstart + FLOOR(real(day_offset/365))
 
 ! Save to array, then write it all at once at end of run
-    if (kkk.eq.max_annual_loops) then
-    day_melt_abl_out(1,iter) = daymelt
-    day_melt_abl_out(2,iter) = dayablation
-    day_melt_abl_out(3,iter) = daysubdrain
-    day_melt_abl_out(4,iter) = iter ! Iteration is not day of year JMC
-    day_melt_abl_out(5,iter) = out_day ! Add day to daily output JMC
-    day_melt_abl_out(6,iter) = out_year ! Add year to output JMC
-    day_melt_abl_out(7,iter) = runcell(iii) ! Add basin to output JMC
-    endif
+                if (kkk.eq.max_annual_loops) then
+                day_melt_abl_out(1,iter) = daymelt
+                day_melt_abl_out(2,iter) = dayablation
+                day_melt_abl_out(3,iter) = daysubdrain
+                day_melt_abl_out(4,iter) = iter ! Iteration is not day of year JMC
+                day_melt_abl_out(5,iter) = out_day ! Add day to daily output JMC
+                day_melt_abl_out(6,iter) = out_year ! Add year to output JMC
+                day_melt_abl_out(7,iter) = runcell(iii) ! Add basin to output JMC
+                endif
 !---------------------------------------------------------------------
 
 ! MJH: End of summer density - write and reset at end of each summer
 ! do this each year on jan 31 (approx end of summer date).
 ! If model starts on july 1, then jan 31 is 215 days later
-    if (mod(real(iter+365-215),365.25).lt.1.0)  then
+                if (mod(real(iter+365-215),365.25).lt.1.0)  then
 ! write out just the upper 30 layers
-        write(66,'(30f8.1)') (endofsummerdensity(i),i=1,30)
+                    write(66,'(30f8.1)') (endofsummerdensity(i),i=1,30)
 
 ! now reset profile to density
-        do i=1,JJ
-            endofsummerdensity(i)=ro_snow
-        enddo
-    endif
+                    do i=1,JJ
+                        endofsummerdensity(i)=ro_snow
+                    enddo
+                endif
 
-      enddo
+            enddo
 !            ^---------- End Daily Loop ------------------^
 !=====================================================================
 
-      enddo 
+        enddo 
 !            ^----------- End Annual Loop -------------------^
 !=====================================================================
 
@@ -1179,27 +1178,27 @@
 
 ! Write out final daily data as binary
 ! just write the 3 ablation quantities in cm
-    write(20,rec=1) ((day_melt_abl_out(i2,j2),i2=1,7),j2=1,maxiter) 
+        write(20,rec=1) ((day_melt_abl_out(i2,j2),i2=1,7),j2=1,maxiter) 
     !JMC: To output 7 daily array values
 
 ! write a final end of summer density
         write(66,'(30f8.1)') (endofsummerdensity(i),i=1,30)
 
 ! close files and end spatial loops
-    close (18)
-    close (19)
-    close (20)
-    close (21)
-!    close (31)
-    close (33)
-    close (36)
-    close (37)
-    close (38)
-    close (26)
-    close (27)
-    close (28)
-    close (66)
-    endif !check to run cell
+        close (18)
+        close (19)
+        close (20)
+        close (21)
+    !    close (31)
+        close (33)
+        close (36)
+        close (37)
+        close (38)
+        close (26)
+        close (27)
+        close (28)
+        close (66)
+        endif !check to run cell
     enddo !spatial loop
     enddo !spatial loop
 
@@ -1212,8 +1211,8 @@
     PRINT *,'ELAPSED TIME,CELLS,TIME/CELL:', &
           xdur,cellcount,xdur/cellcount
 
-      stop
-      end
+    stop
+    end
 
 !=====================================================================
 !               BEGIN ICE ENERGY SUB ROUTINE SECTION
