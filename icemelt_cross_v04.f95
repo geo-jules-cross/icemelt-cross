@@ -894,6 +894,8 @@
             endif
         endif
 
+        print *,'ALBEDO MULTIPLIER =',albedo_mult
+
 ! Albedo Offset and Percent Adjustment for the Day (constant for each day)
         read (33,*) junk1,junk2,junk3,albedo
         albedo = albedo + albedo_surface + albedo_offset + (albedo*albedo_mult)
