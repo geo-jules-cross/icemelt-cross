@@ -871,19 +871,16 @@
 !---------------------------------------------------------------------
 ! Adjustments by year or basin to Albedo and Surface Roughness (Added by JMC)
 !---------------------------------------------------------------------        
-
-                ! ! Reset parameters to base
-                ! z_0 = z_0_base
-                ! albedo_mult = albedo_mult_base
-                ! albedo_offset = albedo_offset_base
-
+                
+                ! Adjustments to albedo: 2008/7/1 onwards apply albedo_mult of -15%
                 if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0.0)) then
-                    ! 2008/7/1 onwards apply albedo_mult of -15%
                     if (runcell(iii).ge.50) then
                         albedo_mult = -0.20
                     else
                         albedo_mult = -0.15
                     endif
+                elseif ((runcell(iii).ge.42).or.(runcell(iii).le.44)) then
+                        albedo_mult = 0.0 ! no adjust for lower basins on Canada
                 else
                     ! Reset parameters to base if not
                     z_0 = z_0_base
