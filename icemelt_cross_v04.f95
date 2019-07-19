@@ -856,12 +856,12 @@
 
       do iter=1,maxiter
         if (iter.le.3) then !changed from every 1000 to 365
-         print *,'WORKING ON DAY =',iter !turned off by JMC
+         ! print *,'WORKING ON DAY =',iter !turned off by JMC
         elseif (mod(iter,365).eq.0) then
-         print *,'WORKING ON YEAR =',out_year ! Added here by JMC
+         ! print *,'WORKING ON YEAR =',out_year ! Added here by JMC
         endif
 
-!    print *,'WORKING ON DAY =',iter
+        ! print *,'WORKING ON DAY =',iter
 
         daymelt = 0.0
         dayablation = 0.0
@@ -890,7 +890,12 @@
             albedo_offset = albedo_offset_base
         endif
 
-        print *,'ALBEDO MULTIPLIER =',albedo_mult
+        if  (mod(iter,365).eq.0) then
+            print *,'WORKING ON YEAR =', out_year ! Added here by JMC
+            print *,'ALBEDO MULTIPLIER =', albedo_mult
+            print *,'BASIN =', runcell(iii)
+        endif
+        
 
 ! Albedo Offset and Percent Adjustment for the Day (constant for each day)
         read (33,*) junk1,junk2,junk3,albedo
