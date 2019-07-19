@@ -213,9 +213,6 @@
 ! Set dz1 to the array
     deltaz(1) = dz1
 
-! Save input z_0
-    z_0_input = z_0
-
 ! write hourly melt file?
     iwritehourlymelt=0 ! changed by JMC
 
@@ -478,7 +475,7 @@
     write(c_deltaz1,'(f6.4)') deltaz(1)
     i=strlen(runnametext)
     ! runname = glaccode//'_'//runnametext(1:i)//'_'//c_z_0//'_'// &
-          ! c_deltaz1//'_'//c_snowgrain_radius ! Changed by JmC
+          ! c_deltaz1//'_'//c_snowgrain_radius ! Changed by JMC
     ! runname = glaccode//'_'//runnametext(1:i)//'_'// sys_date 
     ! Added by JMC
     runname = runnametext(1:i) ! Added by JMC
@@ -852,6 +849,11 @@
 !            START DAILY TIMESTEP LOOP
 !=====================================================================
 
+    ! Store original albedo and z0 from namelist parameters
+    z_0_base = z_0
+    albedo_mult_base = albedo_mult
+    albedo_offset_base = albedo_offset
+
     out_year = i_yearstart ! for adding year to output
 
       do iter=1,maxiter
@@ -870,20 +872,11 @@
 !---------------------------------------------------------------------
 ! Adjustments by year or basin to Albedo and Surface Roughness (Added by JMC)
 !---------------------------------------------------------------------
-
-    ! if (runcell(iii).ge.50) then ! Down-valley
         
-        ! ALBEDO
-       ! if (albedo_offset.eq.0.0) then
-       !      albedo_offset = albedo_offset - 0.05
-       ! endif
-
-       ! SURFACE ROUGNESS
-       ! z_0 = 0.5
-       ! z_0 = 1
-    ! else if (runcell(iii).le.50) then ! Up-valley
-    !     z_0 = z_0_input
-    ! end if
+        ! Reset parameters each day
+        z_0 = z_0_base
+        albedo_mult = albedo_mult_base
+        albedo_offset = albedo_offset_base
 
         if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0.0)) then
             ! 2008/7/1 onwards apply albedo_mult of -15%
@@ -894,7 +887,7 @@
             endif
         endif
 
-        print *,'ALBEDO MULTIPLIER =',albedo_mult
+        ! print *,'ALBEDO MULTIPLIER =',albedo_mult
 
 ! Albedo Offset and Percent Adjustment for the Day (constant for each day)
         read (33,*) junk1,junk2,junk3,albedo
