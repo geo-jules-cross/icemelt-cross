@@ -664,6 +664,7 @@
             SELECT CASE (runcell(iii))
                 case (10, 15, 19)                           ! Taylor Glacier
                     albedo_file = './input/MODIS_alb.TAR'
+                    print *,'ALBEDO set for TAR'
                 case (11, 16, 25)                           ! Borns group of glaciers
                     albedo_file = './input/MODIS_alb.BNS'
                 case (21)                                   ! LaCroix Glacier
@@ -678,6 +679,7 @@
                     albedo_file = './input/MODIS_alb.SUS'
                 case (41, 42, 43, 44, 45)                   ! Canada Glacier
                     albedo_file = './input/MODIS_alb.CAA'
+                    print *,'ALBEDO set for CAA'
                 case (50)                                   ! Howard Glacier
                     albedo_file = './input/MODIS_alb.HOD'
                 case (63, 64, 65, 66)                       ! Crescent Glacier
@@ -686,6 +688,7 @@
                     albedo_file = './input/MODIS_alb.COH'
                 case (62, 81, 82)                           ! Wales group of glaciers
                     albedo_file = './input/MODIS_alb.WLS'
+                    print *,'ALBEDO set for WLS'
             end SELECT
         
         ! Old albedo
@@ -812,38 +815,37 @@
 !=====================================================================
 !                       START ANNUAL ITERATION
 !=====================================================================
-    do kkk=1,max_annual_loops
-      ! print *,'Annual Loop Number =',kkk
-      ! MJH: Note the annual iteration will be phased out.  
-      ! So don't add anything important to this little section.
+    ! do kkk=1,max_annual_loops
+    !   ! print *,'Annual Loop Number =',kkk
+    !   ! MJH: Note the annual iteration will be phased out.  
+    !   ! So don't add anything important to this little section.
 
-    if (kkk .gt. 1) then
-!        snow_cover_depth_old = 0.0
+    !     if (kkk .gt. 1) then
+    !        snow_cover_depth_old = 0.0
 
-! Rewind files on each annual iteration - 31 only if ascii
-!        rewind(31)
-!        rewind(32)
-        rewind(33)
-!        rewind(34)
-!        rewind(35)
-        rewind(36)
-        rewind(37)
-        rewind(38)
-!        rewind(40)
-!        rewind(41)
-    endif
+    ! ! Rewind files on each annual iteration - 31 only if ascii
+    !        rewind(31)
+    !        rewind(32)
+    !        rewind(33)
+    !        rewind(34)
+    !        rewind(35)
+    !        rewind(36)
+    !        rewind(37)
+    !        rewind(38)
+    !        rewind(40)
+    !        rewind(41)
+    !     endif
 
+    !     Tsfc=xmmdata(1,immoffset)+Tf !initialize tsfc for the brent solver
 
-    Tsfc=xmmdata(1,immoffset)+Tf !initialize tsfc for the brent solver
+    ! ! set/reset the density to ice before starting the run
+    !     do i=1,JJ
+    !         endofsummerdensity(i)=ro_snow
+    !     enddo
 
-! set/reset the density to ice before starting the run
-    do i=1,JJ
-        endofsummerdensity(i)=ro_snow
-    enddo
-
-    if (kkk.eq.max_annual_loops) then
-        ablation_output = 1
-    endif
+    !     if (kkk.eq.max_annual_loops) then
+    !         ablation_output = 1
+    !     endif
 
 !=====================================================================
 !            START DAILY TIMESTEP LOOP
@@ -858,7 +860,7 @@
 
       do iter=1,maxiter
         if (iter.le.3) then !changed from every 1000 to 365
-         ! print *,'WORKING ON DAY =',iter !turned off by JMC
+         print *,'WORKING ON DAY =',iter !turned off by JMC
         elseif (mod(iter,365).eq.0) then
          print *,'WORKING ON YEAR =',out_year ! Added here by JMC
         endif
@@ -871,9 +873,9 @@
 
 !---------------------------------------------------------------------
 ! Adjustments by year or basin to Albedo and Surface Roughness (Added by JMC)
-!---------------------------------------------------------------------
-        
-        ! Reset parameters each day
+!---------------------------------------------------------------------        
+
+        ! Reset parameters to base
         z_0 = z_0_base
         albedo_mult = albedo_mult_base
         albedo_offset = albedo_offset_base
@@ -885,6 +887,11 @@
             else
                 albedo_mult = -0.15
             endif
+        else
+            ! Reset parameters to base if not
+            z_0 = z_0_base
+            albedo_mult = albedo_mult_base
+            albedo_offset = albedo_offset_base
         endif
 
         print *,'ALBEDO MULTIPLIER =',albedo_mult
