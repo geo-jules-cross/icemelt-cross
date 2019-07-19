@@ -815,37 +815,33 @@
 !=====================================================================
 !                       START ANNUAL ITERATION
 !=====================================================================
-    ! do kkk=1,max_annual_loops
-    !   ! print *,'Annual Loop Number =',kkk
-    !   ! MJH: Note the annual iteration will be phased out.  
-    !   ! So don't add anything important to this little section.
-
-    !     if (kkk .gt. 1) then
-    !        snow_cover_depth_old = 0.0
-
-    ! ! Rewind files on each annual iteration - 31 only if ascii
-    !        rewind(31)
-    !        rewind(32)
-    !        rewind(33)
-    !        rewind(34)
-    !        rewind(35)
-    !        rewind(36)
-    !        rewind(37)
-    !        rewind(38)
-    !        rewind(40)
-    !        rewind(41)
-    !     endif
-
-    !     Tsfc=xmmdata(1,immoffset)+Tf !initialize tsfc for the brent solver
-
-    ! ! set/reset the density to ice before starting the run
-    !     do i=1,JJ
-    !         endofsummerdensity(i)=ro_snow
-    !     enddo
-
-    !     if (kkk.eq.max_annual_loops) then
-    !         ablation_output = 1
-    !     endif
+    do kkk=1,max_annual_loops
+        ! print *,'Annual Loop Number =',kkk
+    
+        ! MJH: Note the annual iteration will be phased out.  
+        ! So don't add anything important to this little section.
+        !     if (kkk .gt. 1) then
+        !        snow_cover_depth_old = 0.0
+        ! ! Rewind files on each annual iteration - 31 only if ascii
+        !        rewind(31)
+        !        rewind(32)
+        !        rewind(33)
+        !        rewind(34)
+        !        rewind(35)
+        !        rewind(36)
+        !        rewind(37)
+        !        rewind(38)
+        !        rewind(40)
+        !        rewind(41)
+        !     endif
+        !     Tsfc=xmmdata(1,immoffset)+Tf !initialize tsfc for the brent solver
+        ! ! set/reset the density to ice before starting the run
+        !     do i=1,JJ
+        !         endofsummerdensity(i)=ro_snow
+        !     enddo
+        !     if (kkk.eq.max_annual_loops) then
+        !         ablation_output = 1
+        !     endif
 
 !=====================================================================
 !            START DAILY TIMESTEP LOOP
