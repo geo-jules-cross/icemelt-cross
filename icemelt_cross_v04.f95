@@ -219,6 +219,11 @@
     cliffwindmult = 0.68    ! CAA westside 0.68
     clifftempadd = 0.5      !0.5
 
+! Store original albedo and z0 from namelist parameters outside of loop
+    z_0_base = z_0
+    albedo_mult_base = albedo_mult
+    albedo_offset_base = albedo_offset
+
 
 ! directory to store this run
     select case (glacnum)
@@ -320,8 +325,8 @@
         deltaz(37)=deltaz(37)-deltaz(1)+0.01
 
     else
-    print *,'dz not defined properly!'
-    stop
+        print *,'dz not defined properly!'
+        stop
     endif
 
 ! year character string used for the output data files and console.
@@ -533,7 +538,7 @@
     CALL DARKENLAYERS(nz,dy_p,up,down,ndarklayers,qsfactor)
 
     write (6,203) z_0,qsfactor,ndarklayers
-203    format ('roughness (m), qsfactor, ndarklayers = ',2f10.5,i5)
+     203    format ('roughness (m), qsfactor, ndarklayers = ',2f10.5,i5)
 
 ! Save qsfactor into a file for output processing
     open (81,file='./output/'//runname(1:strlen(runname)) &
@@ -560,18 +565,21 @@
             ! glacier_cells_file='./input/tv_basins_surface_wales_jmc.txt'
         endif
     endif
+    
     open (50,file=glacier_cells_file,form='formatted')
     topo_file='./input/tv_dem250.txt'
     open (51,file=topo_file,form='formatted')
     TmeanAnnual_file='./input/T_avg_all.txt'! contains both cliff & surf
     open (52,file=TmeanAnnual_file,form='formatted')
     iheader = 6
+
 ! read through headers
     do k=1,iheader
         read (50,*) cjunk
         read (51,*) cjunk
         read (52,*) cjunk
     enddo
+
 ! read topo array
     do j=ny,1,-1
         read (51,*) (topo_array(i,j),i=1,nx)
@@ -601,18 +609,18 @@
             runcond = ((iii.eq.stnx(glacnum)).and.(jjj.eq.stny(glacnum)))
         endif
 
-        if (runcond) then
+        if (runcond) then ! endif at very end of spatial loop
             cellcount=cellcount+1
             ! print *,'WORKING ON CELL = ',iii, ' , ' , jjj,',num',cellcount
             ! print *, 'BELONGS TO BASIN =', runcell(iii) ! Added by JMC
 
-! reset everything for each cell to use clean
-        slope_az = 0.0
-        terrain_slope = 0.0
-        topo = topo_array(iii,jjj)
+! Reset everything for each cell to use clean
 ! MM should be accounting for slope and aspect for radiation
 ! Use slope=0 when doing a MM run.
 ! but we still need elevation to calculate Pa
+        slope_az = 0.0
+        terrain_slope = 0.0
+        topo = topo_array(iii,jjj)
 
 ! Output options can be put here.  Maybe later in a param file
 ! this needs to start off, so we only write on the last iteration
@@ -690,13 +698,12 @@
                         print *,'ALBEDO set for WLS'
                 end SELECT
         
-            ! Old albedo
+            ! Spatial Run: (old)
             ! case (0)
             !     if (runmax .ge. 30) then 
             !         albedo_file = './input/9513_alb.CAA' 
             !         albedo_file = './input/9513_alb.TAR' 
             !     endif
-            
             ! Single Station Runs:
             case (-1)                                           ! Cliff
                 albedo_file = './input/9513_alb.clf' 
@@ -846,11 +853,6 @@
 !            START DAILY TIMESTEP LOOP
 !=====================================================================
 
-            ! Store original albedo and z0 from namelist parameters
-            z_0_base = z_0
-            albedo_mult_base = albedo_mult
-            albedo_offset_base = albedo_offset
-
             out_year = i_yearstart ! for adding year to output
 
             do iter=1,maxiter
@@ -870,10 +872,10 @@
 ! Adjustments by year or basin to Albedo and Surface Roughness (Added by JMC)
 !---------------------------------------------------------------------        
 
-                ! Reset parameters to base
-                z_0 = z_0_base
-                albedo_mult = albedo_mult_base
-                albedo_offset = albedo_offset_base
+                ! ! Reset parameters to base
+                ! z_0 = z_0_base
+                ! albedo_mult = albedo_mult_base
+                ! albedo_offset = albedo_offset_base
 
                 if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0.0)) then
                     ! 2008/7/1 onwards apply albedo_mult of -15%
@@ -905,7 +907,7 @@
 !=====================================================================
 
                 do hr=0,23
-                         ! print *,'WORKING ON HOUR =',hr
+                    ! print *,'WORKING ON HOUR =',hr
 
                     iarraypos=immoffset+(iter-1)*24+hr
                     Tair=xmmdata(1,iarraypos)
@@ -930,12 +932,11 @@
 ! Read Station data and use it if good
 ! If Stn data is bad, then use MM data
                     if ((isstn.eq.1).and.(glacnum.ne.2)) then
-                    if (xstndata(1,iarraypos).gt.-9999.0) Tair=xstndata(1,iarraypos)
-                    if (xstndata(2,iarraypos).gt.-9999.0) rh=xstndata(2,iarraypos)
-                    if (xstndata(3,iarraypos).gt.-9999.0)  &
-                          windspd=xstndata(3,iarraypos)
-                !    if (xstndata(5,iarraypos).gt.-9999.0) Qsi=xstndata(5,iarraypos)
-                !    if (xstndata(6,iarraypos).gt.-9999.0) Qli=xstndata(6,iarraypos)
+                        if (xstndata(1,iarraypos).gt.-9999.0) Tair=xstndata(1,iarraypos)
+                        if (xstndata(2,iarraypos).gt.-9999.0) rh=xstndata(2,iarraypos)
+                        if (xstndata(3,iarraypos).gt.-9999.0) windspd=xstndata(3,iarraypos)
+                        !if (xstndata(5,iarraypos).gt.-9999.0) Qsi=xstndata(5,iarraypos)
+                        !if (xstndata(6,iarraypos).gt.-9999.0) Qli=xstndata(6,iarraypos)
                     endif
 
                     if (Qsi .lt. 1.0) then
@@ -958,9 +959,9 @@
 !     &        Pa_ref,T_ref
                     Pa_ref=xpadata(1,iarraypos)
                     T_ref=xpadata(2,iarraypos)
-                    if ((Pa_ref .gt. 0.0) .and. (T_ref .gt. -9000)) then
-                    Pa=(Pa_ref*100.0) * exp( (topo-elev_ref) /  &
-                          (-287.04*0.5*(T_ref+Tf + Tair)/gravity) )
+                    if ((Pa_ref .gt. 0.0).and.(T_ref .gt. -9000)) then
+                        Pa=(Pa_ref*100.0) * exp( (topo-elev_ref) /  &
+                              (-287.04*0.5*(T_ref+Tf + Tair)/gravity) )
                     endif
 
 ! Cliff Met adjustments
@@ -969,14 +970,13 @@
                         if (Qsi.gt.50.0) then
                             Tair = Tair + clifftempadd
                         endif
-                    else
-
-! Adjustments anywhere else
-                    windspd = windspd * windmult
-                    ! Temp adjustment
-                    if (Qsi.gt.50.0) then
-                        Tair = Tair + tempadd
-                    endif
+                    else                      
+                        ! Adjustments anywhere else
+                        windspd = windspd * windmult
+                            ! Temp adjustment
+                        if (Qsi.gt.50.0) then
+                            Tair = Tair + tempadd
+                        endif
                     endif
 
 !---------------------------------------------------------------------
@@ -1054,66 +1054,66 @@
 ! Only write output on final iteration, if doing multiple
                     if (kkk.eq.max_annual_loops) then
 
-                    iarraypos=(iter-1)*24+hr+1
+                        iarraypos=(iter-1)*24+hr+1
 
-                    xdataout(1,iarraypos)=real(iter)+real(hr)/24
-                    xdataout(2,iarraypos)=Tair-Tf
-                    xdataout(3,iarraypos)=Tsfc-Tf
-                    xdataout(4,iarraypos)=Qsi
-                    xdataout(5,iarraypos)=Qli
-                    xdataout(6,iarraypos)=Qle
-                    xdataout(7,iarraypos)=Qh
-                    xdataout(8,iarraypos)=Qe
-                    xdataout(9,iarraypos)=Qc
-                    xdataout(10,iarraypos)=Qm
-                    xdataout(11,iarraypos)=balance
-                    xdataout(12,iarraypos)=albedo
-                    xdataout(13,iarraypos)=stability
-                    xdataout(14,iarraypos)=surface_melt
-                    xdataout(15,iarraypos)=ablation
-                    xdataout(16,iarraypos)=snow_cover_depth_old
-                    xdataout(17,iarraypos)=water_depth
-                    xdataout(18,iarraypos)=water_flux
-                !   xdataout(19,iarraypos)=rh
-                    xdataout(19,iarraypos)=subdrain
-                    xdataout(20,iarraypos)=windspd
+                        xdataout(1,iarraypos)=real(iter)+real(hr)/24
+                        xdataout(2,iarraypos)=Tair-Tf
+                        xdataout(3,iarraypos)=Tsfc-Tf
+                        xdataout(4,iarraypos)=Qsi
+                        xdataout(5,iarraypos)=Qli
+                        xdataout(6,iarraypos)=Qle
+                        xdataout(7,iarraypos)=Qh
+                        xdataout(8,iarraypos)=Qe
+                        xdataout(9,iarraypos)=Qc
+                        xdataout(10,iarraypos)=Qm
+                        xdataout(11,iarraypos)=balance
+                        xdataout(12,iarraypos)=albedo
+                        xdataout(13,iarraypos)=stability
+                        xdataout(14,iarraypos)=surface_melt
+                        xdataout(15,iarraypos)=ablation
+                        xdataout(16,iarraypos)=snow_cover_depth_old
+                        xdataout(17,iarraypos)=water_depth
+                        xdataout(18,iarraypos)=water_flux
+                    !   xdataout(19,iarraypos)=rh
+                        xdataout(19,iarraypos)=subdrain
+                        xdataout(20,iarraypos)=windspd
 
 ! Write General Output - hourly? no - save it for daily totals
 !    write(21,rec=iarraypos) (xdataout(i2,iarraypos),i2=14,15)
 
 ! Write Detailed Ouput---------------
-                    if (makedetailedoutput .eq. 1) then
+                        if (makedetailedoutput .eq. 1) then
 ! combine t_old and water_frac into 1 array for storage
-                    do k=1,100
-                        subout(k)=t_old(k)-Tf
-                        if (t_old(k).eq.Tf) subout(k) = water_frac(k)
-                    enddo
+                            do k=1,100
+                                subout(k)=t_old(k)-Tf
+                                if (t_old(k).eq.Tf) subout(k) = water_frac(k)
+                            enddo
 
-                        write(28,rec=iarraypos) &
-                              (xdataout(i2,iarraypos),i2=1,20)
-                        write (26,rec=(iter-1)*24 + hr +1) (subout(k),k=1,100)
+                            write(28,rec=iarraypos) &
+                                  (xdataout(i2,iarraypos),i2=1,20)
+                            write (26,rec=(iter-1)*24 + hr +1) (subout(k),k=1,100)
 
-                    endif !detailed output-------------
+                        endif !detailed output-------------
 
 !---------------------------------------------------------------------
 ! Write Hourly Totals to File
 !---------------------------------------------------------------------
 
 ! optional print out melt, ablation and drained submelt for every hour
-                    if (iwritehourlymelt.eq.1) then
-                    write(21,rec=iarraypos) surface_melt, ablation, subdrain 
-                    ! changed from submelt JMC
-                    ! Write hr and iter to output? JMC
-                    endif  !hourly melt file
+                        if (iwritehourlymelt.eq.1) then
+                            write(21,rec=iarraypos) surface_melt, ablation, subdrain 
+                            ! changed from submelt JMC
+                            ! Write hr and iter to output? JMC
+                        endif  !hourly melt file
 
 
-                    endif !final annual loop check -> output  ******************
+                    endif ! Final annual loop check -> output  ******************
 
 ! REMOVE EXCESS WATER NOW that we have calculated this hour's output!
                     do i=1,JJ
-                    if (water_frac(i).gt.drainthresh) then
-                        water_frac(i)=drainthresh
-                    endif
+                        if (water_frac(i).gt.drainthresh) then
+                            water_frac(i)=drainthresh
+                        endif
                     enddo
 
 
@@ -1141,13 +1141,13 @@
 
 ! Save to array, then write it all at once at end of run
                 if (kkk.eq.max_annual_loops) then
-                day_melt_abl_out(1,iter) = daymelt
-                day_melt_abl_out(2,iter) = dayablation
-                day_melt_abl_out(3,iter) = daysubdrain
-                day_melt_abl_out(4,iter) = iter ! Iteration is not day of year JMC
-                day_melt_abl_out(5,iter) = out_day ! Add day to daily output JMC
-                day_melt_abl_out(6,iter) = out_year ! Add year to output JMC
-                day_melt_abl_out(7,iter) = runcell(iii) ! Add basin to output JMC
+                    day_melt_abl_out(1,iter) = daymelt
+                    day_melt_abl_out(2,iter) = dayablation
+                    day_melt_abl_out(3,iter) = daysubdrain
+                    day_melt_abl_out(4,iter) = iter ! Iteration is not day of year JMC
+                    day_melt_abl_out(5,iter) = out_day ! Add day to daily output JMC
+                    day_melt_abl_out(6,iter) = out_year ! Add year to output JMC
+                    day_melt_abl_out(7,iter) = runcell(iii) ! Add basin to output JMC
                 endif
 !---------------------------------------------------------------------
 
@@ -1165,11 +1165,11 @@
                 endif
 
             enddo
-!            ^---------- End Daily Loop ------------------^
+!           ^---------- End Daily Loop ------------------^
 !=====================================================================
 
         enddo 
-!            ^----------- End Annual Loop -------------------^
+!       ^----------- End Annual Loop -------------------^
 !=====================================================================
 
 !---------------------------------------------------------------------
@@ -1198,10 +1198,13 @@
         close (27)
         close (28)
         close (66)
+        
         endif !check to run cell
-    enddo !spatial loop
-    enddo !spatial loop
-
+        enddo ! yyy spatial loop
+    enddo ! xxx spatial loop
+!   ^----------- End Spatial Loops -------------------^
+!=====================================================================
+    
     close (50)
 
     print *,runnametext
@@ -1213,7 +1216,9 @@
 
     stop
     end
-
+!   ^----------- End Main Routine -------------------^
+!=====================================================================
+    
 !=====================================================================
 !               BEGIN ICE ENERGY SUB ROUTINE SECTION
 !=====================================================================
