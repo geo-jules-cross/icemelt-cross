@@ -471,8 +471,8 @@
 !---------------------------------------------------------------------
 ! Build the Run Name
 !---------------------------------------------------------------------
-    call date_and_time(date)
-    call date_and_time(DATE=sys_date)
+    CALL date_and_time(date)
+    CALL date_and_time(DATE=sys_date)
 
     write(c_snowgrain_radius,'(I2.2)') n_snowgrain_radius
     write(c_z_0,'(f9.7)') z_0
@@ -879,7 +879,7 @@
                     else
                         albedo_mult = -0.15
                     endif
-                elseif ((runcell(iii).ge.42).or.(runcell(iii).le.44)) then
+                elseif ((runcell(iii).ge.42).and.(runcell(iii).le.44)) then
                         albedo_mult = 0.0 ! no adjust for lower basins on Canada
                 else
                     ! Reset parameters to base if not
@@ -1270,7 +1270,7 @@
         xLs,Rv,Tf,ro_water,ro_pure_ice,xinternal_heating_corr, &
         ndarklayers)
 
-    call CONDUCT(icondflag,Qc1,gamma,T_old,dy_p,JJ,Tsfc)
+    CALL CONDUCT(icondflag,Qc1,gamma,T_old,dy_p,JJ,Tsfc)
 
     if(ifinalcall.eq.1) then
     totalheat1=0.0
@@ -1298,7 +1298,7 @@
       CALL ICEMF(T_old,JJ,dy_p,xmelt,Cp_snow,xLf,Tf,ro_ice, &
         ro_snow,water_frac,flag,ro_pure_ice)
 
-    call CONDUCT(icondflag,Qc2,gamma,T_old,dy_p,JJ,Tsfc)
+    CALL CONDUCT(icondflag,Qc2,gamma,T_old,dy_p,JJ,Tsfc)
 
     if(ifinalcall.eq.1) then
     totalheat2=0.0
@@ -1330,7 +1330,7 @@
           up,down,total_solar,xLs,Rv,ro_water,ro_pure_ice, &
           xinternal_heating_corr,ndarklayers,Sc)
 
-    call CONDUCT(icondflag,Qc3,gamma,T_old,dy_p,JJ,Tsfc)
+    CALL CONDUCT(icondflag,Qc3,gamma,T_old,dy_p,JJ,Tsfc)
 
     if(ifinalcall.eq.1) then
     totalheat3=0.0
@@ -2218,7 +2218,7 @@
       if (dt.eq.3600.0) then
 !        do ihour=1,ihrs_day
           xhour = real(hr)
-          call SOLAR_RAD(Qsi_tmp,J_day,xlat,cloud_frac, &
+          CALL SOLAR_RAD(Qsi_tmp,J_day,xlat,cloud_frac, &
             xhour,slope_az,terrain_slope,transmiss, &
               clear_sky,Pa,one_atmos,i_yearstart)
 !            Qsi_sum = Qsi_sum + Qsi_tmp
