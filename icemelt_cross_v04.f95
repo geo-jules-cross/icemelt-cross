@@ -876,15 +876,40 @@
 ! Adjustments by year or basin to Albedo and Surface Roughness (Added by JMC)
 !---------------------------------------------------------------------        
                 
-                ! Adjustments to albedo: 2008/7/1 onwards apply albedo_mult of -15%
+                ! Adjustments to albedo: After 2008
                 if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0.0)) then
-                    if (runcell(iii).ge.50) then
-                        albedo_mult = -0.20
-                    else
-                        albedo_mult = -0.15
-                    endif
+                    SELECT CASE (runcell(iii))
+                        case (10, 11, 15, 16, 19)   ! Taylor/ Borns Glaciers
+                            albedo_mult = -0.20
+                        case (21,22,23,24,26,29)    ! LaCroix Matterhorn Rhone Glaciers
+                            albedo_mult = -0.25
+                        case (36, 37, 38, 39)       ! Sollas group of glaciers
+                            albedo_mult = -0.20
+                        case (31, 32, 33, 34)       ! Suess Glacier
+                            albedo_mult = -0.20
+                        case (41, 45)               ! Outer Canada Glacier
+                            albedo_mult = -0.25
+                        case (42, 43, 44)           ! Inner Canada Glacier
+                            albedo_mult = 0.0
+                        case (50, 63, 64, 65, 66)   ! Howard and Crescent Glaciers
+                            albedo_mult = -0.25
+                        case (61, 71, 72, 73, 74)   ! Commonwealth Glacier
+                            albedo_mult = -0.25
+                        case (62, 81, 82)           ! Wales group of glaciers
+                            albedo_mult = -0.25
+                    end SELECT
+                ! Adjustments to albedo: Before 2008
+                elseif ((iter.le.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0.0)) then
+                    SELECT CASE (runcell(iii))
+                        case (41,45,63,64,65,66)    ! Outer Canada and Crescent Glaciers
+                            albedo_mult = -0.15   
+                    end SELECT
+                ! No adjust for lower basins on Canada (Green)
                 elseif ((runcell(iii).ge.42).and.(runcell(iii).le.44)) then
-                        albedo_mult = 0.0 ! no adjust for lower basins on Canada (Green)
+                    albedo_mult = 0.0
+                ! Increase surfaceroughness in Fryxell
+                elseif(runcell(iii).ge.50) then
+                    z_0 = 1.0 ! mm
                 else
                     ! Reset parameters to base if not
                     z_0 = z_0_base
@@ -897,7 +922,6 @@
                     print *,'ALBEDO MULTIPLIER =', albedo_mult
                     print *,'BASIN =', runcell(iii)
                 endif
-            
 
                 ! Albedo Offset and Percent Adjustment for the Day (constant for each day)
                 read (33,*) junk1,junk2,junk3,albedo
