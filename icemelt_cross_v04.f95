@@ -828,6 +828,7 @@
             ! So don't add anything important to this little section.
             !     if (kkk .gt. 1) then
             !        snow_cover_depth_old = 0.0
+            !
             ! ! Rewind files on each annual iteration - 31 only if ascii
             !        rewind(31)
             !        rewind(32)
@@ -840,14 +841,17 @@
             !        rewind(40)
             !        rewind(41)
             !     endif
-            !     Tsfc=xmmdata(1,immoffset)+Tf !initialize tsfc for the brent solver
-            ! ! set/reset the density to ice before starting the run
-            !     do i=1,JJ
-            !         endofsummerdensity(i)=ro_snow
-            !     enddo
-            !     if (kkk.eq.max_annual_loops) then
-            !         ablation_output = 1
-            !     endif
+            
+            ! Initialize tsfc for the brent solver
+            Tsfc=xmmdata(1,immoffset)+Tf 
+            
+            ! Set/reset the density to ice before starting the run
+            do i=1,JJ
+                endofsummerdensity(i)=ro_snow
+            enddo
+            if (kkk.eq.max_annual_loops) then
+                ablation_output = 1
+            endif
 
 !=====================================================================
 !            START DAILY TIMESTEP LOOP
