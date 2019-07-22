@@ -883,8 +883,8 @@
                     else
                         albedo_mult = -0.15
                     endif
-                ! elseif ((runcell(iii).ge.42).and.(runcell(iii).le.44)) then
-                !         albedo_mult = 0.0 ! no adjust for lower basins on Canada
+                elseif ((runcell(iii).ge.42).and.(runcell(iii).le.44)) then
+                        albedo_mult = 0.0 ! no adjust for lower basins on Canada (Green)
                 else
                     ! Reset parameters to base if not
                     z_0 = z_0_base
