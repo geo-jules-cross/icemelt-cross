@@ -114,6 +114,7 @@
     real :: z_0, dz1, drainthresh, tempadd, windmult
     real :: albedo_surface, albedo_offset, albedo_mult
     integer :: n_snowgrain_radius
+    real :: albedo_mult_base, albedo_offset_base, z_0_base
 
     real albedo_evo_poly_a,albedo_evo_poly_b,albedo_evo_poly_c
     real albedo_evo_poly_d,snow_albedo_thresh
@@ -900,10 +901,11 @@
                     end SELECT
                 ! Adjustments to albedo: Before 2008
                 elseif ((iter.le.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0.0)) then
-                    SELECT CASE (runcell(iii))
-                        case (41,45,63,64,65,66)    ! Outer Canada and Crescent Glaciers
-                            albedo_mult = -0.15   
-                    end SELECT
+                    if((runcell(iii).eq.41).or.(runcell(iii).eq.45)) then
+                        albedo_mult = -0.15         ! Outer Canada
+                    elseif((runcell(iii).ge.63).and.(runcell(iii).le.66)) then
+                        albedo_mult = -0.15         ! Crescent
+                    end
                 ! No adjust for lower basins on Canada (Green)
                 elseif ((runcell(iii).ge.42).and.(runcell(iii).le.44)) then
                     albedo_mult = 0.0
