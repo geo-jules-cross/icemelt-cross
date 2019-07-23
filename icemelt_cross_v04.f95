@@ -888,9 +888,9 @@
                             albedo_mult = -0.20
                         case (31, 32, 33, 34)       ! Suess Glacier
                             albedo_mult = -0.20
-                        case (41, 45)               ! Outer Canada Glacier
+                        case (41,45)               ! Outer Canada Glacier
                             albedo_mult = -0.25
-                        case (42, 43, 44)           ! Inner Canada Glacier
+                        case (42,43,44)           ! Inner Canada Glacier
                             albedo_mult = 0.0
                         case (50, 63, 64, 65, 66)   ! Howard and Crescent Glaciers
                             albedo_mult = -0.25
@@ -899,31 +899,26 @@
                         case (62, 81, 82)           ! Wales group of glaciers
                             albedo_mult = -0.25
                     end SELECT
-                ! Adjustments to albedo: Before 2008
-                elseif ((iter.le.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0.0)) then
-                    if((runcell(iii).eq.41).or.(runcell(iii).eq.45)) then
-                        albedo_mult = -0.15         ! Outer Canada
-                    elseif((runcell(iii).ge.63).and.(runcell(iii).le.66)) then
-                        albedo_mult = -0.15         ! Crescent
-                    endif
-                ! No adjust for lower basins on Canada (Green)
-                elseif ((runcell(iii).ge.42).and.(runcell(iii).le.44)) then
-                    albedo_mult = 0.0
-                ! Increase surfaceroughness in Fryxell
-                elseif(runcell(iii).ge.50) then
-                    z_0 = 1.0 ! mm
                 else
                     ! Reset parameters to base if not
                     z_0 = z_0_base
                     albedo_mult = albedo_mult_base
                     albedo_offset = albedo_offset_base
                 endif
+                ! No adjust for lower basins on Canada (e.g. Green)
+                if ((runcell(iii).ge.42).and.(runcell(iii).le.44)) then
+                    albedo_mult = 0.0
+                endif
+                ! Increase surface roughness in Fryxell
+                ! if(runcell(iii).ge.50) then
+                !     z_0 = 1.0 ! mm
+                ! endif
 
-                if  (mod(iter,365).eq.0) then
+                ! if  (mod(iter,365).eq.0) then
                     print *,'WORKING ON YEAR =', out_year ! Added here by JMC
                     print *,'ALBEDO MULTIPLIER =', albedo_mult
                     print *,'BASIN =', runcell(iii)
-                endif
+                ! endif
 
                 ! Albedo Offset and Percent Adjustment for the Day (constant for each day)
                 read (33,*) junk1,junk2,junk3,albedo
