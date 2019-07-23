@@ -877,27 +877,30 @@
 ! Adjustments by year or basin to Albedo and Surface Roughness (Added by JMC)
 !---------------------------------------------------------------------        
                 
-                ! Adjustments to albedo: After 2008
+                ! Adjustments to albedo and surface roughness: After 2008
                 if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0.0)) then
                     SELECT CASE (runcell(iii))
-                        case (10, 11, 15, 16, 19)   ! Taylor/ Borns Glaciers
+                        case (10,11,15,16,19)       ! Taylor/ Borns Glaciers
                             albedo_mult = -0.20
                         case (21,22,23,24,26,29)    ! LaCroix Matterhorn Rhone Glaciers
-                            albedo_mult = -0.25
-                        case (36, 37, 38, 39)       ! Sollas group of glaciers
                             albedo_mult = -0.20
-                        case (31, 32, 33, 34)       ! Suess Glacier
+                        case (36,37,38,39)          ! Sollas group of glaciers
                             albedo_mult = -0.20
-                        case (41,45)               ! Outer Canada Glacier
+                        case (31,32,33,34)          ! Suess Glacier
+                            albedo_mult = -0.20
+                        case (41,45)                ! Outer Canada Glacier
                             albedo_mult = -0.25
-                        case (42,43,44)           ! Inner Canada Glacier
+                        case (42,43,44)             ! Inner Canada Glacier
                             albedo_mult = 0.0
-                        case (50, 63, 64, 65, 66)   ! Howard and Crescent Glaciers
+                        case (50,63,64,65,66)       ! Howard and Crescent Glaciers
                             albedo_mult = -0.25
-                        case (61, 71, 72, 73, 74)   ! Commonwealth Glacier
+                            z_0 = 1.0 ! mm
+                        case (61,71,72,73,74)       ! Commonwealth Glacier
                             albedo_mult = -0.25
+                            z_0 = 1.0 ! mm
                         case (62, 81, 82)           ! Wales group of glaciers
                             albedo_mult = -0.25
+                            z_0 = 1.0 ! mm
                     end SELECT
                 else
                     ! Reset parameters to base if not
@@ -908,11 +911,8 @@
                 ! No adjust for lower basins on Canada (e.g. Green)
                 if ((runcell(iii).ge.42).and.(runcell(iii).le.44)) then
                     albedo_mult = 0.0
+                    z_0 = z_0_base
                 endif
-                ! Increase surface roughness in Fryxell
-                ! if(runcell(iii).ge.50) then
-                !     z_0 = 1.0 ! mm
-                ! endif
 
                 ! if  (mod(iter,365).eq.0) then
                     print *,'WORKING ON YEAR =', out_year ! Added here by JMC
