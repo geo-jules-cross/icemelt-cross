@@ -905,7 +905,7 @@
                         albedo_mult = -0.15         ! Outer Canada
                     elseif((runcell(iii).ge.63).and.(runcell(iii).le.66)) then
                         albedo_mult = -0.15         ! Crescent
-                    end
+                    endif
                 ! No adjust for lower basins on Canada (Green)
                 elseif ((runcell(iii).ge.42).and.(runcell(iii).le.44)) then
                     albedo_mult = 0.0
