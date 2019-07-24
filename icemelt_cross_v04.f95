@@ -558,11 +558,11 @@
         glacier_cells_file='./input/tv_landcovermetstake.txt'
     else
         if (iscliff.eq.1) then
-            glacier_cells_file='./input/tv_basins_cliff.txt'
-            ! glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
+            ! glacier_cells_file='./input/tv_basins_cliff.txt'
+            glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
-            glacier_cells_file='./input/tv_basins_surface.txt'
-            ! glacier_cells_file='./input/tv_basins_surface_jmc.txt'
+            ! glacier_cells_file='./input/tv_basins_surface.txt'
+            glacier_cells_file='./input/tv_basins_surface_jmc.txt'
             ! glacier_cells_file='./input/tv_basins_surface_wales_jmc.txt'
         endif
     endif
@@ -880,9 +880,9 @@
                 ! Adjustments to albedo and surface roughness: After 2008
                 if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0.0)) then
                     SELECT CASE (runcell(iii))
-                        case (10,11,15,16,19)       ! Taylor/ Borns Glaciers
-                            albedo_mult = -0.20
-                        case (21,22,23,24,26,29)    ! LaCroix Matterhorn Rhone Glaciers
+                        case (10,11,15,16,19,29)    ! Taylor, Rhone and Borns Glaciers
+                            albedo_mult = -0.25
+                        case (21,22,23,24,25,26)    ! LaCroix and Matterhorn Glaciers
                             albedo_mult = -0.20
                         case (36,37,38,39)          ! Sollas group of glaciers
                             albedo_mult = -0.20
@@ -908,16 +908,17 @@
                     albedo_mult = albedo_mult_base
                     albedo_offset = albedo_offset_base
                 endif
-                ! No adjust for lower basins on Canada (e.g. Green)
-                if ((runcell(iii).ge.42).and.(runcell(iii).le.44)) then
-                    albedo_mult = 0.0
-                    z_0 = z_0_base
-                endif
+                ! No adjust for inner/lower basins on Canada (e.g. Green)
+                SELECT CASE (runcell(iii))
+                    case (42,43,44)
+                            albedo_mult = 0.0
+                            z_0 = z_0_base
+                end SELECT
 
                 ! if  (mod(iter,365).eq.0) then
                     print *,'WORKING ON YEAR =', out_year ! Added here by JMC
-                    print *,'ALBEDO MULTIPLIER =', albedo_mult
-                    print *,'BASIN =', runcell(iii)
+                    ! print *,'ALBEDO MULTIPLIER =', albedo_mult
+                    ! print *,'BASIN =', runcell(iii)
                 ! endif
 
                 ! Albedo Offset and Percent Adjustment for the Day (constant for each day)
