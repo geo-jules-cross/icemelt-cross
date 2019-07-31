@@ -5,7 +5,7 @@
 #SBATCH --job-name=icemelt
 #SBATCH --partition medium
 #SBATCH --ntasks=4
-#SBATCH --output=logs/albedo-many-adj-final-%A.log
+#SBATCH --output=logs/albedo-many-adj-30-%A.log
 #
 # mail alert at start, end and abortion of execution
 #SBATCH --mail-type=ALL
