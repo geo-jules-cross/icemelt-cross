@@ -7,7 +7,7 @@ This FORTRAN code simulates the temperature and water content within snow and ic
 **Code:** `icemelt_cross_v04.f95`  
 **File Location:**
 `I:\Antarctica_Julian\icemelt-cross`  
-**Date of README:** 28 October 2018  
+**Date of README:** September 2019  
 **Author of README:** Julian Cross
 
 ### Table of Contents
@@ -30,7 +30,8 @@ This FORTRAN code simulates the temperature and water content within snow and ic
 - `icemelt_8hr_Qc_spatial_xy_mc_drain.f` (v00)
 - `icemelt_hoffman_v01.f95` (v01)
 - `icemelt_spatial_cross_v02.f95` (v02)
--  `icemelt_albedo_cross_v03.f95` (v02)
+- `icemelt_albedo_cross_v03.f95` (v03)
+- `icemelt_cross_v04.f95` (v04)
 
 ##### Changes from previous version:
 
@@ -38,9 +39,9 @@ This FORTRAN code simulates the temperature and water content within snow and ic
 - **October 2017:** FZ reformatted fixed-format v00 (.f) to free-format v01 (.f95).
 - **November 2017:** JC made adjustments to `namelist.input` and output handling.
 - **March 2018:** JC and FZ removed some portions of functional commented-out code from previous version added by Ebnet or Hoffman.  We did not remove their descriptive comments.
+- **May 2019:** JC adjusted parameters to be the same as Hoffman 2016. Specifically `snowgrain_radius` = 0.064, `dz1` = 0.002, `SRSF` = 0.22 and `nz` = 70.
 - **June 2018:** JC developed scripts to run ICEMELT on Coeus Cluster.
 - **October 2018:** JC added new albedo method to account for spatial variability of albedo.
-- **March 2019:** JC adjusted parameters to be the same as Hoffman 2016. Specifically `snowgrain_radius` = 0.064, `dz1` = 0.002, `SRSF` = 0.22 and `nz` = 70.
 - **April 2019:** JC modified ICEMELT to take additional parameters for better handling of albedo adjustments. Now in the `namelist.input`: `albedo_offset` adds a value to albedo, this can be used to correct for specific error. `albedo_mult` multiplies albedo by some relative error and adds the result, this can be used to account for instrument error. `albedo_surface` adjusts albedo according to surface type.
 
 ## <a name="compiling"></a>Compiling the Model
@@ -278,7 +279,7 @@ and
 The model depends on several files and directories that need to reside in the same working directory. These files include `os_info.inc`, `namelist.input` and the files described below in the 'Input Files' section. Additionally an `output` directory needs to exist. The folder structure below is required for a succesful spatial run of the model:
 
 ``` bash
-├───icemelt-working-dir
+├───icemelt
 │       icemelt
 │       icemelt_spatial_jmc.f95
 │       os_info.inc
@@ -287,9 +288,6 @@ The model depends on several files and directories that need to reside in the sa
 │
 ├───────output
 ├───────logs
-├───────input_cliff
-│               XXXYYY.bin
-│               ...
 │
 ├───────input
 │               XXXYYY.bin
@@ -316,7 +314,11 @@ The model depends on several files and directories that need to reside in the sa
 │               tv_landcover_met.txt
 │               T_avg_all.txt
 │               T_avg_cliff.txt
-└────────────── T_avg_surf.txt
+│               T_avg_surf.txt
+├──────────────input_cliff
+│                   XXXYYY.bin
+│                   ...
+└───────────────────
 ```
 ## <a name="parameters"></a>Input Parameters
 
@@ -328,14 +330,16 @@ Model parameters controlling both environmental variables and run settings are s
     glacnum = 0 ! case
     z_0 = 0.05 ! mm
     dz1 = 0.0020 ! m
-    n_snowgrain_radius = 9 ! index value equal to 0.064
+    n_snowgrain_radius = 9 ! index
     runmin = 10 ! index
     runmax = 82 ! index
     runnametext = "TEST"
 ! optional adjustments to met data
     tempadd = 0.0
     windmult = 1.0
+    albedo_surface = 0.0
     albedo_offset = 0.0
+    albedo_mult = 0.0
 ! number of time steps to run
     maxiter = 6426
 ! set start year
@@ -347,7 +351,11 @@ The values for `z_0`, `dz1`, `n_snowgrain_radius` in the above example correspon
 
 The values for `glacnum`, `runmin`, and `runmax` correspond to a spatial configuration of the model.
 
-The values for parameters `tempadd`, `windmult`, and `albedo_offset` correspond to no adjustments to the input met data.
+The options `tempadd` and `windmult` make adjustments to the input met data.
+
+The option `albedo_surface` relates to running the various submodels.
+
+The options `albedo_offset` and `albedo_mult` make additional adjustments to albedo, either as an offset of multiplier.
 
 The values for parameters `maxiter` and `yeararg` correspond with a configuration of the model to run accross the entire MicroMet period with data, from July 1st 1995 to February 1st 2013 (e.g. 6426 days).
 
@@ -380,7 +388,7 @@ The values for parameters `maxiter` and `yeararg` correspond with a configuratio
 
 - `tempadd`: added globally to input air temperature data.
 - `windmult`: multiplier applied to input wind speed data.
-- `albedo_offset`: offset applied to input albedo data.
+- `albedo_offset` and `albedo_mult`: offset or multiplier applied to input albedo data.
 
 ##### Temporal parameters:
 
@@ -481,8 +489,10 @@ These are not controlled by the `namelist.input` file but are set internally in 
     * Accessed using unit (21)
 
 - `053036.ablation.daily`: binary unformatted file
-    * This is a file to write out surface melt, ablation, and drained subsurface melt daily
-    * Stored in variables `daymelt`, `dayablation`, and `daysubdrain` which are then stored in array `day_melt_abl_out` with dimensions `[3,7000]`
+    * This is a file to write out surface melt, ablation, and drained subsurface melt daily (and a few other variables)
+    * Output ablation varialbes of `daymelt`, `dayablation`, and `daysubdrain`.
+    * Also output are `iter` `out_day` `out_year`, and `runcell(iii)`.
+    * Has dimensions of `[7,7000]`
     * Accessed using unit (20)
 
 ##### Other Output Files:

@@ -5,7 +5,7 @@
 #SBATCH --job-name=icemelt
 #SBATCH --partition medium
 #SBATCH --ntasks=4
-#SBATCH --output=logs/BASE-test-%A.log
+#SBATCH --output=logs/name-%A.log
 #
 # mail alert at start, end and abortion of execution
 #SBATCH --mail-type=ALL
@@ -20,7 +20,7 @@ module load gcc-7.2.0
 # compile ICEMELT
 gfortran -g -o ./icemelt ./icemelt_cross_v04.f95
 
-### run ICEMELT with for loop and SLURM srun
+### run ICEMELT
 
 # base commands for running the model
 NL="./namelist/namelist.input"

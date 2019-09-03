@@ -1061,7 +1061,7 @@ body .markdown-body
 <p><strong>Code:</strong> <code>icemelt_cross_v04.f95</code><br />
 <strong>File Location:</strong>
 <code>I:\Antarctica_Julian\icemelt-cross</code><br />
-<strong>Date of README:</strong> 28 October 2018<br />
+<strong>Date of README:</strong> September 2019<br />
 <strong>Author of README:</strong> Julian Cross</p>
 <h3 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link"></a></h3>
 <ol>
@@ -1083,7 +1083,8 @@ body .markdown-body
 <li><code>icemelt_8hr_Qc_spatial_xy_mc_drain.f</code> (v00)</li>
 <li><code>icemelt_hoffman_v01.f95</code> (v01)</li>
 <li><code>icemelt_spatial_cross_v02.f95</code> (v02)</li>
-<li><code>icemelt_albedo_cross_v03.f95</code> (v02)</li>
+<li><code>icemelt_albedo_cross_v03.f95</code> (v03)</li>
+<li><code>icemelt_cross_v04.f95</code> (v04)</li>
 </ul>
 <h5 id="changes-from-previous-version">Changes from previous version:<a class="headerlink" href="#changes-from-previous-version" title="Permanent link"></a></h5>
 <ul>
@@ -1091,9 +1092,9 @@ body .markdown-body
 <li><strong>October 2017:</strong> FZ reformatted fixed-format v00 (.f) to free-format v01 (.f95).</li>
 <li><strong>November 2017:</strong> JC made adjustments to <code>namelist.input</code> and output handling.</li>
 <li><strong>March 2018:</strong> JC and FZ removed some portions of functional commented-out code from previous version added by Ebnet or Hoffman.  We did not remove their descriptive comments.</li>
+<li><strong>May 2019:</strong> JC adjusted parameters to be the same as Hoffman 2016. Specifically <code>snowgrain_radius</code> = 0.064, <code>dz1</code> = 0.002, <code>SRSF</code> = 0.22 and <code>nz</code> = 70.</li>
 <li><strong>June 2018:</strong> JC developed scripts to run ICEMELT on Coeus Cluster.</li>
 <li><strong>October 2018:</strong> JC added new albedo method to account for spatial variability of albedo.</li>
-<li><strong>March 2019:</strong> JC adjusted parameters to be the same as Hoffman 2016. Specifically <code>snowgrain_radius</code> = 0.064, <code>dz1</code> = 0.002, <code>SRSF</code> = 0.22 and <code>nz</code> = 70.</li>
 <li><strong>April 2019:</strong> JC modified ICEMELT to take additional parameters for better handling of albedo adjustments. Now in the <code>namelist.input</code>: <code>albedo_offset</code> adds a value to albedo, this can be used to correct for specific error. <code>albedo_mult</code> multiplies albedo by some relative error and adds the result, this can be used to account for instrument error. <code>albedo_surface</code> adjusts albedo according to surface type.</li>
 </ul>
 <h2 id="compiling-the-model"><a name="compiling"></a>Compiling the Model<a class="headerlink" href="#compiling-the-model" title="Permanent link"></a></h2>
@@ -1325,7 +1326,7 @@ and<br />
 </ul>
 <h2 id="folder-structure"><a name="folders"></a>Folder Structure<a class="headerlink" href="#folder-structure" title="Permanent link"></a></h2>
 <p>The model depends on several files and directories that need to reside in the same working directory. These files include <code>os_info.inc</code>, <code>namelist.input</code> and the files described below in the &lsquo;Input Files&rsquo; section. Additionally an <code>output</code> directory needs to exist. The folder structure below is required for a succesful spatial run of the model:</p>
-<div class="codehilite"><pre>├───icemelt-working-dir
+<div class="codehilite"><pre>├───icemelt
 │       icemelt
 │       icemelt_spatial_jmc.f95
 │       os_info.inc
@@ -1334,9 +1335,6 @@ and<br />
 │
 ├───────output
 ├───────logs
-├───────input_cliff
-│               XXXYYY.bin
-│               ...
 │
 ├───────input
 │               XXXYYY.bin
@@ -1363,7 +1361,11 @@ and<br />
 │               tv_landcover_met.txt
 │               T_avg_all.txt
 │               T_avg_cliff.txt
-└────────────── T_avg_surf.txt
+│               T_avg_surf.txt
+├──────────────input_cliff
+│                   XXXYYY.bin
+│                   ...
+└───────────────────
 </pre></div>
 
 <h2 id="input-parameters"><a name="parameters"></a>Input Parameters<a class="headerlink" href="#input-parameters" title="Permanent link"></a></h2>
@@ -1373,14 +1375,16 @@ and<br />
     <span class="n">glacnum</span> <span class="o">=</span> <span class="mi">0</span> <span class="c">! case</span>
     <span class="n">z_0</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c">! mm</span>
     <span class="n">dz1</span> <span class="o">=</span> <span class="mf">0.0020</span> <span class="c">! m</span>
-    <span class="n">n_snowgrain_radius</span> <span class="o">=</span> <span class="mi">9</span> <span class="c">! index value equal to 0.064</span>
+    <span class="n">n_snowgrain_radius</span> <span class="o">=</span> <span class="mi">9</span> <span class="c">! index</span>
     <span class="n">runmin</span> <span class="o">=</span> <span class="mi">10</span> <span class="c">! index</span>
     <span class="n">runmax</span> <span class="o">=</span> <span class="mi">82</span> <span class="c">! index</span>
     <span class="n">runnametext</span> <span class="o">=</span> <span class="s2">&quot;TEST&quot;</span>
 <span class="c">! optional adjustments to met data</span>
     <span class="n">tempadd</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">windmult</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">albedo_surface</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">albedo_offset</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">albedo_mult</span> <span class="o">=</span> <span class="mf">0.0</span>
 <span class="c">! number of time steps to run</span>
     <span class="n">maxiter</span> <span class="o">=</span> <span class="mi">6426</span>
 <span class="c">! set start year</span>
@@ -1390,7 +1394,9 @@ and<br />
 
 <p>The values for <code>z_0</code>, <code>dz1</code>, <code>n_snowgrain_radius</code> in the above example correspond to the parameterization of the model by MJH in Hoffman 2016.</p>
 <p>The values for <code>glacnum</code>, <code>runmin</code>, and <code>runmax</code> correspond to a spatial configuration of the model.</p>
-<p>The values for parameters <code>tempadd</code>, <code>windmult</code>, and <code>albedo_offset</code> correspond to no adjustments to the input met data.</p>
+<p>The options <code>tempadd</code> and <code>windmult</code> make adjustments to the input met data.</p>
+<p>The option <code>albedo_surface</code> relates to running the various submodels.</p>
+<p>The options <code>albedo_offset</code> and <code>albedo_mult</code> make additional adjustments to albedo, either as an offset of multiplier.</p>
 <p>The values for parameters <code>maxiter</code> and <code>yeararg</code> correspond with a configuration of the model to run accross the entire MicroMet period with data, from July 1st 1995 to February 1st 2013 (e.g. 6426 days).</p>
 <h5 id="required-parameters">Required Parameters:<a class="headerlink" href="#required-parameters" title="Permanent link"></a></h5>
 <ul>
@@ -1421,7 +1427,7 @@ and<br />
 <ul>
 <li><code>tempadd</code>: added globally to input air temperature data.</li>
 <li><code>windmult</code>: multiplier applied to input wind speed data.</li>
-<li><code>albedo_offset</code>: offset applied to input albedo data.</li>
+<li><code>albedo_offset</code> and <code>albedo_mult</code>: offset or multiplier applied to input albedo data.</li>
 </ul>
 <h5 id="temporal-parameters">Temporal parameters:<a class="headerlink" href="#temporal-parameters" title="Permanent link"></a></h5>
 <ul>
@@ -1624,8 +1630,10 @@ and<br />
 <li>
 <p><code>053036.ablation.daily</code>: binary unformatted file</p>
 <ul>
-<li>This is a file to write out surface melt, ablation, and drained subsurface melt daily</li>
-<li>Stored in variables <code>daymelt</code>, <code>dayablation</code>, and <code>daysubdrain</code> which are then stored in array <code>day_melt_abl_out</code> with dimensions <code>[3,7000]</code></li>
+<li>This is a file to write out surface melt, ablation, and drained subsurface melt daily (and a few other variables)</li>
+<li>Output ablation varialbes of <code>daymelt</code>, <code>dayablation</code>, and <code>daysubdrain</code>.</li>
+<li>Also output are <code>iter</code> <code>out_day</code> <code>out_year</code>, and <code>runcell(iii)</code>.</li>
+<li>Has dimensions of <code>[7,7000]</code></li>
 <li>Accessed using unit (20)</li>
 </ul>
 </li>
