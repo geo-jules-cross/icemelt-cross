@@ -700,7 +700,7 @@
         
             ! Spatial Run: (old method)
             ! case (0)
-            !     if (runmax .ge. 30) then 
+            !     if (runcell(iii) .lt. 40) then 
             !         albedo_file = './input/9513_alb.CAA' 
             !         albedo_file = './input/9513_alb.TAR' 
             !     endif
