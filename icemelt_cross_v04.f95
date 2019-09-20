@@ -448,7 +448,8 @@
 
 ! Snow-water-equivalent depth.  Any non-zero value makes the model
 !   simulate snow-ice conditions.
-    swe_depth = 10.0
+!    swe_depth = 10.0
+    swe_depth = 0.0 ! JMC turned this to 0.0 to test if this is the switch for the snow cover routine
 
 ! Model time step.  day=86400, hr=3600 sec.
     dt = 3600.0
@@ -700,7 +701,7 @@
         
             ! Spatial Run: (old method)
             ! case (0)
-            !     if (runmax .ge. 30) then 
+            !     if (runcell(iii) .lt. 40) then 
             !         albedo_file = './input/9513_alb.CAA' 
             !         albedo_file = './input/9513_alb.TAR' 
             !     endif
