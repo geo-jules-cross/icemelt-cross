@@ -703,7 +703,7 @@
             case (0)
                 if (runcell(iii) .lt. 40) then 
                     albedo_file = './input/9513_alb.TAR'
-                elseif runcell(iii) .gt. 40) then
+                elseif (runcell(iii) .gt. 40) then
                     albedo_file = './input/9513_alb.CAA'
                 endif
             
