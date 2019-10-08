@@ -24,7 +24,7 @@ module load gcc-7.2.0
 
 # base commands for running the model
 NL="./namelist/namelist.input"
-CMD="./icemelt_mjh_test2"
+CMD="./icemelt"
 runname=`grep runnametext $NL | cut -f 2 -d "\""`
 
 echo using runnametext=$runname
