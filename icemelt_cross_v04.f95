@@ -828,7 +828,7 @@
         
             ! MJH: Note the annual iteration will be phased out.  
             ! So don't add anything important to this little section.
-            !     if (kkk .gt. 1) then
+            !    if (kkk .gt. 1) then
             !        snow_cover_depth_old = 0.0
             !
             ! ! Rewind files on each annual iteration - 31 only if ascii
