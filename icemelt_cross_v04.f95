@@ -105,8 +105,8 @@
     real day_melt_abl_out(7,7000) 
     ! real day_melt_abl_out(3,7000) 
     integer i2,j2,iarraypos
-    ! real xdataout(30,185000),subout(100)
-    real xdataout(30,175000),subout(100) ! Changed by JMC
+    ! real xdataout(30,185000),subout(100) ! Changed by JMC
+    real xdataout(30,175000),subout(100)
     double precision totalheat,totalheat2
     character*(80) nlfname
     real endofsummerdensity(JJ)
@@ -507,7 +507,7 @@
     endif
 
 !---------------------------------------------------------------------
-! Call Initial Subroutines
+! Call Initial Optical Subroutines
 !---------------------------------------------------------------------
 
 ! Get the general constants to be used.
@@ -2550,8 +2550,8 @@
       SUBROUTINE MELTTEMP(Tsfc,Tf,swe_depth)
 
       if (swe_depth.gt.0.0 .and. Tsfc.gt.Tf) then
-    Tsfc = Tf
-    endif
+        Tsfc = Tf
+      endif
 
       return
       end
@@ -2586,7 +2586,7 @@
       endif
 
 ! MJH: The ice heat flux is calculated using the 1st and 2nd levels 
-! withinthe profile of the ice instead of the ice at the surface and 
+! within the profile of the ice instead of the ice at the surface and 
 ! the 1st level. This allows for surface ice at the melting point to 
 ! still have a positive ice heat flux where as surface ice at the 
 ! melt point should have zero gain or loss of energy to the ice below.
