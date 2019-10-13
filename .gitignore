@@ -17,3 +17,4 @@ icemelt-versions/*
 !logs/.gitkeep 
 !input/.gitkeep
 !namelist/namelist.input
+!namelist/namelist.input-mjh
