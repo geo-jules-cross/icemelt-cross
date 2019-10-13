@@ -294,13 +294,6 @@ c nz=170 goes to 15 m.
 		deltaz(i)=0.50-deltaz(1)+0.01
 		enddo
 
-	elseif (nz.eq.71) then
-		deltaz(2:20) = 0.01
-		do j=21,71
-			deltaz(j)=deltaz(j-1)*1.101
-		enddo
-		deltaz(71)=deltaz(71)-deltaz(1)+0.01
-
 c my new setup that gives 1 cm cells to 30 cm
 c then gives a total of 70 cells to exactly 15 m
 c the lowest cell is 1.80 m thick
