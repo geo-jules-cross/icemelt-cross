@@ -275,7 +275,6 @@ c directory to store this run
 
 c nz=170 goes to 15 m.
 	if (nz.eq.170) then
-
 		do i=2,50
 		deltaz(i) = 0.01
 		enddo
@@ -296,18 +295,18 @@ c nz=170 goes to 15 m.
 		enddo
 
 	elseif (nz.eq.71) then
-
 		deltaz(2:20) = 0.01
 		do j=21,71
 			deltaz(j)=deltaz(j-1)*1.101
 		enddo
 		deltaz(71)=deltaz(71)-deltaz(1)+0.01
 
-	elseif (nz.eq.70) then
 c my new setup that gives 1 cm cells to 30 cm
 c then gives a total of 70 cells to exactly 15 m
 c the lowest cell is 1.80 m thick
 c cell thickness is 0.10 m at 1.0m depth.
+	
+	elseif (nz.eq.70) then
 		deltaz(2:30) = 0.01
 		do j=31,70
 			deltaz(j)=deltaz(j-1)*1.13863
@@ -315,16 +314,15 @@ c cell thickness is 0.10 m at 1.0m depth.
 		deltaz(70)=deltaz(70)-deltaz(1)+0.01
 
 	elseif (nz.eq.37) then
-
-	deltaz(2:15) = 0.01
-	do j=16,37
-		deltaz(j)=deltaz(j-1)*1.3047
-	enddo
+		deltaz(2:15) = 0.01
+		do j=16,37
+			deltaz(j)=deltaz(j-1)*1.3047
+		enddo
 		deltaz(37)=deltaz(37)-deltaz(1)+0.01
 
 	else
-	print *,'dz not defined properly!'
-	stop
+		print *,'dz not defined properly!'
+		stop
 	endif
 
 
