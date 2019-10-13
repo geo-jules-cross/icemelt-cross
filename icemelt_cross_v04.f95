@@ -116,16 +116,6 @@
     integer :: n_snowgrain_radius
     real :: albedo_mult_base, albedo_offset_base, z_0_base
 
-    real albedo_evo_poly_a,albedo_evo_poly_b,albedo_evo_poly_c
-    real albedo_evo_poly_d,snow_albedo_thresh
-
-! constants for calculating the best fit polynomial of albedo.
-    parameter(albedo_evo_poly_a = 9.749256e-10)
-    parameter(albedo_evo_poly_b = -7.432486e-07)
-    parameter(albedo_evo_poly_c = 2.099152e-04)
-    parameter(albedo_evo_poly_d = -0.025216)
-    parameter(albedo_evo_poly_e = 1.614333)
-
     data stnx/53,63,65,133,143,127,164,0/
     data stny/36,43,45,93,66,88,114,0/
 
@@ -448,8 +438,9 @@
 
 ! Snow-water-equivalent depth.  Any non-zero value makes the model
 !   simulate snow-ice conditions.
-   swe_depth = 10.0
-    ! swe_depth = 0.0 ! JMC turned this to 0.0 to test if this is the switch for the snow cover routine
+    ! swe_depth = 10.0
+    ! swe_depth = 0.0 
+    ! JMC turned this to 0.0 to test if this is the switch for the snow cover routine
 
 ! Model time step.  day=86400, hr=3600 sec.
     dt = 3600.0
@@ -829,8 +820,6 @@
         
             ! MJH: Note the annual iteration will be phased out.  
             ! So don't add anything important to this little section.
-            !    if (kkk .gt. 1) then
-            !        snow_cover_depth_old = 0.0
             !
             ! ! Rewind files on each annual iteration - 31 only if ascii
             !        rewind(31)
@@ -1015,7 +1004,7 @@
                         T_old,dy_p,JJ,icond_flag,cloud_frac,albedo,z_0, &
                         J_day_start,xlat,slope_az,terrain_slope, &
                         transmiss,clear_sky, &
-                        snow_cover_depth_old,surface_melt,ro_snow_on_top, &
+                        surface_melt, &
                         ablation,iter,xLs,xLf,i_yearstart, &
                         ablation_output,stability,hr,Qsi_fraction, &
                         y_crds,f_n,dely_p,Qsip,extcoef,xk_snow,ro_snow, &
@@ -1096,10 +1085,9 @@
                         xdataout(13,iarraypos)=stability
                         xdataout(14,iarraypos)=surface_melt
                         xdataout(15,iarraypos)=ablation
-                        xdataout(16,iarraypos)=snow_cover_depth_old
-                        xdataout(17,iarraypos)=water_depth
-                        xdataout(18,iarraypos)=water_flux
-                    !   xdataout(19,iarraypos)=rh
+                        xdataout(16,iarraypos)=water_depth
+                        xdataout(17,iarraypos)=water_flux
+                        xdataout(18,iarraypos)=rh
                         xdataout(19,iarraypos)=subdrain
                         xdataout(20,iarraypos)=windspd
 
@@ -2094,7 +2082,7 @@
           T_old,dy_p,JJ,icond_flag,cloud_frac,albedo,z_0, &
           J_day_start,xlat,slope_az,terrain_slope, &
           transmiss,clear_sky, &
-            snow_cover_depth_old,surface_melt,ro_snow_on_top, &
+          surface_melt, &
           ablation,model_day,xLs,xLf,i_yearstart, &
           ablation_output,stability,hr,Qsi_fraction, &
           y_crds,f_n,dely_p,Qsip,extcoef,xk_snow,ro_snow, &
@@ -2189,8 +2177,8 @@
           gravity,De_h,ea,ro_air,xLs,Pa,Cp,emiss_sfc, &
           Stef_Boltz,swe_depth,xkappa,z_0,gamma,T_old,dy_p, &
           JJ,icond_flag, &
-          xLf,ro_water,surface_melt,ro_snow_on_top,ablation, &
-          snow_cover_depth_old,model_day,ablation_output,hr,qsfactor,dt)
+          xLf,ro_water,surface_melt,ablation, &
+          model_day,ablation_output,hr,qsfactor,dt)
 
 ! Decrease the swe depth by the swe melt depth.
 !   Turn this off for blue-ice simulations.
@@ -2420,17 +2408,17 @@
 !=====================================================================
 !=====================================================================
 
-      SUBROUTINE SNOW_UPDATE(swe_depth,Qm,dt,ro_ice,xLf)
+!       SUBROUTINE SNOW_UPDATE(swe_depth,Qm,dt,ro_ice,xLf)
 
-! Calculate the swe melt depth for this time step.
-      swe_melt = Qm * dt / (ro_ice * xLf)
+! ! Calculate the swe melt depth for this time step.
+!       swe_melt = Qm * dt / (ro_ice * xLf)
 
-! Decrease the swe depth by the swe melt depth.
-      swe_depth = swe_depth - swe_melt
-      swe_depth = max(0.0,swe_depth)
+! ! Decrease the swe depth by the swe melt depth.
+!       swe_depth = swe_depth - swe_melt
+!       swe_depth = max(0.0,swe_depth)
 
-      return
-      end
+!       return
+!       end
 
 !=====================================================================
 !=====================================================================
@@ -2463,12 +2451,12 @@
 !=====================================================================
 !=====================================================================
 
-      SUBROUTINE MFENERGY(albedo,Qsi,Qli,Qle,Qh,Qe,Qc,Qm,Qf,Tsfc, &
+    SUBROUTINE MFENERGY(albedo,Qsi,Qli,Qle,Qh,Qe,Qc,Qm,Qf,Tsfc, &
         Tf,Tair,windspd,z_windobs,gravity,De_h,ea,ro_air,xLs,Pa,Cp, &
         emiss_sfc,Stef_Boltz,swe_depth,xkappa,z_0,gamma,T_old,dy_p, &
         JJ,icond_flag, &
-        xLf,ro_water,surface_melt,ro_snow_on_top,ablation, &
-        snow_cover_depth_old,model_day,ablation_output,hr,qsfactor,dt)
+        xLf,ro_water,surface_melt,ablation, &
+        model_day,ablation_output,hr,qsfactor,dt)
 
     implicit none
 
@@ -2476,37 +2464,27 @@
     real Tf,Tair,windspd,z_windobs,gravity,De_h,ea,ro_air,xLs,Pa,Cp
     real emiss_sfc,Stef_Boltz,swe_depth,xkappa,z_0
     integer JJ,model_day,icond_flag,hr
-      real gamma(JJ+2)
-      real T_old(JJ+2)
-      real dy_p(JJ+2)
-    real xLf,ro_water,total_surface_melt,ro_snow_on_top
-    real snow_cover_depth_old
+    real gamma(JJ+2)
+    real T_old(JJ+2)
+    real dy_p(JJ+2)
+    real xLf,ro_water,total_surface_melt
     integer ablation_output
 
-!   real albedo_evo_poly_a,albedo_evo_poly_b,albedo_evo_poly_c
-!   real albedo_evo_poly_d,calculated_albedo
     real surface_melt,ablation
     real qsfactor,dt
 
-!   real albedo_tom,calculated_albedo_tom,snow_cover_depth,ablation_tmp
-
-! If Qm is > 0, then this is the energy available for melting.
+!   If Qm is > 0, then this is the energy available for melting.
 !   If Qm is < 0, then this is the energy available for freezing
 !   liquid water in the snowpack.
-      if (swe_depth.gt.0.0 .and. Tsfc.eq.Tf) then
-! MJH: added qsfactor here to account for energy absorbed below surface
+    
+    if (Tsfc.eq.Tf) then
+        ! MJH: added qsfactor here to account for energy absorbed below surface
         Qm = (1.0-albedo) * Qsi * qsfactor + Qli + Qle + Qh + Qe + Qc
-      else
-        Qm = 0.0
-      endif
-
-! JE: Calculate the ablation and melt of the ice surface.
-! Surface melt...
-    if (snow_cover_depth_old.gt.0) then
-        surface_melt = 0.0
     else
-        surface_melt = Qm / (xLf * ro_water) * dt * 100.0
+        Qm = 0.0
     endif
+
+    surface_melt = Qm / (xLf * ro_water) * dt * 100.0
     total_surface_melt = total_surface_melt + surface_melt
 
 ! Check Values
@@ -2522,34 +2500,17 @@
         print *,'WARNING: bigmelt!', surface_melt
     endif
 
-! Ablation...(no melt can occur if snow is on top)
-    if (snow_cover_depth_old.gt.0.0) then
-!       ablation = -Qe/(xLs * ro_snow_on_top) * dt * 100.0
-! Don't count ice sublimation if snow is on top
-        ablation = 0.0
-    else
-        ablation = surface_melt - Qe/(xLs * ro_water) &
-            * dt * 100.0
-    endif
-    if (ablation.lt. 0.0) then
-!       ablation = 0.0
-    endif
+    ablation = surface_melt - Qe/(xLs * ro_water) * dt * 100.0
 
-!   if (snow_cover_depth_old.gt.0.0) then
-!       ablation_tmp = 0.0
-!   else
-!       ablation_tmp = ablation
-!   endif
-
-      return
-      end
+    return
+    end
 
 !=====================================================================
 !=====================================================================
 
       SUBROUTINE MELTTEMP(Tsfc,Tf,swe_depth)
 
-      if (swe_depth.gt.0.0 .and. Tsfc.gt.Tf) then
+      if (Tsfc.gt.Tf) then
         Tsfc = Tf
       endif
 
