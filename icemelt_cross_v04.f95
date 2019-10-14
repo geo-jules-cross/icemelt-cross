@@ -436,12 +436,6 @@
 ! initialize albedo for the EXTCOEFS calculation
     albedo = 0.562
 
-! Snow-water-equivalent depth.  Any non-zero value makes the model
-!   simulate snow-ice conditions.
-    ! swe_depth = 10.0
-    ! swe_depth = 0.0 
-    ! JMC turned this to 0.0 to test if this is the switch for the snow cover routine
-
 ! Model time step.  day=86400, hr=3600 sec.
     dt = 3600.0
 
@@ -810,7 +804,7 @@
 
         water_depth_old = 0.0
 
-        gravity = 9.81 ! is this part of Jon's stuff?
+        gravity = 9.81 
 
 !=====================================================================
 !                       START ANNUAL ITERATION
@@ -1000,7 +994,7 @@
                     CALL ENBALANCE(Tair,windspd,rh,  &
                         Tsfc,Qsi,Qli,Qle,Qh, &
                         Qe,Qc,Qm,balance,Qf, &
-                        swe_depth,topo,z_windobs,dt,gamma, &
+                        topo,z_windobs,dt,gamma, &
                         T_old,dy_p,JJ,icond_flag,cloud_frac,albedo,z_0, &
                         J_day_start,xlat,slope_az,terrain_slope, &
                         transmiss,clear_sky, &
@@ -2078,7 +2072,7 @@
       SUBROUTINE ENBALANCE(Tair,windspd,rh, &
           Tsfc,Qsi,Qli,Qle,Qh, &
           Qe,Qc,Qm,balance,Qf, &
-          swe_depth,topo,z_windobs,dt,gamma, &
+          topo,z_windobs,dt,gamma, &
           T_old,dy_p,JJ,icond_flag,cloud_frac,albedo,z_0, &
           J_day_start,xlat,slope_az,terrain_slope, &
           transmiss,clear_sky, &
@@ -2151,7 +2145,7 @@
             xinternal_heating_corr,qsfactor,ndarklayers)
 
 ! Make sure the snow surface temperature is <= 0 C.
-        CALL MELTTEMP(Tsfc,Tf,swe_depth)
+        CALL MELTTEMP(Tsfc,Tf)
 
 ! Compute the stability function.
         CALL STABLEFN(stability,Tair,Tsfc,windspd,z_windobs, &
@@ -2175,14 +2169,10 @@
         CALL MFENERGY(albedo,Qsi,Qli,Qle,Qh,Qe, &
           Qc,Qm,Qf,Tsfc,Tf,Tair,windspd,z_windobs, &
           gravity,De_h,ea,ro_air,xLs,Pa,Cp,emiss_sfc, &
-          Stef_Boltz,swe_depth,xkappa,z_0,gamma,T_old,dy_p, &
+          Stef_Boltz,xkappa,z_0,gamma,T_old,dy_p, &
           JJ,icond_flag, &
           xLf,ro_water,surface_melt,ablation, &
           model_day,ablation_output,hr,qsfactor,dt)
-
-! Decrease the swe depth by the swe melt depth.
-!   Turn this off for blue-ice simulations.
-!       CALL SNOW_UPDATE(swe_depth,Qm,dt,ro_ice,xLf)
 
 ! Perform an energy balance check.
         CALL ENBAL(balance,albedo,Qsi,Qli,Qle,Qh, &
@@ -2408,21 +2398,6 @@
 !=====================================================================
 !=====================================================================
 
-!       SUBROUTINE SNOW_UPDATE(swe_depth,Qm,dt,ro_ice,xLf)
-
-! ! Calculate the swe melt depth for this time step.
-!       swe_melt = Qm * dt / (ro_ice * xLf)
-
-! ! Decrease the swe depth by the swe melt depth.
-!       swe_depth = swe_depth - swe_melt
-!       swe_depth = max(0.0,swe_depth)
-
-!       return
-!       end
-
-!=====================================================================
-!=====================================================================
-
       SUBROUTINE VAPPRESS(ea,rh,Tair,Tf)
 
 ! Also see the VAPOR subroutine.
@@ -2453,7 +2428,7 @@
 
     SUBROUTINE MFENERGY(albedo,Qsi,Qli,Qle,Qh,Qe,Qc,Qm,Qf,Tsfc, &
         Tf,Tair,windspd,z_windobs,gravity,De_h,ea,ro_air,xLs,Pa,Cp, &
-        emiss_sfc,Stef_Boltz,swe_depth,xkappa,z_0,gamma,T_old,dy_p, &
+        emiss_sfc,Stef_Boltz,xkappa,z_0,gamma,T_old,dy_p, &
         JJ,icond_flag, &
         xLf,ro_water,surface_melt,ablation, &
         model_day,ablation_output,hr,qsfactor,dt)
@@ -2462,7 +2437,7 @@
 
     real albedo,Qsi,Qli,Qle,Qh,Qe,Qc,Qm,Qf,Tsfc
     real Tf,Tair,windspd,z_windobs,gravity,De_h,ea,ro_air,xLs,Pa,Cp
-    real emiss_sfc,Stef_Boltz,swe_depth,xkappa,z_0
+    real emiss_sfc,Stef_Boltz,xkappa,z_0
     integer JJ,model_day,icond_flag,hr
     real gamma(JJ+2)
     real T_old(JJ+2)
@@ -2508,7 +2483,7 @@
 !=====================================================================
 !=====================================================================
 
-      SUBROUTINE MELTTEMP(Tsfc,Tf,swe_depth)
+      SUBROUTINE MELTTEMP(Tsfc,Tf)
 
       if (Tsfc.gt.Tf) then
         Tsfc = Tf
