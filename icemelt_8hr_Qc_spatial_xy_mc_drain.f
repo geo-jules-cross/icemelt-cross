@@ -39,7 +39,7 @@ c nz=JJ equals the number of grid cells in the z direction.  The
 c   reason this is like this is because my heat equation solver
 c   calls the z-dir(k) the y-dir(j).
 	integer nz,JJ,nx,ny
-      parameter(nz=170) !170, 37, 71, 70
+      parameter(nz=70) !170, 37, 71, 70
       parameter(JJ=nz)
 	parameter(nx=200)
 	parameter(ny=140)
