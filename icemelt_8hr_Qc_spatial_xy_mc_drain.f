@@ -162,7 +162,7 @@ c===============================================================
 ! Specify default values for variables read from namelist                  
 !----------------------------------------------        
         glacnum = -1
-        z_0 = 1.0  ! mm
+        z_0 = 1.0  ! mm (JMC: this is actually in meters!)
         dz1 = 1.0  ! cm (JMC: this is actually in meters!)
         n_snowgrain_radius = 10  ! index
         runmin = -1
