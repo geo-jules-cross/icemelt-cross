@@ -142,7 +142,7 @@
 ! Otherwise run default parameters below
     glacnum = 0 ! spatial run
     z_0 = 1.0  ! mm
-    dz1 = 1.0  ! m
+    dz1 = 1.0  ! cm
     n_snowgrain_radius = 10  ! index
     runmin = 10
     runmax = 82
