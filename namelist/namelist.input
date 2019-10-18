@@ -1,12 +1,12 @@
 &params
 ! required parameters
 glacnum = 0 ! case
-z_0 = 0.1 ! mm
-dz1 = 0.1 ! cm
-n_snowgrain_radius = 10 ! index
+z_0 = 0.00005 ! mm
+dz1 = 0.02 ! m
+n_snowgrain_radius = 9 ! index
 runmin = 40 ! index
 runmax = 45 ! index
-runnametext = "CAA-mjh-dissertation-test"
+runnametext = "CAA-jmc-param-test"
 ! optional adjustments to met data
 tempadd = 0.0
 windmult = 1.0

@@ -163,7 +163,7 @@ c===============================================================
 !----------------------------------------------        
         glacnum = -1
         z_0 = 1.0  ! mm
-        dz1 = 1.0  ! cm
+        dz1 = 1.0  ! cm (JMC: this is actually in meters!)
         n_snowgrain_radius = 10  ! index
         runmin = -1
         runmax = -1
