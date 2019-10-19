@@ -465,11 +465,12 @@
     write(c_z_0,'(f9.7)') z_0
     write(c_deltaz1,'(f6.4)') deltaz(1)
     i=strlen(runnametext)
-    ! runname = glaccode//'_'//runnametext(1:i)//'_'//c_z_0//'_'// &
-          ! c_deltaz1//'_'//c_snowgrain_radius ! Changed by JMC
-    ! runname = glaccode//'_'//runnametext(1:i)//'_'// sys_date 
-    ! Added by JMC
-    runname = runnametext(1:i) ! Added by JMC
+    
+    runname = glaccode//'_'//runnametext(1:i)//'_'//c_z_0//'_'// &
+            c_deltaz1//'_'//c_snowgrain_radius ! Changed by JMC
+    
+    ! runname = glaccode//'_'//runnametext(1:i)//'_'// sys_date ! Added by JMC
+    ! runname = runnametext(1:i) ! Added by JMC
     
     ! DOS shell command
     i=strlen(runname)
