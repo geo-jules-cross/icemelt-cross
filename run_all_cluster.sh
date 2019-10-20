@@ -18,7 +18,7 @@ module purge
 module load gcc-7.2.0
 
 # compile ICEMELT
-gfortran -g -o ./icemelt ./icemelt_cross_v04.f95
+gfortran -g -o ./icemelt ./icemelt_cross_v05.f95
 
 ### run ICEMELT
 
