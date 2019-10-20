@@ -1,4 +1,4 @@
-c icemelt.f
+c icemelt_8hr_Qc_spatial_xy_mc_drain.f
 
 c This FORTRAN code simulates the temperature within snow and ice
 c   in response to the surface energy balance and penetration of

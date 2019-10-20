@@ -18,7 +18,7 @@ module purge
 module load gcc-7.2.0
 
 # compile ICEMELT
-gfortran -g -o ./icemelt-mjh ./icemelt_8hr_Qc_spatial_xy_mc_drain.f
+gfortran -g -o ./icemelt-mjh ./icemelt_mjh.f
 
 ### run ICEMELT
 

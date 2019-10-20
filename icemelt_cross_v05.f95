@@ -99,13 +99,9 @@
     integer :: strlen
     integer stnx(8),stny(8),glacnum
     real xdur
-    ! real xmmdata(6,185000),xstndata(6,185000),xpadata(2,185000) ! Changed by JMC
     real xmmdata(6,175000),xstndata(6,175000),xpadata(2,175000)
-    !real day_melt_abl_out(7,8000) ! Changed by JMC from line below
     real day_melt_abl_out(7,7000) 
-    ! real day_melt_abl_out(3,7000) 
     integer i2,j2,iarraypos
-    ! real xdataout(30,185000),subout(100) ! Changed by JMC
     real xdataout(30,175000),subout(100)
     double precision totalheat,totalheat2
     character*(80) nlfname
@@ -373,37 +369,6 @@
         2016, 189192, &
         2017, 197952, &
         2018, 206712/
-
-! (1994 starts at 1994/1/1/1) - this is the new file by JMC
-    ! data immstart / &
-    !     1991, -9999, &
-    !     1992, -9999, &
-    !     1993, -9999, &
-    !     1994, 4368, &
-    !     1995, 13128, &
-    !     1996, 21912, &
-    !     1997, 30672, &
-    !     1998, 39432, &
-    !     1999, 48192, &
-    !     2000, 56976, &
-    !     2001, 65736, &
-    !     2002, 74496, &
-    !     2003, 83256, &
-    !     2004, 92040, &
-    !     2005, 100800, &
-    !     2006, 109560, &
-    !     2007, 118320, &
-    !     2008, 127104, &
-    !     2009, 135864, &
-    !     2010, 144624, &
-    !     2011, 153384, &
-    !     2012, 162168, &
-    !     2013, 170928, &
-    !     2014, 179688, &
-    !     2015, 188448, &
-    !     2016, 197232, &
-    !     2017, 205992, &
-    !     2018, 214752/
 
     immoffset=immstart(2,i_yearstart-1990)
 !    immoffset=1
