@@ -14,9 +14,7 @@ albedo_surface = 0.0
 albedo_offset = 0.0
 albedo_mult = 0.0
 ! number of time steps to run
-! maxiter=7304
 maxiter = 6425
-! maxiter = 2
 ! set start year
 yeararg = "1995"
 /
