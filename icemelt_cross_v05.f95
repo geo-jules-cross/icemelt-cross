@@ -678,19 +678,20 @@
     ! Open albedo file
         open (33,file=albedo_file,form='formatted')
 
-!---------------------------------------------------------------------
-! End Albedo Section
-!---------------------------------------------------------------------
 
-! read off albedo file until we reach the start date
+        ! read off albedo file until we reach the start date
         do i=1,immoffset-1
             if (mod(i,24).eq.1) read (33,*) junk1,junk2,junk3,xjunk4
         enddo
 
+!---------------------------------------------------------------------
+! End Albedo Section
+!---------------------------------------------------------------------
+
 ! Read entire Pa file
         Pa_file = './input/hoe_pa.bin'
-!    open (36,file=Pa_file,access='direct',form='unformatted',
-!     &  recl=iwordlength*2)
+!       open (36,file=Pa_file,access='direct',form='unformatted',
+!       & recl=iwordlength*2)
         open (36,file=Pa_file,access='direct',form='unformatted', &
           recl=iwordlength*2*(immoffset-1+maxiter*24))
         read (36,rec=1) ((xpadata(i2,j2),i2=1,2) &
@@ -878,6 +879,7 @@
                 ! Albedo Offset and Percent Adjustment for the Day (constant for each day)
                 read (33,*) junk1,junk2,junk3,albedo
                 albedo = albedo + albedo_surface + albedo_offset + (albedo*albedo_mult)
+                print *,'DAILY ALBEDO =',albedo
 
 !=====================================================================
 !            START HOURLY TIMESTEP LOOP
@@ -987,11 +989,12 @@
 
                     totalheat2=totalheat
                     totalheat=dble(0.0)
+                    
                     do mmm=1,JJ
-                    totalheat=totalheat+dble((T_old(mmm)-270.0)* &
-                         dble(Cp_snow)*dble(dy_p(mmm))*dble(ro_snow))
-                    totalheat=totalheat+dble(water_frac(mmm))*dble(dy_p(mmm))* &
-                         dble(ro_snow)*dble(xLf)
+                        totalheat=totalheat+dble((T_old(mmm)-270.0)* &
+                             dble(Cp_snow)*dble(dy_p(mmm))*dble(ro_snow))
+                        totalheat=totalheat+dble(water_frac(mmm))*dble(dy_p(mmm))* &
+                             dble(ro_snow)*dble(xLf)
                     enddo
 
 !    print *,'day,hr',iter.hr,net heat,internal,internal change,Qc,Qsip
@@ -1004,19 +1007,19 @@
 
 
                     do i=1,JJ !update for next time step
-                    water_frac_old(i) = water_frac(i)
+                        water_frac_old(i) = water_frac(i)
                     enddo
 
 ! Calculate drainage amount
                     subdrain=0.0 !total amount of water we've removed for the column
                     do i=1,JJ
-                    if (water_frac(i).gt.drainthresh) then
-                        subdrain=subdrain+(water_frac(i)-drainthresh)*dy_p(i)*100.0 &
-                              *ro_snow/ro_water !in cm weq
+                        if (water_frac(i).gt.drainthresh) then
+                            subdrain=subdrain+(water_frac(i)-drainthresh)*dy_p(i)*100.0 &
+                                  *ro_snow/ro_water !in cm weq
 ! adjust density profile by the amount that drained from each depth
-                    endofsummerdensity(i)=endofsummerdensity(i) - &
-                          (water_frac(i)-drainthresh) * ro_snow
-                    endif
+                        endofsummerdensity(i)=endofsummerdensity(i) - &
+                              (water_frac(i)-drainthresh) * ro_snow
+                        endif
                     enddo
 
 ! calcs for daily total
@@ -1154,8 +1157,8 @@
 
 ! Write out final daily data as binary
 ! just write the 3 ablation quantities in cm
+! JMC: To output 7 daily array values
         write(20,rec=1) ((day_melt_abl_out(i2,j2),i2=1,7),j2=1,maxiter) 
-    !JMC: To output 7 daily array values
 
 ! write a final end of summer density
         write(66,'(30f8.1)') (endofsummerdensity(i),i=1,30)
@@ -1165,7 +1168,7 @@
         close (19)
         close (20)
         close (21)
-    !    close (31)
+    !    close (31) ! rewind 31 only if ascii
         close (33)
         close (36)
         close (37)
