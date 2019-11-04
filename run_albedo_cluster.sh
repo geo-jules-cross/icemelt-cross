@@ -5,7 +5,7 @@
 #SBATCH --job-name=icemelt
 #SBATCH --partition medium
 #SBATCH --ntasks=20
-#SBATCH --output=logs/$SLURM_JOB_NAME-%A_%a.log
+#SBATCH --output=logs/icemelt-%A_%a.log
 #SBATCH --array=1-2
 #
 # mail alert at start, end and abortion of execution
