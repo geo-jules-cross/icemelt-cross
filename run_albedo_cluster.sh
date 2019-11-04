@@ -5,7 +5,7 @@
 #SBATCH --job-name=icemelt
 #SBATCH --partition medium
 #SBATCH --ntasks=20
-#SBATCH --output=logs/name-%A_%a.log
+#SBATCH --output=logs/$SLURM_JOB_NAME-%A_%a.log
 #SBATCH --array=1-2
 #
 # mail alert at start, end and abortion of execution
@@ -27,13 +27,13 @@ gfortran -g -o ./icemelt ./icemelt_cross_v05.f95
 NL="./namelist/namelist.input"
 CMD="./icemelt"
 
-# set parameter values and setup jobs (5x4 on one 5x4 on another)
+# set parameter values and setup jobs (e.g. 5x4 on one 5x4 on another)
 if [ $SLURM_ARRAY_TASK_ID  == 1 ] 
     then
-    ALBEDO=(0.0 -0.07 -0.10) # 5 parameters to optimize running time
+    ALBEDO=(-0.07) # up to 5 parameter adjustments to optimize running time
 elif [ $SLURM_ARRAY_TASK_ID  == 2 ] 
     then
-    ALBEDO=(-0.20 -0.25) # increase array to add more
+    ALBEDO=(0.07) # increase array to add more
     fi
 
 # loops over parameters specific to node
@@ -62,7 +62,7 @@ do
     echo "setup & run basin wall"
     NL_bwall=$NL.bwall.$SLURM_ARRAY_TASK_ID
     cp $NL $NL_bwall
-    sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1.0/" $NL_bwall
+    sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.001/" $NL_bwall
     sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 0.5/" $NL_bwall
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.67/" $NL_bwall
     sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.065/"
@@ -76,7 +76,7 @@ do
     echo "setup & run basin floor"
     NL_bfloor=$NL.bfloor.$SLURM_ARRAY_TASK_ID
     cp $NL $NL_bfloor
-    sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1.0/" $NL_bfloor
+    sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.001/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 1.5/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.33/" $NL_bfloor
     sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.17/" $NL_bfloor
@@ -91,7 +91,7 @@ do
     NL_cliff=$NL.cliff.$SLURM_ARRAY_TASK_ID
     cp $NL $NL_cliff
     sed -i.SEDBACKUP "s/.*glacnum.*/glacnum = -1/" $NL_cliff
-    sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.1/" $NL_cliff
+    sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.0001/" $NL_cliff
     sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb-cliff\"/" $NL_cliff
 
     # run cliff
