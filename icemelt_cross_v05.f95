@@ -975,6 +975,7 @@
                         ! if (Qsi.gt.50.0) then
                         !     Tair = Tair + (tempadd + tempadd_adj)
                         ! endif
+                    
                     ! Old way
                         windspd = windspd * windmult
                         if (Qsi.gt.50.0) then
