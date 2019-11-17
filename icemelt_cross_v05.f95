@@ -646,9 +646,9 @@
                         albedo_file = './input/combo_alb.HOD'
                     case (63, 64, 65, 66)                       ! Crescent Glacier
                         albedo_file = './input/combo_alb.CRS'
-                    case (61, 71, 72, 73, 74)                   ! Commonwealth Glacier
+                    case (71, 72, 73, 74)                       ! Commonwealth Glacier
                         albedo_file = './input/combo_alb.COH'
-                    case (62, 81, 82)                           ! Wales group of glaciers
+                    case (61, 62, 81, 82)                       ! Wales group of glaciers
                         albedo_file = './input/combo_alb.WLS'
                         print *,'ALBEDO set for WLS'
                 end SELECT
