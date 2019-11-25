@@ -621,37 +621,59 @@
 
                 ! Using station average albedo as per MJH 2016
                 ! albedo_file = './input/9515_alb.AVG'
-                         
-                ! Using combo MODIS and station albedo, Articel Cross & Fountain 2019
+                
+                ! Using New MODIS and albedo, Update to Thesis Cross 2019
                 SELECT CASE (runcell(iii))
-                    case (10, 15, 19)                           ! Taylor Glacier
-                        albedo_file = './input/combo_alb.TAR'
+                    case (10,11,15,16,19,25)                    ! Taylor group
+                        albedo_file = './input/MODIS_alb_new.TAR'
                         print *,'ALBEDO set for TAR'
-                    case (11, 16, 25)                           ! Borns group of glaciers
-                        albedo_file = './input/combo_alb.BNS'
-                    case (21)                                   ! LaCroix Glacier
-                        albedo_file = './input/combo_alb.LCX'
-                    case (26)                                   ! Matterhorn Glacier
-                        albedo_file = './input/combo_alb.MTN'
+                    case (24,22,23,36,37,38,39)                 ! Hughes/ WKH group
+                        albedo_file = './input/MODIS_alb_new.HUS'
                     case (29)                                   ! Rhone Glacier
-                        albedo_file = './input/combo_alb.RHO'
-                    case (22, 24, 23, 36, 37, 38, 39)           ! Sollas group of glaciers
-                        albedo_file = './input/combo_alb.SLS'
-                    case (31, 32, 33, 34)                       ! Suess Glacier
-                        albedo_file = './input/combo_alb.SUS'
-                    case (41, 42, 43, 44, 45)                   ! Canada Glacier
-                        albedo_file = './input/combo_alb.CAA'
+                        albedo_file = './input/MODIS_alb_new.RHO'
+                    case (26)                                   ! Matterhorn Glacier
+                        albedo_file = './input/MODIS_alb_new.MTN'
+                    case (21)                                   ! LaCroix Glacier
+                        albedo_file = './input/MODIS_alb_new.LCX'
+                    case (31,32,33,34)                          ! Suess Glacier
+                        albedo_file = './input/MODIS_alb_new.SUS'
+                    case (41,42,43,44,45,61)                    ! Canada Glacier
+                        albedo_file = './input/MODIS_alb_new.CAA'
                         print *,'ALBEDO set for CAA'
-                    case (50)                                   ! Howard Glacier
-                        albedo_file = './input/combo_alb.HOD'
-                    case (63, 64, 65, 66)                       ! Crescent Glacier
-                        albedo_file = './input/combo_alb.CRS'
-                    case (71, 72, 73, 74)                       ! Commonwealth Glacier
-                        albedo_file = './input/combo_alb.COH'
-                    case (61, 62, 81, 82)                       ! Wales group of glaciers
-                        albedo_file = './input/combo_alb.WLS'
-                        print *,'ALBEDO set for WLS'
+                    case (71,72,73,74)                          ! Commonwealth Glacier
+                        albedo_file = './input/MODIS_alb_new.COH'
+                        print *,'ALBEDO set for COH'
+                    case (50,62,63,64,65,66,81,82)              ! Howard/ EKH group
+                        albedo_file = './input/MODIS_alb_new.HOD'
+                        print *,'ALBEDO set for HOD'
                 end SELECT
+
+                ! Using combo MODIS and station albedo, Article Cross & Fountain 2019
+                ! SELECT CASE (runcell(iii))
+                !     case (10,11,15,16,19,25)               ! Taylor group of glaciers
+                !         albedo_file = './input/combo_new_alb.TAR'
+                !         print *,'ALBEDO set for TAR'
+                !     case (21)                                   ! LaCroix Glacier
+                !         albedo_file = './input/combo_alb.LCX'
+                !     case (26)                                   ! Matterhorn Glacier
+                !         albedo_file = './input/combo_alb.MTN'
+                !     case (29)                                   ! Rhone Glacier
+                !         albedo_file = './input/combo_alb.RHO'
+                !     case (22, 24, 23, 36, 37, 38, 39)           ! Hughes group of glaciers
+                !         albedo_file = './input/combo_alb.SLS'
+                !     case (31, 32, 33, 34)                       ! Suess Glacier
+                !         albedo_file = './input/combo_alb.SUS'
+                !     case (41, 42, 43, 44, 45)                   ! Canada Glacier
+                !         albedo_file = './input/combo_alb.CAA'
+                !         print *,'ALBEDO set for CAA'
+                !     case (50)                                   ! Howard Glacier
+                !         albedo_file = './input/combo_alb.HOD'
+                !     case (63, 64, 65, 66, 61, 62, 81, 82)       ! Crescent & Wales group of glaciers
+                !         albedo_file = './input/combo_alb.CRS'
+                !     case (71, 72, 73, 74)                       ! Commonwealth Glacier
+                !         albedo_file = './input/combo_alb.COH'
+                !         print *,'ALBEDO set for COH'
+                ! end SELECT
             
             ! Single Station Runs:
             case (-1)                                           ! Cliff
