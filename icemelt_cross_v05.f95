@@ -622,7 +622,7 @@
                 ! Using station average albedo as per MJH 2016
                 ! albedo_file = './input/9515_alb.AVG'
                 
-                ! Using New MODIS and albedo, Update to Thesis Cross 2019
+                ! Using new MODIS where available, Update to Thesis Cross 2019
                 ! SELECT CASE (runcell(iii))
                 !     case (10,11,15,16,19,25)                    ! Taylor group
                 !         albedo_file = './input/MODIS_alb_new.TAR'
@@ -648,30 +648,19 @@
                 !         print *,'ALBEDO set for HOD'
                 ! end SELECT
 
-                ! Using combo MODIS and station albedo, Article Cross & Fountain 2019
+                ! Using combo new MODIS and station albedo, Article Cross & Fountain 2019
                 SELECT CASE (runcell(iii))
-                    case (10,11,15,16,19,25)                    ! Taylor group
+                    case (10,11,15,16,19,25,21,26,29)           ! Taylor group
                         albedo_file = './input/combo_alb_new.TAR'
                         print *,'ALBEDO set for TAR'
                     case (24,22,23,36,37,38,39)                 ! Hughes/ WKH group
-                        albedo_file = './input/combo_alb_new.HUS'
-                    case (29)                                   ! Rhone Glacier
-                        albedo_file = './input/combo_alb_new.RHO'
-                    case (26)                                   ! Matterhorn Glacier
-                        albedo_file = './input/combo_alb_new.MTN'
-                    case (21)                                   ! LaCroix Glacier
-                        albedo_file = './input/combo_alb_new.LCX'
-                    case (31,32,33,34)                          ! Suess Glacier
-                        albedo_file = './input/combo_alb_new.SUS'
-                    case (41,42,43,44,45,61)                    ! Canada Glacier
+                        albedo_file = './input/combo_alb_new.TAR'
+                    case (31,32,33,34,41,42,43,44,45,61)        ! Canada & Suess glaciers
                         albedo_file = './input/combo_alb_new.CAA'
                         print *,'ALBEDO set for CAA'
-                    case (71,72,73,74)                          ! Commonwealth Glacier
+                    case (71,72,73,74,50,62,63,64,65,66,81,82)  ! Fryxell Basin
                         albedo_file = './input/combo_alb_new.COH'
                         print *,'ALBEDO set for COH'
-                    case (50,62,63,64,65,66,81,82)              ! Howard/ EKH group
-                        albedo_file = './input/combo_alb_new.HOD'
-                        print *,'ALBEDO set for HOD'
                 end SELECT
             
             ! Single Station Runs:
