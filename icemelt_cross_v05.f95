@@ -655,10 +655,10 @@
                         print *,'ALBEDO set for TAR'
                     case (24,22,23,36,37,38,39)                 ! Hughes/ WKH group
                         albedo_file = './input/combo_alb_new.TAR'
-                    case (31,32,33,34,41,42,43,44,45,61)        ! Canada & Suess glaciers
+                    case (31,32,33,34,41,42,43,44,45,50,61,66)  ! Canada, Suess, Howard & Crescent glaciers
                         albedo_file = './input/combo_alb_new.CAA'
                         print *,'ALBEDO set for CAA'
-                    case (71,72,73,74,50,62,63,64,65,66,81,82)  ! Fryxell Basin
+                    case (71,72,73,74,62,63,64,65,81,82)        ! Fryxell Basin
                         albedo_file = './input/combo_alb_new.COH'
                         print *,'ALBEDO set for COH'
                 end SELECT
