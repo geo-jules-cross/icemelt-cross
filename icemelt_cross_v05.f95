@@ -652,15 +652,17 @@
                 SELECT CASE (runcell(iii))
                     case (10,11,15,16,19,25,21,26,29)               ! Taylor group
                         albedo_file = './input/combo_alb_new.TAR'
-                        print *,'ALBEDO set for TAR'
+                        print *,'ALBEDO set for TAR/Bonney Basin'
                     case (24,22,23,36,37,38,39)                     ! Hughes/ WKH group
                         albedo_file = './input/combo_alb_new.TAR'
-                    case (31,32,33,34,41,42,43,44,45)               ! Canada & Suess glaciers
+                    case (31,32,33,34,41,45)                        ! Canada & Suess glaciers
                         albedo_file = './input/combo_alb_new.CAA'
-                        print *,'ALBEDO set for CAA'
+                        print *,'ALBEDO set for CAA/Hoare Basin'
+                    case (42,43,44)                                 ! Middle Canada Basins
+                        albedo_file = './input/9513_alb.AVG'
                     case (71,72,73,74,62,63,64,65,81,82,66,50,61)   ! Fryxell Basin
                         albedo_file = './input/combo_alb_new.COH'
-                        print *,'ALBEDO set for COH'
+                        print *,'ALBEDO set for COH/Fryxell Basin'
                 end SELECT
             
             ! Single Station Runs:
