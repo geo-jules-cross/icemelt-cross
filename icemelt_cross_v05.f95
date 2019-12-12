@@ -585,8 +585,8 @@
         if (iscliff.eq.1) then
         mm_met_file='./input/micromet_cliff/' //   c_i // c_j // '.bin'
         else
-        ! mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
         endif
 
         open (31,file=mm_met_file,access='direct',form='unformatted', &
@@ -621,7 +621,7 @@
                 ! end SELECT
 
                 ! Using station average albedo as per MJH 2016
-                albedo_file = './input/albedo/9515_alb.AVG'
+                ! albedo_file = './input/albedo/9515_alb.AVG'
                 
                 ! Using new MODIS where available, Update to Thesis Cross 2019
                 ! SELECT CASE (runcell(iii))
@@ -650,19 +650,19 @@
                 ! end SELECT
 
                 ! Using combo new MODIS and station albedo, Article Cross & Fountain 2019
-                ! SELECT CASE (runcell(iii))
-                !     case (10,11,15,16,19,25,21,26,29)           ! Taylor group
-                !         albedo_file = './input/albedo/combo_alb_new.TAR'
-                !         print *,'ALBEDO set for TAR/Bonney Basin'
-                !     case (24,22,23,36,37,38,39)                 ! Hughes/ WKH group
-                !         albedo_file = './input/albedo/combo_alb_new.TAR'
-                !     case (31,32,33,34,41,42,43,44,45,61)        ! Canada & Suess glaciers
-                !         albedo_file = './input/albedo/combo_alb_new.CAA'
-                !         print *,'ALBEDO set for CAA/Hoare Basin'
-                !     case (71,72,73,74,62,63,64,65,81,82,66,50)  ! Fryxell Basin
-                !         albedo_file = './input/albedo/combo_alb_new.COH'
-                !         print *,'ALBEDO set for COH/Fryxell Basin'
-                ! end SELECT
+                SELECT CASE (runcell(iii))
+                    case (10,11,15,16,19,25,21,26,29)           ! Taylor group
+                        albedo_file = './input/albedo/combo_alb_new.TAR'
+                        print *,'ALBEDO set for TAR/Bonney Basin'
+                    case (24,22,23,36,37,38,39)                 ! Hughes/ WKH group
+                        albedo_file = './input/albedo/combo_alb_new.TAR'
+                    case (31,32,33,34,41,42,43,44,45,61)        ! Canada & Suess glaciers
+                        albedo_file = './input/albedo/combo_alb_new.CAA'
+                        print *,'ALBEDO set for CAA/Hoare Basin'
+                    case (71,72,73,74,62,63,64,65,81,82,66,50)  ! Fryxell Basin
+                        albedo_file = './input/albedo/combo_alb_new.COH'
+                        print *,'ALBEDO set for COH/Fryxell Basin'
+                end SELECT
             
             ! Single Station Runs:
             case (-1)                                               ! Cliff
@@ -703,10 +703,8 @@
 ! Elevation of Lake Hoare station
         elev_ref=77.1
 
-! MJH: I will just use a random icetempinit.txt file from a TAR run
-! it shouldn't vary that much once we get to summer I hope.
-        open (39,file='./input/icetempinit2008good.txt')
 ! Supply the initial conditions.
+        open (39,file='./input/icetempinit2008good.txt')
         do j=1,JJ
             read (39,'(f10.4)') T_old(j)
 ! Shift ice temp column based on mean annual air temp
@@ -830,61 +828,6 @@
                 daymelt = 0.0
                 dayablation = 0.0
                 daysubdrain = 0.0
-
-!---------------------------------------------------------------------
-! Adjustments to Albedo and Roughness (As per JMC Thesis Cross, 2019)
-!---------------------------------------------------------------------        
-                
-                ! Adjustments to smooth surfaces after 2008
-                ! if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.eq.0.0)) then
-                !     SELECT CASE (runcell(iii))
-                !         case (10,11,15,16,19,29)    ! Taylor, Rhone and Borns Glaciers
-                !             albedo_mult = -0.30
-                !         case (21,22,23,24,25,26)    ! LaCroix and Matterhorn Glaciers
-                !             albedo_mult = -0.30
-                !         case (36,37,38,39)          ! Sollas group of glaciers
-                !             albedo_mult = -0.30
-                !         case (31,32,33,34)          ! Suess Glacier
-                !             albedo_mult = -0.30
-                !         case (41,45)                ! Outer Canada Glacier
-                !             albedo_mult = -0.30
-                !         case (42,43,44)             ! Inner Canada Glacier
-                !             albedo_mult = 0.0
-                !         case (50,63,64,65,66)       ! Howard and Crescent Glaciers
-                !             albedo_mult = -0.30
-                !             z_0 = 1.0 ! mm
-                !         case (61,71,72,73,74)       ! Commonwealth Glacier
-                !             albedo_mult = -0.30
-                !             z_0 = 1.0 ! mm
-                !         case (62, 81, 82)           ! Wales group of glaciers
-                !             albedo_mult = -0.30
-                !             z_0 = 1.0 ! mm
-                !     end SELECT
-                ! ! ! No adjust for inner/lower basins on Canada (e.g. Green)
-                ! ! SELECT CASE (runcell(iii))
-                ! !     case (42,43,44)
-                ! !             albedo_mult = 0.0
-                ! !             z_0 = z_0_base
-                ! ! end SELECT
-                ! else
-                !     ! Reset parameters to base if not
-                !     z_0 = z_0_base
-                !     albedo_mult = albedo_mult_base
-                !     albedo_offset = albedo_offset_base
-                ! endif
-
-!---------------------------------------------------------------------
-! Adjustments to Basin Wind Speed and Temperature (JMC)
-!--------------------------------------------------------------------- 
-
-                ! Adjustments to basins after 2008
-                ! if ((iter.gt.4749).and.(iscliff.eq.0).and.(albedo_surface.lt.0.0)) then
-                !     windmult_adj = 0.1
-                !     tempadd_adj = 0.1
-                ! else
-                !     windmult_adj = 0.0
-                !     tempadd_adj = 0.0
-                ! endif
 
 !---------------------------------------------------------------------
 ! Calculate daily albedo
