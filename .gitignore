@@ -4,8 +4,8 @@
 desktop.ini
 icemelt.sublime-project
 icemelt.sublime-workspace
-icemelt
-icemelt-mjh
+#icemelt
+#icemelt-mjh
 
 # exclude these directories
 output/*
