@@ -502,11 +502,11 @@
         glacier_cells_file='./input/tv_landcovermetstake.txt'
     else
         if (iscliff.eq.1) then
-            ! glacier_cells_file='./input/tv_basins_cliff.txt'
-            glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
+            glacier_cells_file='./input/tv_basins_cliff.txt'
+            ! glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
-            ! glacier_cells_file='./input/tv_basins_surface.txt'
-            glacier_cells_file='./input/tv_basins_surface_jmc.txt'
+            glacier_cells_file='./input/tv_basins_surface.txt'
+            ! glacier_cells_file='./input/tv_basins_surface_jmc.txt'
         endif
     endif
     
@@ -585,8 +585,8 @@
         if (iscliff.eq.1) then
         mm_met_file='./input/micromet_cliff/' //   c_i // c_j // '.bin'
         else
-        mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
-        ! mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
+        !mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
         endif
 
         open (31,file=mm_met_file,access='direct',form='unformatted', &
@@ -621,7 +621,7 @@
                 ! end SELECT
 
                 ! Using station average albedo as per MJH 2016
-                ! albedo_file = './input/9515_alb.AVG'
+                albedo_file = './input/9515_alb.AVG'
                 
                 ! Using new MODIS where available, Update to Thesis Cross 2019
                 ! SELECT CASE (runcell(iii))
@@ -650,19 +650,19 @@
                 ! end SELECT
 
                 ! Using combo new MODIS and station albedo, Article Cross & Fountain 2019
-                SELECT CASE (runcell(iii))
-                    case (10,11,15,16,19,25,21,26,29)           ! Taylor group
-                        albedo_file = './input/combo_alb_new.TAR'
-                        print *,'ALBEDO set for TAR/Bonney Basin'
-                    case (24,22,23,36,37,38,39)                 ! Hughes/ WKH group
-                        albedo_file = './input/combo_alb_new.TAR'
-                    case (31,32,33,34,41,42,43,44,45,61)        ! Canada & Suess glaciers
-                        albedo_file = './input/combo_alb_new.CAA'
-                        print *,'ALBEDO set for CAA/Hoare Basin'
-                    case (71,72,73,74,62,63,64,65,81,82,66,50)  ! Fryxell Basin
-                        albedo_file = './input/combo_alb_new.COH'
-                        print *,'ALBEDO set for COH/Fryxell Basin'
-                end SELECT
+                ! SELECT CASE (runcell(iii))
+                !     case (10,11,15,16,19,25,21,26,29)           ! Taylor group
+                !         albedo_file = './input/combo_alb_new.TAR'
+                !         print *,'ALBEDO set for TAR/Bonney Basin'
+                !     case (24,22,23,36,37,38,39)                 ! Hughes/ WKH group
+                !         albedo_file = './input/combo_alb_new.TAR'
+                !     case (31,32,33,34,41,42,43,44,45,61)        ! Canada & Suess glaciers
+                !         albedo_file = './input/combo_alb_new.CAA'
+                !         print *,'ALBEDO set for CAA/Hoare Basin'
+                !     case (71,72,73,74,62,63,64,65,81,82,66,50)  ! Fryxell Basin
+                !         albedo_file = './input/combo_alb_new.COH'
+                !         print *,'ALBEDO set for COH/Fryxell Basin'
+                ! end SELECT
             
             ! Single Station Runs:
             case (-1)                                               ! Cliff
