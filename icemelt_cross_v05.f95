@@ -502,11 +502,11 @@
         glacier_cells_file='./input/tv_landcovermetstake.txt'
     else
         if (iscliff.eq.1) then
-            glacier_cells_file='./input/tv_basins_cliff.txt'
-            ! glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
+            ! glacier_cells_file='./input/tv_basins_cliff.txt'
+            glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
-            glacier_cells_file='./input/tv_basins_surface.txt'
-            ! glacier_cells_file='./input/tv_basins_surface_jmc.txt'
+            ! glacier_cells_file='./input/tv_basins_surface.txt'
+            glacier_cells_file='./input/tv_basins_surface_jmc.txt'
         endif
     endif
     
@@ -584,6 +584,7 @@
 ! Note the wordlength (4) is dependent on compiler settings!
         if (iscliff.eq.1) then
         mm_met_file='./input/micromet_cliff/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_cliff_jmc/' //   c_i // c_j // '.bin'
         else
         ! mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
         mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'

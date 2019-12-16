@@ -4,9 +4,9 @@ glacnum = 0 ! case
 z_0 = 0.00005 ! m
 dz1 = 0.002 ! m
 n_snowgrain_radius = 9 ! index
-runmin = 10 ! index
+runmin = 50 ! index
 runmax = 82 ! index
-runnametext = "micromet-test"
+runnametext = "micromet-test1"
 ! optional adjustments to met data
 tempadd = 0.0
 windmult = 1.0
