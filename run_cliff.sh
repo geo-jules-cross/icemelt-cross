@@ -34,7 +34,6 @@ NL_cliff=$NL.cliff.$SLURM_ARRAY_TASK_ID
 cp $NL $NL_cliff
 sed -i.SEDBACKUP "s/.*glacnum.*/glacnum = -1/" $NL_cliff
 sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.0001/" $NL_cliff
-sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname_alb-cliff\"/" $NL_cliff
 
 # run cliff
 $CMD $NL_cliff &
