@@ -6,13 +6,13 @@ dz1 = 0.002 ! m
 n_snowgrain_radius = 9 ! index
 runmin = 10 ! index
 runmax = 82 ! index
-runnametext = "base-modis"
+runnametext = "base-modis70"
 ! optional adjustments to met data
 tempadd = 0.0
 windmult = 1.0
 albedo_surface = 0.0
 albedo_offset = 0.0
-albedo_mult = 0.0
+albedo_mult = 0.07
 ! number of time steps to run
 maxiter = 6425
 ! set start year
