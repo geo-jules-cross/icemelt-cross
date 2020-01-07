@@ -30,12 +30,14 @@ runname=`grep runnametext $NL | cut -f 2 -d "\""`
 echo using runnametext=$runname
 
 echo "setup & run cliff"
-NL_cliff=$NL.cliff.$SLURM_ARRAY_TASK_ID
-cp $NL $NL_cliff
-sed -i.SEDBACKUP "s/.*glacnum.*/glacnum = -1/" $NL_cliff
-sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.0001/" $NL_cliff
+
+cp $NL $NL.cliff
+sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.0001/" $NL.cliff
+sed -i.SEDBACKUP "s/.*glacnum.*/glacnum = -1/" $NL.cliff
+sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname-cliff\"/" $NL.cliff
+sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL.cliff
 
 # run cliff
-$CMD $NL_cliff &
+$CMD $NL.cliff &
 
 wait
