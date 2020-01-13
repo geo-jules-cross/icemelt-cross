@@ -3,7 +3,7 @@
 #
 # SLURM parallel commands
 #SBATCH --job-name=icemelt
-#SBATCH --partition medium
+#SBATCH --partition allcpu
 #SBATCH --ntasks=4
 #SBATCH --output=logs/icemelt-%A.log
 #
