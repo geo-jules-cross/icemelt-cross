@@ -918,10 +918,10 @@
                     ! Qli=Qli+0.0
 
                     ! JMC tests
-                    rh = rh*1.25
-                        if (rh.ge.100.0) then
-                            rh = 100.0
-                        endif
+                    ! rh = rh*1.25
+                    !     if (rh.ge.100.0) then
+                    !         rh = 100.0
+                    !     endif
                     ! Increase longwave in to test radiation paradox
                     ! if (runcell(iii).ge.50) then ! Fryxell / Kukri Hills
                     !     Qli=xmmdata(6,iarraypos)+20
