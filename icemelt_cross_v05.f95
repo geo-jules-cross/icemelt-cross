@@ -865,18 +865,6 @@
                     Qsi=xmmdata(5,iarraypos)
                     Qli=xmmdata(6,iarraypos)
 
-! Increase longwave in to test radiation paradox
-                    ! if (runcell(iii).ge.50) then ! Fryxell / Kukri Hills
-                    !     Qli=xmmdata(6,iarraypos)+20
-                    ! else if (runcell(iii).le.50) then ! Up-valley
-                    !     Qli=xmmdata(6,iarraypos)
-                    ! endif
-
-! MJH: Manual sensitivity adjustments here
-                    ! Tair=Tair+0.0
-                    ! windspd=windspd*1.0
-                    ! Qli=Qli+0.0
-
 ! Read Station data and use it if good
 ! If Stn data is bad, then use MM data
                     if ((isstn.eq.1).and.(glacnum.ne.2)) then
@@ -901,10 +889,6 @@
                     endif
 
 ! Calc Pressure using Lk Hoare Pa measurements
-! There are 36 hours in the whole 14 years with Pa missing at LH
-! For those times, just use the previous time step value.
-!        read (36,rec=(immoffset + (iter-1)*24 + hr) )
-!     &        Pa_ref,T_ref
                     Pa_ref=xpadata(1,iarraypos)
                     T_ref=xpadata(2,iarraypos)
                     if ((Pa_ref .gt. 0.0).and.(T_ref .gt. -9000)) then
@@ -912,27 +896,38 @@
                               (-287.04*0.5*(T_ref+Tf + Tair)/gravity) )
                     endif
 
-                    ! Cliff Met adjustments
+                    ! Met adjustments for cliff sub-domain
                     if (((iscliff.eq.1).or.(glacnum.eq.3)).or.(glacnum.eq.6)) then
                         windspd = windspd * cliffwindmult
                         if (Qsi.gt.50.0) then
                             Tair = Tair + clifftempadd
                         endif
                     else                      
-                    
-                    ! Adjustments to wind and temp anywhere else
-                    ! Account for additional adjust JMC
-                        ! windspd = windspd * (windmult + windmult_adj)
-                        ! if (Qsi.gt.50.0) then
-                        !     Tair = Tair + (tempadd + tempadd_adj)
-                        ! endif
-                    
-                    ! Old way
+                    ! Met adjustments to other sub-domains
                         windspd = windspd * windmult
                         if (Qsi.gt.50.0) then
                             Tair = Tair + tempadd
                         endif
                     endif
+
+! Manual met forcing sensitivity adjustments here
+
+                    ! MJH tests
+                    ! Tair=Tair+0.0
+                    ! windspd=windspd*1.0
+                    ! Qli=Qli+0.0
+
+                    ! JMC tests
+                    rh = rh*1.25
+                        if (rh.ge.100.0) then
+                            rh = 100.0
+                        endif
+                    ! Increase longwave in to test radiation paradox
+                    ! if (runcell(iii).ge.50) then ! Fryxell / Kukri Hills
+                    !     Qli=xmmdata(6,iarraypos)+20
+                    ! else if (runcell(iii).le.50) then ! Up-valley
+                    !     Qli=xmmdata(6,iarraypos)
+                    ! endif
 
 !---------------------------------------------------------------------
 ! Call Main Subroutines
