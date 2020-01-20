@@ -37,7 +37,7 @@ CMD="./icemelt"
 #     fi
 
 # set parameter values
-ALBEDO=(-0.10 -0.15 -0.20) # up to 5 parameter adjustments to optimize running time
+ALBEDO=(-0.07 0.0 0.07) # up to 5 parameter adjustments to optimize running time
 
 # loops over parameters specific to node
 for albedo in "${ALBEDO[@]}"

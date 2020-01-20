@@ -5,7 +5,7 @@ z_0 = 0.00005 ! m
 dz1 = 0.002 ! m
 n_snowgrain_radius = 9 ! index
 runmin = 10 ! index
-runmax = 40 ! index
+runmax = 82 ! index
 runnametext = "alb-adj"
 ! optional adjustments to met data
 tempadd = 0.0
