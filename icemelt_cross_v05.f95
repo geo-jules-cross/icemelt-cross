@@ -626,7 +626,7 @@
                 ! end SELECT
 
                 ! Using station average albedo as per MJH 2016
-                albedo_file = './input/9515_alb.AVG'
+                ! albedo_file = './input/9515_alb.AVG'
                 
                 ! Using new MODIS where available, Update to Thesis Cross 2019
                 ! SELECT CASE (runcell(iii))
