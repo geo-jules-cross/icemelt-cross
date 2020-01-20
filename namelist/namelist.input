@@ -4,15 +4,15 @@ glacnum = 0 ! case
 z_0 = 0.00005 ! m
 dz1 = 0.002 ! m
 n_snowgrain_radius = 9 ! index
-runmin = 50 ! index
-runmax = 82 ! index
-runnametext = "alb-adj-20"
+runmin = 10 ! index
+runmax = 40 ! index
+runnametext = "wind-adj-125"
 ! optional adjustments to met data
-tempadd = 2.0
-windmult = 1.0
+tempadd = 0.0
+windmult = 1.25
 albedo_surface = 0.0
 albedo_offset = 0.0
-albedo_mult = -0.20
+albedo_mult = 0.0
 ! number of time steps to run
 maxiter = 6425
 ! set start year
