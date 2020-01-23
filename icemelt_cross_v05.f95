@@ -136,44 +136,44 @@
     endif
 
 ! Otherwise run default parameters below
-    glacnum = 0 ! spatial run
-    z_0 = 1.0  ! m
-    dz1 = 1.0  ! m
-    n_snowgrain_radius = 10  ! index
-    runmin = 10
-    runmax = 82
+    glacnum             = 0 ! spatial run
+    z_0                 = 1.0  ! m
+    dz1                 = 1.0  ! m
+    n_snowgrain_radius  = 10  ! index
+    runmin              = 10
+    runmax              = 82
     ! Parameters runmin and runmax are necessary for a spatial run
     ! they refer to the basins input grid and indicate what range
     ! of basin indices (inclusive) to run, which allows a run for
     ! just a particular basin or glacier (range 10-82)
 
-    runnametext = "DEFAULT_NAME"
+    runnametext         = "DEFAULT_NAME"
 
-    drainthresh = 0.10  
+    drainthresh         = 0.10  
     ! the water frac at which water is removed from subsurface
 
 ! Adjustments to turn on or off for adjustments to general met data
-    tempadd         = 0.0   ! FLOOR=1.5   WALL=0.5  
+    tempadd             = 0.0   ! FLOOR=1.5   WALL=0.5  
     ! Temperature added to measured temperature.
-    windmult        = 1.00  ! FLOOR=0.33  WALL=0.67 
+    windmult            = 1.00  ! FLOOR=0.33  WALL=0.67 
     ! Wind multiplier on measured wind speed.
-    albedo_surface  = 0.0   ! FLOOR=-0.17  WALL=-0.065 
+    albedo_surface      = 0.0   ! FLOOR=-0.17  WALL=-0.065 
     ! Albedo adjustment applied to specific surface type
-    albedo_offset   = 0.0  
+    albedo_offset       = 0.0  
     ! Albedo offset added to measured albedo.
-    albedo_mult     = 0.0
+    albedo_mult         = 0.0
     ! Percent change to albedo. JMC: added
 
 ! Define maxiter, the number of time steps in the model run.
 ! In the hourly model it's the number of days, hours are handled later
 
 ! run the model from 1995/7/1 to 2013/2/01 = 6425
-    maxiter=6425
+    maxiter             = 6425
 ! run the model from 1995/7/1 to 2015/6/30 = 7304
-!    maxiter=7304
+!    maxiter            =7 304
 
 ! Set range of years to run in the model (determine correct timesteps)
-    yeararg='1995'
+    yeararg             = '1995'
 
 !---------------------------------------------------------------------
 ! Read parameters from namelist.input file
@@ -370,7 +370,8 @@
     max_annual_loops = 1
 
 ! Julian day of the model start.
-    J_day_start = 182  ! JMC: Matt usually started the melt runs mid-winter (July 1st)
+    J_day_start = 182  
+    ! JMC: Matt usually started the melt runs mid-winter (July 1st)
 
 ! Height of wind and temperature observations.
     z_windobs = 3.0
@@ -502,11 +503,11 @@
         glacier_cells_file='./input/tv_landcovermetstake.txt'
     else
         if (iscliff.eq.1) then
-            ! glacier_cells_file='./input/tv_basins_cliff.txt'
-            glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
+            glacier_cells_file='./input/tv_basins_cliff.txt'
+            ! glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
             ! glacier_cells_file='./input/tv_basins_surface.txt'
-            glacier_cells_file='./input/tv_basins_surface_jmc.txt'
+            glacier_cells_file='./input/tv_basins_surface_jmc_ekh.txt'
         endif
     endif
     
