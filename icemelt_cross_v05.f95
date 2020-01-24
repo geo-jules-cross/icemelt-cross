@@ -498,13 +498,12 @@
 
 ! Open grids needed for surface or cliff domains
 ! tv_basins grids were modified by JMC to expand the contributing area to 
-! Commonwealth Stream and the EKH Glaciers (62, 63, 64)
+! the EKH Glaciers (62, 63, 64)
     if (isstn.eq.1) then
         glacier_cells_file='./input/tv_landcovermetstake.txt'
     else
         if (iscliff.eq.1) then
             glacier_cells_file='./input/tv_basins_cliff.txt'
-            ! glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
             ! glacier_cells_file='./input/tv_basins_surface.txt'
             glacier_cells_file='./input/tv_basins_surface_jmc_ekh.txt'
@@ -659,18 +658,22 @@
                 SELECT CASE (runcell(iii))
                     case (10,11,15,16,19,25,21,26,29)           ! Taylor group
                         ! albedo_file = './input/combo_alb_new.TAR'
-                        albedo_file = './input/combo_alb_new2.TAR'
+                        ! albedo_file = './input/combo_alb_new2.TAR'
+                        albedo_file = './input/combo_alb_new3.TAR'
                         print *,'ALBEDO set for TAR/Bonney Basin'
                     case (24,22,23,36,37,38,39)                 ! Hughes/ WKH group
                         ! albedo_file = './input/combo_alb_new.TAR'
-                        albedo_file = './input/combo_alb_new2.TAR'
+                        ! albedo_file = './input/combo_alb_new2.TAR'
+                        albedo_file = './input/combo_alb_new3.TAR'
                     case (31,32,33,34,41,42,43,44,45,61)        ! Canada & Suess glaciers
                         ! albedo_file = './input/combo_alb_new.CAA'
-                        albedo_file = './input/combo_alb_new2.CAA'
+                        ! albedo_file = './input/combo_alb_new2.CAA'
+                        albedo_file = './input/combo_alb_new3.CAA'
                         print *,'ALBEDO set for CAA/Hoare Basin'
                     case (71,72,73,74,62,63,64,65,81,82,66,50)  ! Fryxell Basin
                         ! albedo_file = './input/combo_alb_new.COH'
-                        albedo_file = './input/combo_alb_new2.COH'
+                        ! albedo_file = './input/combo_alb_new2.COH'
+                        albedo_file = './input/combo_alb_new3.COH'
                         print *,'ALBEDO set for COH/Fryxell Basin'
                 end SELECT
             
