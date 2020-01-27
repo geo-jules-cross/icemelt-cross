@@ -846,7 +846,7 @@
                 read (33,*) junk1,junk2,junk3,albedo
                 albedo = albedo + albedo_surface + albedo_offset + (albedo*albedo_mult)
                 
-                if (runcell(iii).eq.61) then ! Decrease albedo at Huey
+                if (runcell(iii).eq.61) then ! Decrease albedo at Huey by 5%
                     albedo=albedo*0.95
                 endif
 
