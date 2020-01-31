@@ -584,14 +584,14 @@
 ! Note the wordlength (4) is dependent on compiler settings!
         if (iscliff.eq.1) then
         ! mm_met_file='./input/micromet_mjh_cliff/' //   c_i // c_j // '.bin'
-        ! mm_met_file='./input/micromet_jmc_cliff/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_jmc_cliff/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_tlr_cliff/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_vlr_cliff/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_vlr_cliff/' //   c_i // c_j // '.bin'
         else
         ! mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
-        ! mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_tlr/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_vlr/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_vlr/' //   c_i // c_j // '.bin'
         endif
 
         open (31,file=mm_met_file,access='direct',form='unformatted', &
@@ -847,9 +847,9 @@
                 albedo = albedo + albedo_surface + albedo_offset + (albedo*albedo_mult)
                 
                 ! Decrease albedo for EKH and Huey
-                ! if ((runcell(iii).ge.61).and.(runcell(iii).le.65)) then
-                !     albedo=albedo*0.85
-                ! endif
+                if ((runcell(iii).ge.61).and.(runcell(iii).le.65)) then
+                    albedo=albedo*0.90
+                endif
 
                 ! print *,'DAILY ALBEDO =',albedo
 
