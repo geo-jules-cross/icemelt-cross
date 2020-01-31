@@ -848,7 +848,7 @@
                 
                 ! Decrease albedo for EKH and Huey
                 if ((runcell(iii).ge.61).and.(runcell(iii).le.65)) then
-                    albedo=albedo*0.90
+                    albedo=albedo*0.85
                 endif
 
                 ! print *,'DAILY ALBEDO =',albedo
