@@ -198,12 +198,6 @@
     cliffwindmult = 0.68    ! CAA westside 0.68
     clifftempadd = 0.5      !0.5
 
-! Store original albedo and z0 from namelist parameters outside of loop
-    ! z_0_base = z_0
-    ! albedo_mult_base = albedo_mult
-    ! albedo_offset_base = albedo_offset
-
-
 ! directory to store this run
     select case (glacnum)
         case (1)
@@ -586,12 +580,14 @@
         ! mm_met_file='./input/micromet_mjh_cliff/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_jmc_cliff/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_tlr_cliff/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_vlr_cliff/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_vlr_cliff/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_new_cliff/' //   c_i // c_j // '.bin'
         else
         ! mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_tlr/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_vlr/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_vlr/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_new/' //   c_i // c_j // '.bin'
         endif
 
         open (31,file=mm_met_file,access='direct',form='unformatted', &
@@ -847,9 +843,9 @@
                 albedo = albedo + albedo_surface + albedo_offset + (albedo*albedo_mult)
                 
                 ! Decrease albedo for EKH and Huey
-                ! if ((runcell(iii).ge.61).and.(runcell(iii).le.65)) then
-                !     albedo=albedo*0.85
-                ! endif
+                if ((runcell(iii).ge.61).and.(runcell(iii).le.65)) then
+                    albedo=albedo*0.90
+                endif
 
                 ! print *,'DAILY ALBEDO =',albedo
 
