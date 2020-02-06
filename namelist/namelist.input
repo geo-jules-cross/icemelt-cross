@@ -6,7 +6,7 @@ dz1 = 0.002 ! m
 n_snowgrain_radius = 9 ! index
 runmin = 10 ! index
 runmax = 82 ! index
-runnametext = "multi-adj-ekh-alb-2006"
+runnametext = "multi-adj-ekh-alb-2007"
 ! optional adjustments to met data
 tempadd = 0.0
 windmult = 1.0
