@@ -1,4 +1,4 @@
-! icemelt_cross_v04.f95
+! icemelt_cross_v05.f95
 !=====================================================================
 
 ! This FORTRAN code simulates the temperature within snow and ice
@@ -136,10 +136,10 @@
     endif
 
 ! Otherwise run default parameters below
-    glacnum             = 0 ! spatial run
-    z_0                 = 1.0  ! m
-    dz1                 = 1.0  ! m
-    n_snowgrain_radius  = 10  ! index
+    glacnum             = 0     ! spatial run
+    z_0                 = 1.0   ! m
+    dz1                 = 1.0   ! m
+    n_snowgrain_radius  = 10    ! index
     runmin              = 10
     runmax              = 82
     ! Parameters runmin and runmax are necessary for a spatial run
@@ -170,7 +170,7 @@
 ! run the model from 1995/7/1 to 2013/2/01 = 6425
     maxiter             = 6425
 ! run the model from 1995/7/1 to 2015/6/30 = 7304
-!    maxiter            =7 304
+!    maxiter            = 7304
 
 ! Set range of years to run in the model (determine correct timesteps)
     yeararg             = '1995'
@@ -578,16 +578,16 @@
 ! Note the wordlength (4) is dependent on compiler settings!
         if (iscliff.eq.1) then
         ! mm_met_file='./input/micromet_mjh_cliff/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_jmc_cliff/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_jmc_cliff/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_tlr_cliff/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_vlr_cliff/' //   c_i // c_j // '.bin'
-        ! mm_met_file='./input/micromet_new_cliff/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_new_cliff/' //   c_i // c_j // '.bin'
         else
         ! mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_tlr/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_vlr/' //   c_i // c_j // '.bin'
-        ! mm_met_file='./input/micromet_new/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_new/' //   c_i // c_j // '.bin'
         endif
 
         open (31,file=mm_met_file,access='direct',form='unformatted', &
@@ -597,7 +597,7 @@
                ,j2=1,immoffset-1+maxiter*24)
 
 !  For Station Runs, we also need this (in same structure as mm file)
-!    stn_met_file='./input/TAR_stn.bin'
+!  stn_met_file='./input/TAR_stn.bin'
         if ((isstn.eq.1).and.(glacnum.ne.2)) then
         stn_met_file='./input/'//glaccode//'_stn.bin'
             open (32,file=stn_met_file,access='direct',form='unformatted', &
@@ -736,6 +736,7 @@
 !     &    //'/'//c_i//c_j//'.subsurfMelt'
 !     &    , access='direct',form=
 !     &    'unformatted',recl=iwordlength*1*100)
+
             open (28,file='./output/'//runname(1:strlen(runname)) &
                //'/'//c_i//c_j//'.out' &
                , access='direct',form= &
@@ -1058,7 +1059,7 @@
                         if (iwritehourlymelt.eq.1) then
                             write(21,rec=iarraypos) surface_melt, ablation, subdrain 
                             ! changed from submelt JMC
-                            ! Write hr and iter to output? JMC
+                            ! write hr and iter to output? JMC
                         endif  !hourly melt file
 
 
