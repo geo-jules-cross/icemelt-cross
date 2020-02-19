@@ -9,7 +9,7 @@ runmax = 82 ! index
 runnametext = "sens-alb+5"
 ! optional adjustments to met data
 tempadd = 0.0
-windmult = 0.0
+windmult = 1.0
 albedo_surface = 0.0
 albedo_offset = 0.0
 albedo_mult = +0.05
