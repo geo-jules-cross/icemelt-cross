@@ -1,4 +1,4 @@
-! icemelt_cross_v04.f95
+! icemelt_cross_v05.f95
 !=====================================================================
 
 ! This FORTRAN code simulates the temperature within snow and ice
@@ -136,44 +136,44 @@
     endif
 
 ! Otherwise run default parameters below
-    glacnum = 0 ! spatial run
-    z_0 = 1.0  ! m
-    dz1 = 1.0  ! m
-    n_snowgrain_radius = 10  ! index
-    runmin = 10
-    runmax = 82
+    glacnum             = 0     ! spatial run
+    z_0                 = 1.0   ! m
+    dz1                 = 1.0   ! m
+    n_snowgrain_radius  = 10    ! index
+    runmin              = 10
+    runmax              = 82
     ! Parameters runmin and runmax are necessary for a spatial run
     ! they refer to the basins input grid and indicate what range
     ! of basin indices (inclusive) to run, which allows a run for
     ! just a particular basin or glacier (range 10-82)
 
-    runnametext = "DEFAULT_NAME"
+    runnametext         = "DEFAULT_NAME"
 
-    drainthresh = 0.10  
+    drainthresh         = 0.10  
     ! the water frac at which water is removed from subsurface
 
 ! Adjustments to turn on or off for adjustments to general met data
-    tempadd         = 0.0   ! FLOOR=1.5   WALL=0.5  
+    tempadd             = 0.0   ! FLOOR=1.5   WALL=0.5  
     ! Temperature added to measured temperature.
-    windmult        = 1.00  ! FLOOR=0.33  WALL=0.67 
+    windmult            = 1.00  ! FLOOR=0.33  WALL=0.67 
     ! Wind multiplier on measured wind speed.
-    albedo_surface  = 0.0   ! FLOOR=-0.17  WALL=-0.065 
+    albedo_surface      = 0.0   ! FLOOR=-0.17  WALL=-0.065 
     ! Albedo adjustment applied to specific surface type
-    albedo_offset   = 0.0  
+    albedo_offset       = 0.0  
     ! Albedo offset added to measured albedo.
-    albedo_mult     = 0.0
+    albedo_mult         = 0.0
     ! Percent change to albedo. JMC: added
 
 ! Define maxiter, the number of time steps in the model run.
 ! In the hourly model it's the number of days, hours are handled later
 
 ! run the model from 1995/7/1 to 2013/2/01 = 6425
-    maxiter=6425
+    maxiter             = 6425
 ! run the model from 1995/7/1 to 2015/6/30 = 7304
-!    maxiter=7304
+!    maxiter            = 7304
 
 ! Set range of years to run in the model (determine correct timesteps)
-    yeararg='1995'
+    yeararg             = '1995'
 
 !---------------------------------------------------------------------
 ! Read parameters from namelist.input file
@@ -197,12 +197,6 @@
 ! factors to adjust met variables along cliffs
     cliffwindmult = 0.68    ! CAA westside 0.68
     clifftempadd = 0.5      !0.5
-
-! Store original albedo and z0 from namelist parameters outside of loop
-    ! z_0_base = z_0
-    ! albedo_mult_base = albedo_mult
-    ! albedo_offset_base = albedo_offset
-
 
 ! directory to store this run
     select case (glacnum)
@@ -370,7 +364,8 @@
     max_annual_loops = 1
 
 ! Julian day of the model start.
-    J_day_start = 182  ! JMC: Matt usually started the melt runs mid-winter (July 1st)
+    J_day_start = 182  
+    ! JMC: Matt usually started the melt runs mid-winter (July 1st)
 
 ! Height of wind and temperature observations.
     z_windobs = 3.0
@@ -497,16 +492,15 @@
 
 ! Open grids needed for surface or cliff domains
 ! tv_basins grids were modified by JMC to expand the contributing area to 
-! Commonwealth Stream and the Wales Group of Unnamed Glaciers (62, 63, 64)
+! the EKH Glaciers (62, 63, 64)
     if (isstn.eq.1) then
         glacier_cells_file='./input/tv_landcovermetstake.txt'
     else
         if (iscliff.eq.1) then
             glacier_cells_file='./input/tv_basins_cliff.txt'
-            !glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
-            glacier_cells_file='./input/tv_basins_surface.txt'
-            ! glacier_cells_file='./input/tv_basins_surface_jmc.txt'
+            ! glacier_cells_file='./input/tv_basins_surface.txt'
+            glacier_cells_file='./input/tv_basins_surface_jmc_ekh.txt'
         endif
     endif
     
@@ -584,12 +578,16 @@
 ! Note the wordlength (4) is dependent on compiler settings!
         if (iscliff.eq.1) then
         ! mm_met_file='./input/micromet_mjh_cliff/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_jmc_cliff/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_jmc_cliff/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_tlr_cliff/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_vlr_cliff/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_new_cliff/' //   c_i // c_j // '.bin'
         else
         ! mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_tlr/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_vlr/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_new/' //   c_i // c_j // '.bin'
         endif
 
         open (31,file=mm_met_file,access='direct',form='unformatted', &
@@ -599,7 +597,7 @@
                ,j2=1,immoffset-1+maxiter*24)
 
 !  For Station Runs, we also need this (in same structure as mm file)
-!    stn_met_file='./input/TAR_stn.bin'
+!  stn_met_file='./input/TAR_stn.bin'
         if ((isstn.eq.1).and.(glacnum.ne.2)) then
         stn_met_file='./input/'//glaccode//'_stn.bin'
             open (32,file=stn_met_file,access='direct',form='unformatted', &
@@ -655,15 +653,19 @@
                 ! Using combo new MODIS and station albedo, Article Cross & Fountain 2019
                 SELECT CASE (runcell(iii))
                     case (10,11,15,16,19,25,21,26,29)           ! Taylor group
-                        albedo_file = './input/combo_alb_new2.TAR'
+                        ! albedo_file = './input/combo_alb_new.TAR'
+                        albedo_file = './input/combo_alb_new3.TAR'
                         print *,'ALBEDO set for TAR/Bonney Basin'
                     case (24,22,23,36,37,38,39)                 ! Hughes/ WKH group
-                        albedo_file = './input/combo_alb_new2.TAR'
+                        ! albedo_file = './input/combo_alb_new.TAR'
+                        albedo_file = './input/combo_alb_new3.TAR'
                     case (31,32,33,34,41,42,43,44,45,61)        ! Canada & Suess glaciers
-                        albedo_file = './input/combo_alb_new2.CAA'
+                        ! albedo_file = './input/combo_alb_new.CAA'
+                        albedo_file = './input/combo_alb_new3.CAA'
                         print *,'ALBEDO set for CAA/Hoare Basin'
                     case (71,72,73,74,62,63,64,65,81,82,66,50)  ! Fryxell Basin
-                        albedo_file = './input/combo_alb_new2.COH'
+                        ! albedo_file = './input/combo_alb_new.COH'
+                        albedo_file = './input/combo_alb_new3.COH'
                         print *,'ALBEDO set for COH/Fryxell Basin'
                 end SELECT
             
@@ -734,6 +736,7 @@
 !     &    //'/'//c_i//c_j//'.subsurfMelt'
 !     &    , access='direct',form=
 !     &    'unformatted',recl=iwordlength*1*100)
+
             open (28,file='./output/'//runname(1:strlen(runname)) &
                //'/'//c_i//c_j//'.out' &
                , access='direct',form= &
@@ -840,6 +843,11 @@
                 read (33,*) junk1,junk2,junk3,albedo
                 albedo = albedo + albedo_surface + albedo_offset + (albedo*albedo_mult)
                 
+                ! Decrease albedo for EKH and Huey
+                if ((runcell(iii).ge.61).and.(runcell(iii).le.65)) then
+                    albedo=albedo*0.90
+                endif
+
                 ! print *,'DAILY ALBEDO =',albedo
 
                 ! if  (mod(iter,365).eq.0) then
@@ -862,18 +870,6 @@
                     winddir=xmmdata(4,iarraypos)
                     Qsi=xmmdata(5,iarraypos)
                     Qli=xmmdata(6,iarraypos)
-
-! Increase longwave in to test radiation paradox
-                    ! if (runcell(iii).ge.50) then ! Fryxell / Kukri Hills
-                    !     Qli=xmmdata(6,iarraypos)+20
-                    ! else if (runcell(iii).le.50) then ! Up-valley
-                    !     Qli=xmmdata(6,iarraypos)
-                    ! endif
-
-! MJH: Manual sensitivity adjustments here
-                    ! Tair=Tair+0.0
-                    ! windspd=windspd*1.0
-                    ! Qli=Qli+0.0
 
 ! Read Station data and use it if good
 ! If Stn data is bad, then use MM data
@@ -899,10 +895,6 @@
                     endif
 
 ! Calc Pressure using Lk Hoare Pa measurements
-! There are 36 hours in the whole 14 years with Pa missing at LH
-! For those times, just use the previous time step value.
-!        read (36,rec=(immoffset + (iter-1)*24 + hr) )
-!     &        Pa_ref,T_ref
                     Pa_ref=xpadata(1,iarraypos)
                     T_ref=xpadata(2,iarraypos)
                     if ((Pa_ref .gt. 0.0).and.(T_ref .gt. -9000)) then
@@ -910,27 +902,38 @@
                               (-287.04*0.5*(T_ref+Tf + Tair)/gravity) )
                     endif
 
-                    ! Cliff Met adjustments
+                    ! Met adjustments for cliff sub-domain
                     if (((iscliff.eq.1).or.(glacnum.eq.3)).or.(glacnum.eq.6)) then
                         windspd = windspd * cliffwindmult
                         if (Qsi.gt.50.0) then
                             Tair = Tair + clifftempadd
                         endif
                     else                      
-                    
-                    ! Adjustments to wind and temp anywhere else
-                    ! Account for additional adjust JMC
-                        ! windspd = windspd * (windmult + windmult_adj)
-                        ! if (Qsi.gt.50.0) then
-                        !     Tair = Tair + (tempadd + tempadd_adj)
-                        ! endif
-                    
-                    ! Old way
+                    ! Met adjustments to other sub-domains
                         windspd = windspd * windmult
                         if (Qsi.gt.50.0) then
                             Tair = Tair + tempadd
                         endif
                     endif
+
+! Manual met forcing sensitivity adjustments here
+
+                    ! MJH tests
+                    ! Tair=Tair+0.0
+                    ! windspd=windspd*1.0
+                    ! Qli=Qli+0.0
+
+                    ! JMC tests
+                    ! rh = rh*1.25
+                    !     if (rh.ge.100.0) then
+                    !         rh = 100.0
+                    !     endif
+                    ! Increase longwave in to test radiation paradox
+                    ! if (runcell(iii).ge.50) then ! Fryxell / Kukri Hills
+                    !     Qli=xmmdata(6,iarraypos)+20
+                    ! else if (runcell(iii).le.50) then ! Up-valley
+                    !     Qli=xmmdata(6,iarraypos)
+                    ! endif
 
 !---------------------------------------------------------------------
 ! Call Main Subroutines
@@ -1056,7 +1059,7 @@
                         if (iwritehourlymelt.eq.1) then
                             write(21,rec=iarraypos) surface_melt, ablation, subdrain 
                             ! changed from submelt JMC
-                            ! Write hr and iter to output? JMC
+                            ! write hr and iter to output? JMC
                         endif  !hourly melt file
 
 
