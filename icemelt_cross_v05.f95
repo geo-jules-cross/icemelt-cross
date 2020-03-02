@@ -110,7 +110,6 @@
     real :: z_0, dz1, drainthresh, tempadd, windmult
     real :: albedo_surface, albedo_offset, albedo_mult
     integer :: n_snowgrain_radius
-    ! real :: albedo_mult_base, albedo_offset_base, z_0_base
 
     data stnx/53,63,65,133,143,127,164,0/
     data stny/36,43,45,93,66,88,114,0/
@@ -666,7 +665,7 @@
                     case (71,72,73,74,62,63,64,65,81,82,66,50)  ! Fryxell Basin
                         albedo_file = './input/combo_alb_new3.COH'
                         print *,'ALBEDO set for COH/Fryxell Basin'
-                        
+
                 end SELECT
             
             ! Single Station Runs:
