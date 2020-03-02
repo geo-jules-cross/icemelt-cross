@@ -653,20 +653,20 @@
                 ! Using combo new MODIS and station albedo, Article Cross & Fountain 2019
                 SELECT CASE (runcell(iii))
                     case (10,11,15,16,19,25,21,26,29)           ! Taylor group
-                        ! albedo_file = './input/combo_alb_new.TAR'
                         albedo_file = './input/combo_alb_new3.TAR'
                         print *,'ALBEDO set for TAR/Bonney Basin'
+
                     case (24,22,23,36,37,38,39)                 ! Hughes/ WKH group
-                        ! albedo_file = './input/combo_alb_new.TAR'
                         albedo_file = './input/combo_alb_new3.TAR'
+
                     case (31,32,33,34,41,42,43,44,45,61)        ! Canada & Suess glaciers
-                        ! albedo_file = './input/combo_alb_new.CAA'
                         albedo_file = './input/combo_alb_new3.CAA'
                         print *,'ALBEDO set for CAA/Hoare Basin'
+
                     case (71,72,73,74,62,63,64,65,81,82,66,50)  ! Fryxell Basin
-                        ! albedo_file = './input/combo_alb_new.COH'
                         albedo_file = './input/combo_alb_new3.COH'
                         print *,'ALBEDO set for COH/Fryxell Basin'
+                        
                 end SELECT
             
             ! Single Station Runs:
