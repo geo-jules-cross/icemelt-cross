@@ -1,10 +1,10 @@
-# ICEMELT model (v04)
+# ICEMELT model (v05)
 
 Repository for ICEMELT fortran model and pre- and post- processing scripts. Created to track modifications (in-lieu of a branch) made to Hoffman et al ICEMELT version by Julian Cross.
 
 This FORTRAN code simulates the temperature and water content within snow and ice in response to the surface energy balance and penetration of solar radiation into the snow and ice.
 
-**Code:** `icemelt_cross_v04.f95`  
+**Code:** `icemelt_cross_v05.f95`  
 **File Location:**
 `I:\Antarctica_Julian\icemelt-cross`  
 **Date of README:** September 2019  
