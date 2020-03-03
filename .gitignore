@@ -6,6 +6,7 @@ icemelt.sublime-project
 icemelt.sublime-workspace
 icemelt
 icemelt-mjh
+.DS_Store
 
 # exclude these directories
 output/*
