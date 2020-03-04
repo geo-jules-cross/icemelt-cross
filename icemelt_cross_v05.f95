@@ -665,7 +665,7 @@
                         albedo_file = './input/combo_alb_new3.CAA'
                         print *,'ALBEDO set for CAA/Hoare Basin'
 
-                    case (71,72,73,74,62,63,64,65,81,82,66,50)  ! Fryxell Basin
+                    case (71,72,73,74,62,63,64,65,81,82,66,50,90)  ! Fryxell Basin and RIS
                         albedo_file = './input/combo_alb_new3.COH'
                         print *,'ALBEDO set for COH/Fryxell Basin'
 
