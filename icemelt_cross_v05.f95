@@ -588,8 +588,8 @@
         ! mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_new/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_RIS_min/' //   c_i // c_j // '.bin'
-        ! mm_met_file='./input/micromet_RIS_max/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_RIS_min/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_RIS_max/' //   c_i // c_j // '.bin'
         endif
 
         open (31,file=mm_met_file,access='direct',form='unformatted', &
