@@ -657,15 +657,12 @@
                     case (10,11,15,16,19,25,21,26,29)           ! Taylor group
                         albedo_file = './input/combo_alb_new3.TAR'
                         print *,'ALBEDO set for TAR/Bonney Basin'
-
                     case (24,22,23,36,37,38,39)                 ! Hughes/ WKH group
                         albedo_file = './input/combo_alb_new3.TAR'
-
                     case (31,32,33,34,41,42,43,44,45,61)        ! Canada & Suess glaciers
                         albedo_file = './input/combo_alb_new3.CAA'
                         print *,'ALBEDO set for CAA/Hoare Basin'
-
-                    case (71,72,73,74,62,63,64,65,81,82,66,50,90)  ! Fryxell Basin and RIS
+                    case (50,66,62,63,64,65,71,72,73,74,81,82,90)  ! Fryxell Basin and RIS
                         albedo_file = './input/combo_alb_new3.COH'
                         print *,'ALBEDO set for COH/Fryxell Basin'
 
@@ -714,7 +711,7 @@
         open (39,file='./input/icetempinit2008good.txt')
         do j=1,JJ
             read (39,'(f10.4)') T_old(j)
-! Shift ice temp column based on mean annual air temp
+! Shift ice column temp based on mean annual air temp
             T_old(j)=T_old(j)+Tannualmean(iii,jjj)-TannualmeanRef
             water_frac(j) = 0.0
             gamma(j) = xk_snow
