@@ -4,7 +4,8 @@
 # SLURM parallel commands
 #SBATCH --job-name=icemelt
 #SBATCH --partition medium
-#SBATCH --ntasks=4
+#SBATCH --nodes=1
+#SBATCH --ntasks=20
 #SBATCH --output=logs/icemelt-%A.log
 #
 # mail alert at start, end and abortion of execution
