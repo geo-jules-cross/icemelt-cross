@@ -7,8 +7,10 @@ n_snowgrain_radius = 9 	! index
 runmin = 10 			! index
 runmax = 90 			! index
 runnametext = "ris-max"
-! optional adjustments to met data
+! adjustments to met data
+temp_surface = 0.0
 tempadd = 0.0
+wind_surface = 1.0
 windmult = 1.0
 albedo_surface = 0.0
 albedo_offset = 0.0

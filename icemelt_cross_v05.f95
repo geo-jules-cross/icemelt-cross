@@ -108,6 +108,7 @@
     real endofsummerdensity(JJ)
     integer :: ierr
     real :: z_0, dz1, drainthresh, tempadd, windmult
+    real :: temp_surface, wind_surface
     real :: albedo_surface, albedo_offset, albedo_mult
     integer :: n_snowgrain_radius
 
@@ -116,7 +117,8 @@
 
     namelist /params/ glacnum, z_0, dz1, n_snowgrain_radius, &
                        runmin, runmax, runnametext, &
-                       tempadd, windmult, &
+                       temp_surface, tempadd. &
+                       wind_surface, windmult, &
                        albedo_surface, albedo_offset, albedo_mult, &
                        maxiter, yeararg
 
@@ -152,8 +154,12 @@
     ! the water frac at which water is removed from subsurface
 
 ! Adjustments to turn on or off for adjustments to general met data
+    temp_surface        = 0.0
+    ! Temperature added to specific surface type
     tempadd             = 0.0   ! FLOOR=1.5   WALL=0.5  
     ! Temperature added to measured temperature.
+    wind_surface        = 1.0
+    ! Wind multiplier applied to specific surface type
     windmult            = 1.00  ! FLOOR=0.33  WALL=0.67 
     ! Wind multiplier on measured wind speed.
     albedo_surface      = 0.0   ! FLOOR=-0.17  WALL=-0.065 
@@ -920,14 +926,18 @@
 
                     ! Met adjustments for cliff sub-domain
                     if (((iscliff.eq.1).or.(glacnum.eq.3)).or.(glacnum.eq.6)) then
-                        windspd = windspd * cliffwindmult
+                        windspd = windspd * windmult * cliffwindmult
                         if (Qsi.gt.50.0) then
-                            Tair = Tair + clifftempadd
+                            Tair = Tair + tempadd + clifftempadd
+                        else
+                            Tair = Tair + tempadd
                         endif
                     else                      
                     ! Met adjustments to other sub-domains
-                        windspd = windspd * windmult
+                        windspd = windspd * windmult * wind_surface
                         if (Qsi.gt.50.0) then
+                            Tair = Tair + tempadd + temp_surface
+                        else
                             Tair = Tair + tempadd
                         endif
                     endif

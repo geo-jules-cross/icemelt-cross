@@ -39,8 +39,8 @@ $CMD $NL.smooth &
 echo "setup & run basin wall"
 cp $NL $NL.bwall
 sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.001/" $NL.bwall
-sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 0.5/" $NL.bwall
-sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.67/" $NL.bwall
+sed -i.SEDBACKUP "s/.*temp_surface.*/temp_surface = 0.5/" $NL.bwall
+sed -i.SEDBACKUP "s/.*wind_surface.*/wind_surface = 0.67/" $NL.bwall
 sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.065/" $NL.bwall
 # Basin albedo is not lowered any further
 sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL.bwall
@@ -52,8 +52,8 @@ $CMD $NL.bwall &
 echo "setup & run basin floor"
 cp $NL $NL.bfloor
 sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.001/" $NL.bfloor
-sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 1.5/" $NL.bfloor
-sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.33/" $NL.bfloor
+sed -i.SEDBACKUP "s/.*temp_surface.*/temp_surface = 1.5/" $NL.bwall
+sed -i.SEDBACKUP "s/.*wind_surface.*/wind_surface = 0.33/" $NL.bwall
 sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.17/" $NL.bfloor
 # Basin albedo is not lowered any further
 sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL.bfloor
