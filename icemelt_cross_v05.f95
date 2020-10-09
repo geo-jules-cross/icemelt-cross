@@ -117,7 +117,7 @@
 
     namelist /params/ glacnum, z_0, dz1, n_snowgrain_radius, &
                        runmin, runmax, runnametext, &
-                       temp_surface, tempadd. &
+                       temp_surface, tempadd, &
                        wind_surface, windmult, &
                        albedo_surface, albedo_offset, albedo_mult, &
                        maxiter, yeararg
