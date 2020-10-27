@@ -505,20 +505,20 @@
             glacier_cells_file='./input/tv_basins_cliff.txt'
         else
             ! glacier_cells_file='./input/tv_basins_surface.txt'
-            ! glacier_cells_file='./input/tv_basins_surface_jmc_ekh.txt'
-            glacier_cells_file='./input/tv_basins_surface_min.txt'
+            glacier_cells_file='./input/tv_basins_surface_jmc_ekh.txt'
+            ! glacier_cells_file='./input/tv_basins_surface_min.txt'
             ! glacier_cells_file='./input/tv_basins_surface_max.txt'
         endif
     endif
     open (50,file=glacier_cells_file,form='formatted')
     
-    ! topo_file='./input/tv_dem250.txt'
-    topo_file='./input/tv_mindem250.txt'
+    topo_file='./input/tv_dem250.txt'
+    ! topo_file='./input/tv_mindem250.txt'
     ! topo_file='./input/tv_maxdem250.txt'
     open (51,file=topo_file,form='formatted')
     
-    ! TmeanAnnual_file='./input/T_avg_all.txt'! contains both cliff & surf
-    TmeanAnnual_file='./input/T_avg_min.txt'
+    TmeanAnnual_file='./input/T_avg_all.txt'! contains both cliff & surf
+    ! TmeanAnnual_file='./input/T_avg_min.txt'
     ! TmeanAnnual_file='./input/T_avg_max.txt'
     open (52,file=TmeanAnnual_file,form='formatted')
     iheader = 6
@@ -595,8 +595,8 @@
         else
         ! mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
-        ! mm_met_file='./input/micromet_new/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_RIS_min/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_new/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_RIS_min/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_RIS_max/' //   c_i // c_j // '.bin'
         endif
 
@@ -661,35 +661,35 @@
                 ! end SELECT
 
                 ! Using combo new MODIS and station albedo, Article Cross & Fountain 2020
-                ! SELECT CASE (runcell(iii))
-                !     case (10,11,15,16,19,25,21,26,29)           ! Taylor group
-                !         albedo_file = './input/combo_alb_new3.TAR'
-                !         print *,'ALBEDO set for TAR/Bonney Basin'
-                !     case (24,22,23,36,37,38,39)                 ! Hughes/ WKH group
-                !         albedo_file = './input/combo_alb_new3.TAR'
-                !     case (31,32,33,34,41,42,43,44,45,61)        ! Canada & Suess glaciers
-                !         albedo_file = './input/combo_alb_new3.CAA'
-                !         print *,'ALBEDO set for CAA/Hoare Basin'
-                !     case (50,66,62,63,64,65,71,72,73,74,81,82,90)  ! Fryxell Basin and RIS
-                !         albedo_file = './input/combo_alb_new3.COH'
-                !         print *,'ALBEDO set for COH/Fryxell Basin'
-                ! end SELECT
-
-                ! Using fixed albedo for RIS Min and Max domain
-                 SELECT CASE (runcell(iii))
-                    case (10,11,15,16,19,25,21,26,29)               ! Taylor group
+                SELECT CASE (runcell(iii))
+                    case (10,11,15,16,19,25,21,26,29)           ! Taylor group
                         albedo_file = './input/combo_alb_new3.TAR'
                         print *,'ALBEDO set for TAR/Bonney Basin'
-                    case (24,22,23,36,37,38,39)                     ! WKH group
+                    case (24,22,23,36,37,38,39)                 ! Hughes/ WKH group
                         albedo_file = './input/combo_alb_new3.TAR'
-                        print *,'ALBEDO set for TAR/Bonney Basin'
-                    case (31,32,33,34,41,42,43,44,45,61)            ! RIS
-                        albedo_file = './input/combo_alb_new3.COH'
+                    case (31,32,33,34,41,42,43,44,45,61)        ! Canada & Suess glaciers
+                        albedo_file = './input/combo_alb_new3.CAA'
                         print *,'ALBEDO set for CAA/Hoare Basin'
-                    case (50,66,62,63,64,65,71,72,73,74,81,82,90)   ! RIS
+                    case (50,66,62,63,64,65,71,72,73,74,81,82,90)  ! Fryxell Basin and RIS
                         albedo_file = './input/combo_alb_new3.COH'
                         print *,'ALBEDO set for COH/Fryxell Basin'
                 end SELECT
+
+                ! Using fixed albedo for RIS Min and Max domain
+                !  SELECT CASE (runcell(iii))
+                !     case (10,11,15,16,19,25,21,26,29)               ! Taylor group
+                !         albedo_file = './input/combo_alb_new3.TAR'
+                !         print *,'ALBEDO set for TAR/Bonney Basin'
+                !     case (24,22,23,36,37,38,39)                     ! WKH group
+                !         albedo_file = './input/combo_alb_new3.TAR'
+                !         print *,'ALBEDO set for TAR/Bonney Basin'
+                !     case (31,32,33,34,41,42,43,44,45,61)            ! RIS
+                !         albedo_file = './input/combo_alb_new3.COH'
+                !         print *,'ALBEDO set for CAA/Hoare Basin'
+                !     case (50,66,62,63,64,65,71,72,73,74,81,82,90)   ! RIS
+                !         albedo_file = './input/combo_alb_new3.COH'
+                !         print *,'ALBEDO set for COH/Fryxell Basin'
+                ! end SELECT
             
             ! Single Station Runs:
             case (-1)                                               ! Cliff
