@@ -1055,10 +1055,10 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>README_v04</title></head><body><article class="markdown-body"><h1 id="icemelt-model-v04">ICEMELT model (v04)<a class="headerlink" href="#icemelt-model-v04" title="Permanent link"></a></h1>
+</style><title>__README</title></head><body><article class="markdown-body"><h1 id="icemelt-model-v05">ICEMELT model (v05)<a class="headerlink" href="#icemelt-model-v05" title="Permanent link"></a></h1>
 <p>Repository for ICEMELT fortran model and pre- and post- processing scripts. Created to track modifications (in-lieu of a branch) made to Hoffman et al ICEMELT version by Julian Cross.</p>
 <p>This FORTRAN code simulates the temperature and water content within snow and ice in response to the surface energy balance and penetration of solar radiation into the snow and ice.</p>
-<p><strong>Code:</strong> <code>icemelt_cross_v04.f95</code><br />
+<p><strong>Code:</strong> <code>icemelt_cross_v05.f95</code><br />
 <strong>File Location:</strong>
 <code>I:\Antarctica_Julian\icemelt-cross</code><br />
 <strong>Date of README:</strong> September 2019<br />
@@ -1112,8 +1112,8 @@ body .markdown-body
 </ul>
 <h5 id="linux-compiling">Linux Compiling:<a class="headerlink" href="#linux-compiling" title="Permanent link"></a></h5>
 <p>An example of a compile shell command using GCC (GNU Fortran) 7.2.0<br />
-<code>gfortran -o ./icemelt ./icemelt_cross_v04.f95</code></p>
-<p>In this command the <code>-o</code> option specifies that the <code>./icemelt_cross_v04.f95</code> program is compiled to an executable object at <code>./icemelt</code> (rather than the default <code>a.out</code>). This executable is used in further shell scripts to run the model.</p>
+<code>gfortran -o ./icemelt ./icemelt_cross_v05.f95</code></p>
+<p>In this command the <code>-o</code> option specifies that the <code>./icemelt_cross_v05.f95</code> program is compiled to an executable object at <code>./icemelt</code> (rather than the default <code>a.out</code>). This executable is used in further shell scripts to run the model.</p>
 <h2 id="running-the-model"><a name="running"></a>Running the Model<a class="headerlink" href="#running-the-model" title="Permanent link"></a></h2>
 <h3 id="on-the-herarcpdxedu-server">On the hera.rc.pdx.edu Server<a class="headerlink" href="#on-the-herarcpdxedu-server" title="Permanent link"></a></h3>
 <ul>
@@ -1137,7 +1137,7 @@ body .markdown-body
 <ul>
 <li>If all the required <a href="#input_files">input files</a> and the correct <a href="#folders">folder structure</a> are present, the model can be compiled and run:  </li>
 </ul>
-<div class="codehilite"><pre>gfortran -o ./icemelt ./icemelt_cross_v04.f95
+<div class="codehilite"><pre>gfortran -o ./icemelt ./icemelt_cross_v05.f95
 chmod u+x icemelt
 ./icemelt
 </pre></div>
@@ -1205,7 +1205,10 @@ chmod u+x icemelt
 <span class="c1"># script to run all surfaces in ICEMELT in parallel on Coeus Cluster</span>
 <span class="c1">#</span>
 <span class="c1"># SLURM parallel commands</span>
-<span class="c1">#SBATCH --job-name=icemelt-all</span>
+<span class="c1">#SBATCH --job-name=icemelt</span>
+<span class="c1">#SBATCH --partition medium</span>
+<span class="c1">#SBATCH --nodes=1</span>
+<span class="c1">#SBATCH --ntasks=20</span>
 <span class="c1">#SBATCH --output=logs/icemelt-%A.log</span>
 <span class="c1">#</span>
 <span class="c1"># mail alert at start, end and abortion of execution</span>
@@ -1219,9 +1222,9 @@ module purge
 module load gcc-7.2.0
 
 <span class="c1"># compile ICEMELT</span>
-<span class="c1"># gfortran -g -o ./icemelt ./icemelt_cross_v04.f95</span>
+gfortran -g -o ./icemelt ./icemelt_cross_v05.f95
 
-<span class="c1">### run ICEMELT with for loop and SLURM srun</span>
+<span class="c1">### run ICEMELT</span>
 
 <span class="c1"># base commands for running the model</span>
 <span class="nv">NL</span><span class="o">=</span><span class="s2">&quot;./namelist/namelist.input&quot;</span>
@@ -1238,10 +1241,12 @@ cp <span class="nv">$NL</span> <span class="nv">$NL</span>.smooth
 
 <span class="nb">echo</span> <span class="s2">&quot;setup &amp; run basin wall&quot;</span>
 cp <span class="nv">$NL</span> <span class="nv">$NL</span>.bwall
-sed -i.SEDBACKUP <span class="s2">&quot;s/.*z_0.*/z_0 = 1/&quot;</span> <span class="nv">$NL</span>.bwall
-sed -i.SEDBACKUP <span class="s2">&quot;s/.*tempadd.*/tempadd = 0.5/&quot;</span> <span class="nv">$NL</span>.bwall
-sed -i.SEDBACKUP <span class="s2">&quot;s/.*windmult.*/windmult = 0.67/&quot;</span> <span class="nv">$NL</span>.bwall
-sed -i.SEDBACKUP <span class="s2">&quot;s/.*albedo_offset.*/albedo_offset = -0.065/&quot;</span> <span class="nv">$NL</span>.bwall
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*z_0.*/z_0 = 0.001/&quot;</span> <span class="nv">$NL</span>.bwall
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*temp_surface.*/temp_surface = 0.5/&quot;</span> <span class="nv">$NL</span>.bwall
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*wind_surface.*/wind_surface = 0.67/&quot;</span> <span class="nv">$NL</span>.bwall
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*albedo_surface.*/albedo_surface = -0.065/&quot;</span> <span class="nv">$NL</span>.bwall
+<span class="c1"># Basin albedo is not lowered any further</span>
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*albedo_mult.*/albedo_mult = 0.0/&quot;</span> <span class="nv">$NL</span>.bwall
 sed -i.SEDBACKUP <span class="s2">&quot;s/.*runnametext.*/runnametext = \&quot;</span><span class="nv">$runname</span><span class="s2">-bwall\&quot;/&quot;</span> <span class="nv">$NL</span>.bwall
 
 <span class="c1"># run basin wall</span>
@@ -1249,10 +1254,12 @@ sed -i.SEDBACKUP <span class="s2">&quot;s/.*runnametext.*/runnametext = \&quot;<
 
 <span class="nb">echo</span> <span class="s2">&quot;setup &amp; run basin floor&quot;</span>
 cp <span class="nv">$NL</span> <span class="nv">$NL</span>.bfloor
-sed -i.SEDBACKUP <span class="s2">&quot;s/.*z_0.*/z_0 = 1/&quot;</span> <span class="nv">$NL</span>.bfloor
-sed -i.SEDBACKUP <span class="s2">&quot;s/.*tempadd.*/tempadd = 1.5/&quot;</span> <span class="nv">$NL</span>.bfloor
-sed -i.SEDBACKUP <span class="s2">&quot;s/.*windmult.*/windmult = 0.33/&quot;</span> <span class="nv">$NL</span>.bfloor
-sed -i.SEDBACKUP <span class="s2">&quot;s/.*albedo_offset.*/albedo_offset = -0.17/&quot;</span> <span class="nv">$NL</span>.bfloor
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*z_0.*/z_0 = 0.001/&quot;</span> <span class="nv">$NL</span>.bfloor
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*temp_surface.*/temp_surface = 1.5/&quot;</span> <span class="nv">$NL</span>.bwall
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*wind_surface.*/wind_surface = 0.33/&quot;</span> <span class="nv">$NL</span>.bwall
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*albedo_surface.*/albedo_surface = -0.17/&quot;</span> <span class="nv">$NL</span>.bfloor
+<span class="c1"># Basin albedo is not lowered any further</span>
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*albedo_mult.*/albedo_mult = 0.0/&quot;</span> <span class="nv">$NL</span>.bfloor
 sed -i.SEDBACKUP <span class="s2">&quot;s/.*runnametext.*/runnametext = \&quot;</span><span class="nv">$runname</span><span class="s2">-bfloor\&quot;/&quot;</span> <span class="nv">$NL</span>.bfloor
 
 <span class="c1"># run basin floor</span>
@@ -1260,17 +1267,15 @@ sed -i.SEDBACKUP <span class="s2">&quot;s/.*runnametext.*/runnametext = \&quot;<
 
 <span class="nb">echo</span> <span class="s2">&quot;setup &amp; run cliff&quot;</span>
 cp <span class="nv">$NL</span> <span class="nv">$NL</span>.cliff
-sed -i.SEDBACKUP <span class="s2">&quot;s/.*z_0.*/z_0 = 0.1/&quot;</span> <span class="nv">$NL</span>.cliff
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*z_0.*/z_0 = 0.0001/&quot;</span> <span class="nv">$NL</span>.cliff
 sed -i.SEDBACKUP <span class="s2">&quot;s/.*glacnum.*/glacnum = -1/&quot;</span> <span class="nv">$NL</span>.cliff
 sed -i.SEDBACKUP <span class="s2">&quot;s/.*runnametext.*/runnametext = \&quot;</span><span class="nv">$runname</span><span class="s2">-cliff\&quot;/&quot;</span> <span class="nv">$NL</span>.cliff
+sed -i.SEDBACKUP <span class="s2">&quot;s/.*albedo_mult.*/albedo_mult = 0.0/&quot;</span> <span class="nv">$NL</span>.cliff
 
 <span class="c1"># run cliff</span>
 <span class="nv">$CMD</span> <span class="nv">$NL</span>.cliff <span class="p">&amp;</span>
 
 <span class="nb">wait</span>
-
-<span class="c1"># rm sed*</span>
-<span class="c1"># rm *.SEDBACKUP</span>
 
 <span class="c1"># end</span>
 </pre></div>

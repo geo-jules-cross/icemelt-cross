@@ -62,9 +62,9 @@ The `os_info.inc` file allows the code to be compiled on DOS or linux operating 
 ##### Linux Compiling:
 
 An example of a compile shell command using GCC (GNU Fortran) 7.2.0  
-`gfortran -o ./icemelt ./icemelt_cross_v04.f95`
+`gfortran -o ./icemelt ./icemelt_cross_v05.f95`
 
-In this command the `-o` option specifies that the `./icemelt_cross_v04.f95` program is compiled to an executable object at `./icemelt` (rather than the default `a.out`). This executable is used in further shell scripts to run the model.
+In this command the `-o` option specifies that the `./icemelt_cross_v05.f95` program is compiled to an executable object at `./icemelt` (rather than the default `a.out`). This executable is used in further shell scripts to run the model.
 
 ## <a name="running"></a>Running the Model
 
@@ -91,7 +91,7 @@ In this command the `-o` option specifies that the `./icemelt_cross_v04.f95` pro
 - If all the required [input files](#input_files) and the correct [folder structure](#folders) are present, the model can be compiled and run:  
 
 ```bash
-gfortran -o ./icemelt ./icemelt_cross_v04.f95
+gfortran -o ./icemelt ./icemelt_cross_v05.f95
 chmod u+x icemelt
 ./icemelt
 ```
@@ -160,7 +160,10 @@ R/3.4.0/gcc6.3
 # script to run all surfaces in ICEMELT in parallel on Coeus Cluster
 #
 # SLURM parallel commands
-#SBATCH --job-name=icemelt-all
+#SBATCH --job-name=icemelt
+#SBATCH --partition medium
+#SBATCH --nodes=1
+#SBATCH --ntasks=20
 #SBATCH --output=logs/icemelt-%A.log
 #
 # mail alert at start, end and abortion of execution
@@ -174,9 +177,9 @@ module purge
 module load gcc-7.2.0
 
 # compile ICEMELT
-# gfortran -g -o ./icemelt ./icemelt_cross_v04.f95
+gfortran -g -o ./icemelt ./icemelt_cross_v05.f95
 
-### run ICEMELT with for loop and SLURM srun
+### run ICEMELT
 
 # base commands for running the model
 NL="./namelist/namelist.input"
@@ -193,10 +196,12 @@ $CMD $NL.smooth &
 
 echo "setup & run basin wall"
 cp $NL $NL.bwall
-sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1/" $NL.bwall
-sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 0.5/" $NL.bwall
-sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.67/" $NL.bwall
-sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_offset = -0.065/" $NL.bwall
+sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.001/" $NL.bwall
+sed -i.SEDBACKUP "s/.*temp_surface.*/temp_surface = 0.5/" $NL.bwall
+sed -i.SEDBACKUP "s/.*wind_surface.*/wind_surface = 0.67/" $NL.bwall
+sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.065/" $NL.bwall
+# Basin albedo is not lowered any further
+sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL.bwall
 sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname-bwall\"/" $NL.bwall
 
 # run basin wall
@@ -204,10 +209,12 @@ $CMD $NL.bwall &
 
 echo "setup & run basin floor"
 cp $NL $NL.bfloor
-sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 1/" $NL.bfloor
-sed -i.SEDBACKUP "s/.*tempadd.*/tempadd = 1.5/" $NL.bfloor
-sed -i.SEDBACKUP "s/.*windmult.*/windmult = 0.33/" $NL.bfloor
-sed -i.SEDBACKUP "s/.*albedo_offset.*/albedo_offset = -0.17/" $NL.bfloor
+sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.001/" $NL.bfloor
+sed -i.SEDBACKUP "s/.*temp_surface.*/temp_surface = 1.5/" $NL.bwall
+sed -i.SEDBACKUP "s/.*wind_surface.*/wind_surface = 0.33/" $NL.bwall
+sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.17/" $NL.bfloor
+# Basin albedo is not lowered any further
+sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL.bfloor
 sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname-bfloor\"/" $NL.bfloor
 
 # run basin floor
@@ -215,17 +222,15 @@ $CMD $NL.bfloor &
  
 echo "setup & run cliff"
 cp $NL $NL.cliff
-sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.1/" $NL.cliff
+sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.0001/" $NL.cliff
 sed -i.SEDBACKUP "s/.*glacnum.*/glacnum = -1/" $NL.cliff
 sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname-cliff\"/" $NL.cliff
+sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL.cliff
 
 # run cliff
 $CMD $NL.cliff &
 
 wait
-
-# rm sed*
-# rm *.SEDBACKUP
 
 # end
 ```
