@@ -590,8 +590,8 @@
 ! Note the wordlength (4) is dependent on compiler settings!
         if (iscliff.eq.1) then
         ! mm_met_file='./input/micromet_mjh_cliff/' //   c_i // c_j // '.bin'
-        ! mm_met_file='./input/micromet_jmc_cliff/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_new_cliff/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_jmc_cliff/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_new_cliff/' //   c_i // c_j // '.bin'
         else
         ! mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
