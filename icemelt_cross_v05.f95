@@ -502,7 +502,8 @@
         glacier_cells_file='./input/tv_landcovermetstake.txt'
     else
         if (iscliff.eq.1) then
-            glacier_cells_file='./input/tv_basins_cliff.txt'
+            ! glacier_cells_file='./input/tv_basins_cliff.txt'
+            glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
             ! glacier_cells_file='./input/tv_basins_surface.txt'
             glacier_cells_file='./input/tv_basins_surface_jmc_ekh.txt'
@@ -517,8 +518,8 @@
     ! topo_file='./input/tv_maxdem250.txt'
     open (51,file=topo_file,form='formatted')
     
-    TmeanAnnual_file='./input/T_avg_all.txt'! contains both cliff & surf
-    ! TmeanAnnual_file='./input/T_avg_min.txt'
+    ! TmeanAnnual_file='./input/T_avg_all.txt'! contains both cliff & surf
+    TmeanAnnual_file='./input/T_avg_min.txt'
     ! TmeanAnnual_file='./input/T_avg_max.txt'
     open (52,file=TmeanAnnual_file,form='formatted')
     iheader = 6
@@ -590,8 +591,8 @@
 ! Note the wordlength (4) is dependent on compiler settings!
         if (iscliff.eq.1) then
         ! mm_met_file='./input/micromet_mjh_cliff/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_jmc_cliff/' //   c_i // c_j // '.bin'
-        ! mm_met_file='./input/micromet_new_cliff/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_jmc_cliff/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_new_cliff/' //   c_i // c_j // '.bin'
         else
         ! mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
