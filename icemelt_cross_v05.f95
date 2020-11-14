@@ -497,7 +497,7 @@
 
 ! Open grids needed for surface or cliff domains
 ! tv_basins grids were modified by JMC to expand the contributing area to 
-! the EKH Glaciers (62, 63, 64)
+! the EKH and Huey glaciers (61, 62, 63, 64)
     if (isstn.eq.1) then
         glacier_cells_file='./input/tv_landcovermetstake.txt'
     else
@@ -518,8 +518,8 @@
     ! topo_file='./input/tv_maxdem250.txt'
     open (51,file=topo_file,form='formatted')
     
-    ! TmeanAnnual_file='./input/T_avg_all.txt'! contains both cliff & surf
-    TmeanAnnual_file='./input/T_avg_min.txt'
+    TmeanAnnual_file='./input/T_avg_all.txt'! contains both cliff & surf
+    ! TmeanAnnual_file='./input/T_avg_min.txt'
     ! TmeanAnnual_file='./input/T_avg_max.txt'
     open (52,file=TmeanAnnual_file,form='formatted')
     iheader = 6
