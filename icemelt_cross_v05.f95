@@ -506,20 +506,20 @@
             glacier_cells_file='./input/tv_basins_cliff_jmc.txt'
         else
             ! glacier_cells_file='./input/tv_basins_surface.txt'
-            glacier_cells_file='./input/tv_basins_surface_jmc_ekh.txt'
-            ! glacier_cells_file='./input/tv_basins_surface_min.txt'
+            ! glacier_cells_file='./input/tv_basins_surface_jmc_ekh.txt'
+            glacier_cells_file='./input/tv_basins_surface_min.txt'
             ! glacier_cells_file='./input/tv_basins_surface_max.txt'
         endif
     endif
     open (50,file=glacier_cells_file,form='formatted')
     
-    topo_file='./input/tv_dem250.txt'
-    ! topo_file='./input/tv_mindem250.txt'
+    ! topo_file='./input/tv_dem250.txt'
+    topo_file='./input/tv_mindem250.txt'
     ! topo_file='./input/tv_maxdem250.txt'
     open (51,file=topo_file,form='formatted')
     
-    TmeanAnnual_file='./input/T_avg_all.txt'! contains both cliff & surf
-    ! TmeanAnnual_file='./input/T_avg_min.txt'
+    ! TmeanAnnual_file='./input/T_avg_all.txt'! contains both cliff & surf
+    TmeanAnnual_file='./input/T_avg_min.txt'
     ! TmeanAnnual_file='./input/T_avg_max.txt'
     open (52,file=TmeanAnnual_file,form='formatted')
     iheader = 6
@@ -596,8 +596,8 @@
         else
         ! mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_new/' //   c_i // c_j // '.bin'
-        ! mm_met_file='./input/micromet_RIS_min/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_new/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_RIS_min/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_RIS_max/' //   c_i // c_j // '.bin'
         endif
 
