@@ -577,15 +577,15 @@
 ! this needs to start off, so we only write on the last iteration
         ablation_output=0
 
+!---------------------------------------------------------------------
+! Read Met Input Files
+!---------------------------------------------------------------------
+
 ! Open the atmospheric forcing data data files for the year.
 ! Make sure start date is July 1st in data file!
 ! output name indicates location in ascii grid dimensions
         write(c_i,'(i3.3)') iii
         write(c_j,'(i3.3)') jjj
-
-!---------------------------------------------------------------------
-! Read Met Input Files
-!---------------------------------------------------------------------
 
 ! Data out of MicroMet is binary and has 6 variables
 ! Note the wordlength (4) is dependent on compiler settings!
