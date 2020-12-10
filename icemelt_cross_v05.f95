@@ -927,7 +927,7 @@
 
                     ! Met adjustments for cliff sub-domain
                     if (((iscliff.eq.1).or.(glacnum.eq.3)).or.(glacnum.eq.6)) then
-                        windspd = windspd + (windspd * windmult) + (windspd * cliffwindmult)
+                        windspd = (windspd * windmult) + (windspd * cliffwindmult)
                         if (Qsi.gt.50.0) then
                             Tair = Tair + tempadd + clifftempadd
                         else
@@ -935,7 +935,7 @@
                         endif
                     else                      
                     ! Met adjustments to other sub-domains
-                        windspd = windspd + (windspd * windmult) + (windspd * wind_surface)
+                        windspd = (windspd * windmult) + (windspd * wind_surface)
                         if (Qsi.gt.50.0) then
                             Tair = Tair + tempadd + temp_surface
                         else
