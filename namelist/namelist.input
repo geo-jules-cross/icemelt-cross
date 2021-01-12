@@ -5,7 +5,7 @@ z_0 = 0.00005 			! m
 dz1 = 0.002 			! m
 n_snowgrain_radius = 9 	! index
 runmin = 10 			! index
-runmax = 82 			! index
+runmax = 90 			! index
 runnametext = "no-ris_min-4c"
 ! adjustments to met data
 temp_surface = 0.0
