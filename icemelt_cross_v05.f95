@@ -671,9 +671,12 @@
                     case (31,32,33,34,41,42,43,44,45,61)            ! Canada & Suess glaciers
                         albedo_file = './input/combo_alb_new3.CAA'
                         print *,'ALBEDO set for CAA/Hoare Basin'
-                    case (50,66,62,63,64,65,71,72,73,74,81,82,90)   ! Fryxell Basin and RIS MIN
+                    case (50,66,62,63,64,65,71,72,73,74,81,82)      !  Fryxell Basin
                         albedo_file = './input/combo_alb_new3.COH'
                         print *,'ALBEDO set for COH/Fryxell Basin'
+                    case (90)                                       ! RIS MIN
+                        albedo_file = './input/constant_alb.RIS'
+                        print *,'ALBEDO set for RIS Minimum'
                 end SELECT
 
                 ! Using COH albedo for RIS Max domain
@@ -945,7 +948,7 @@
 
 ! Manual met forcing sensitivity adjustments here
 
-                    ! MJH tests
+                    ! MJH and JMC tests
                     ! Tair=Tair+0.0
                     ! windspd=windspd*1.0
                     ! Qli=Qli+0.0
