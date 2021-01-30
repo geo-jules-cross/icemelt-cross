@@ -591,12 +591,12 @@
 ! Note the wordlength (4) is dependent on compiler settings!
         if (iscliff.eq.1) then
         ! mm_met_file='./input/micromet_mjh_cliff/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_jmc_cliff/' //   c_i // c_j // '.bin'
-        ! mm_met_file='./input/micromet_new_cliff/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_jmc_cliff/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_new_cliff/' //   c_i // c_j // '.bin'
         else
         ! mm_met_file='./input/micromet_mjh/' //   c_i // c_j // '.bin'
-        mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
-        ! mm_met_file='./input/micromet_new/' //   c_i // c_j // '.bin'
+        ! mm_met_file='./input/micromet_jmc/' //   c_i // c_j // '.bin'
+        mm_met_file='./input/micromet_new/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_RIS_min/' //   c_i // c_j // '.bin'
         ! mm_met_file='./input/micromet_RIS_max/' //   c_i // c_j // '.bin'
         endif
@@ -671,7 +671,7 @@
                     case (31,32,33,34,41,42,43,44,45,61)            ! Canada & Suess glaciers
                         albedo_file = './input/combo_alb_new3.CAA'
                         print *,'ALBEDO set for CAA/Hoare Basin'
-                    case (50,66,62,63,64,65,71,72,73,74,81,82)      !  Fryxell Basin
+                    case (50,66,62,63,64,65,71,72,73,74,81,82)      ! Fryxell Basin
                         albedo_file = './input/combo_alb_new3.COH'
                         print *,'ALBEDO set for COH/Fryxell Basin'
                     case (90)                                       ! RIS MIN
@@ -874,13 +874,11 @@
                     albedo=albedo*0.90
                 endif
 
-                ! print *,'DAILY ALBEDO =',albedo
-
-                ! if  (mod(iter,365).eq.0) then
-                    ! print *,'WORKING ON YEAR =', out_year ! Added here by JMC
-                    ! print *,'ALBEDO MULTIPLIER =', albedo_mult
-                    ! print *,'BASIN =', runcell(iii)
-                ! endif
+                ! Make sure albedo does not go below 0.30
+                if (albedo.lt.0.30) then
+                    print *,'Albedo less than 0.30, setting to 0.30; albedo =',albedo
+                    albedo = 0.30
+                endif
 
 !=====================================================================
 !            START HOURLY TIMESTEP LOOP
@@ -897,8 +895,8 @@
                     Qsi=xmmdata(5,iarraypos)
                     Qli=xmmdata(6,iarraypos)
 
-! Read Station data and use it if good
-! If Stn data is bad, then use MM data
+                    ! Read Station data and use it if good
+                    ! If Stn data is bad, then use MM data
                     if ((isstn.eq.1).and.(glacnum.ne.2)) then
                         if (xstndata(1,iarraypos).gt.-9999.0) Tair=xstndata(1,iarraypos)
                         if (xstndata(2,iarraypos).gt.-9999.0) rh=xstndata(2,iarraypos)
@@ -913,14 +911,7 @@
 
                     Tair = Tair + Tf
 
-! Windspeed needs to be above a threshold value 
-! to avoid computational problems. 0.1
-! MM already does this, but station data does not
-                    if (windspd .lt. 1.0) then
-                        windspd = 1.0
-                    endif
-
-! Calc Pressure using Lk Hoare Pa measurements
+                    ! Calculate Pressure using Lk Hoare Pa measurements
                     Pa_ref=xpadata(1,iarraypos)
                     T_ref=xpadata(2,iarraypos)
                     if ((Pa_ref .gt. 0.0).and.(T_ref .gt. -9000)) then
@@ -937,6 +928,7 @@
                             Tair = Tair + tempadd
                         endif
                     else                      
+                    
                     ! Met adjustments to other sub-domains
                         windspd = (windspd * wind_surface) * windmult
                         if (Qsi.gt.50.0) then
@@ -946,14 +938,10 @@
                         endif
                     endif
 
-! Manual met forcing sensitivity adjustments here
-
-                    ! MJH and JMC tests
+                    ! Manual met forcing sensitivity adjustments here, MJH and JMC tests
                     ! Tair=Tair+0.0
                     ! windspd=windspd*1.0
                     ! Qli=Qli+0.0
-
-                    ! JMC tests
                     ! rh = rh*1.25
                     !     if (rh.ge.100.0) then
                     !         rh = 100.0
@@ -964,6 +952,13 @@
                     ! else if (runcell(iii).le.50) then ! Up-valley
                     !     Qli=xmmdata(6,iarraypos)
                     ! endif
+
+                    ! Windspeed needs to be above a threshold value 
+                    ! to avoid computational problems.
+                    ! MM already does this, but station data does not
+                    if (windspd .lt. 1.0) then
+                        windspd = 1.0
+                    endif
 
 !---------------------------------------------------------------------
 ! Call Main Subroutines

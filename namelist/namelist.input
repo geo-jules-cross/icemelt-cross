@@ -5,13 +5,13 @@ z_0 = 0.00005 			! m
 dz1 = 0.002 			! m
 n_snowgrain_radius = 9 	! index
 runmin = 10 			! index
-runmax = 90 			! index
-runnametext = "no-ris_min-4c"
+runmax = 82 			! index
+runnametext = "sens-wind-20"
 ! adjustments to met data
 temp_surface = 0.0
-tempadd = -4.0
+tempadd = 0.0
 wind_surface = 1.0
-windmult = 1.0
+windmult = 0.80
 albedo_surface = 0.0
 albedo_offset = 0.0
 albedo_mult = 0.0
