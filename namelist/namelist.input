@@ -6,10 +6,10 @@ dz1 = 0.002 			! m
 n_snowgrain_radius = 9 	! index
 runmin = 10 			! index
 runmax = 82 			! index
-runnametext = "sens-temp-1"
+runnametext = "sens-temp+1"
 ! adjustments to met data
 temp_surface = 0.0
-tempadd = -1.0
+tempadd = +1.0
 wind_surface = 1.0
 windmult = 1.0
 albedo_surface = 0.0
