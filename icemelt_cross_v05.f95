@@ -675,7 +675,8 @@
                         albedo_file = './input/combo_alb_new3.COH'
                         print *,'ALBEDO set for COH/Fryxell Basin'
                     case (90)                                       ! RIS MIN
-                        albedo_file = './input/constant_alb.RIS'
+                        ! albedo_file = './input/constant_alb.RIS'
+                        albedo_file = './input/combo_alb_new3.COH'
                         print *,'ALBEDO set for RIS Minimum'
                 end SELECT
 
