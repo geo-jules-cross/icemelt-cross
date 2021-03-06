@@ -939,7 +939,8 @@
                         endif
                     endif
 
-                    ! Manual met forcing sensitivity adjustments here, MJH and JMC tests
+                    ! Manual met forcing sensitivity adjustments here.
+                    ! MJH and JMC tests:
                     ! Tair=Tair+0.0
                     ! windspd=windspd*1.0
                     ! Qli=Qli+0.0
@@ -947,6 +948,7 @@
                     !     if (rh.ge.100.0) then
                     !         rh = 100.0
                     !     endif
+
                     ! Increase longwave in to test radiation paradox
                     ! if (runcell(iii).ge.50) then ! Fryxell / Kukri Hills
                     !     Qli=xmmdata(6,iarraypos)+20
