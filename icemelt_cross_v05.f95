@@ -110,6 +110,7 @@
     real :: z_0, dz1, drainthresh, tempadd, windmult
     real :: temp_surface, wind_surface
     real :: albedo_surface, albedo_offset, albedo_mult
+    real :: rad_mult
     integer :: n_snowgrain_radius
 
     data stnx/53,63,65,133,143,127,164,0/
@@ -120,6 +121,7 @@
                        temp_surface, tempadd, &
                        wind_surface, windmult, &
                        albedo_surface, albedo_offset, albedo_mult, &
+                       rad_mult, &
                        maxiter, yeararg
 
 ! INITIALIZE TO 0 FOR RUN TIME
@@ -168,6 +170,8 @@
     ! Albedo offset added to measured albedo.
     albedo_mult         = 0.0
     ! Percent change to albedo. JMC: added
+    rad_mult            = 1.0
+    ! SW radiation multplier for paleo runs. JMC: added.
 
 ! Define maxiter, the number of time steps in the model run.
 ! In the hourly model it's the number of days, hours are handled later
@@ -906,10 +910,6 @@
                         if (xstndata(6,iarraypos).gt.-9999.0) Qli=xstndata(6,iarraypos)
                     endif
 
-                    if (Qsi .lt. 1.0) then
-                        Qsi=0.0
-                    endif
-
                     Tair = Tair + Tf
 
                     ! Calculate Pressure using Lk Hoare Pa measurements
@@ -919,6 +919,8 @@
                         Pa=(Pa_ref*100.0) * exp( (topo-elev_ref) /  &
                               (-287.04*0.5*(T_ref+Tf + Tair)/gravity) )
                     endif
+
+                    ! Manual met forcing adjustments here:
 
                     ! Met adjustments for cliff sub-domain
                     if (((iscliff.eq.1).or.(glacnum.eq.3)).or.(glacnum.eq.6)) then
@@ -939,8 +941,10 @@
                         endif
                     endif
 
-                    ! Manual met forcing sensitivity adjustments here.
-                    ! MJH and JMC tests:
+                    ! Adjust shortwave radiation for paleo runs:
+                    Qsi = Qsi * rad_mult
+                    
+                    ! MJH and JMC sensitivity tests:
                     ! Tair=Tair+0.0
                     ! windspd=windspd*1.0
                     ! Qli=Qli+0.0
@@ -949,12 +953,17 @@
                     !         rh = 100.0
                     !     endif
 
-                    ! Increase longwave in to test radiation paradox
+                    ! Increase longwave in to test radiation paradox:
                     ! if (runcell(iii).ge.50) then ! Fryxell / Kukri Hills
                     !     Qli=xmmdata(6,iarraypos)+20
                     ! else if (runcell(iii).le.50) then ! Up-valley
                     !     Qli=xmmdata(6,iarraypos)
                     ! endif
+
+                    ! Shortwave threshold
+                    if (Qsi .lt. 1.0) then
+                        Qsi=0.0
+                    endif
 
                     ! Windspeed needs to be above a threshold value 
                     ! to avoid computational problems.
