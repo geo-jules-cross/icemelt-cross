@@ -162,7 +162,7 @@
     ! Temperature added to measured temperature.
     wind_surface        = 1.0
     ! Wind multiplier applied to specific surface type
-    windmult            = 1.00  ! FLOOR=0.33  WALL=0.67 
+    windmult            = 1.0  ! FLOOR=0.33  WALL=0.67 
     ! Wind multiplier on measured wind speed.
     albedo_surface      = 0.0   ! FLOOR=-0.17  WALL=-0.065 
     ! Albedo adjustment applied to specific surface type

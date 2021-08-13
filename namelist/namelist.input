@@ -6,14 +6,14 @@ dz1 = 0.002 			! m
 n_snowgrain_radius = 9 	! index
 runmin = 10 			! index
 runmax = 82 			! index
-runnametext = "sens-albedo-6"
+runnametext = "sens-temp-plus-0pt275_C"
 ! adjustments to met data
 temp_surface = 0.0
-tempadd = 0.0
+tempadd = 0.275
 wind_surface = 1.0
 windmult = 1.0
 albedo_surface = 0.0
-albedo_offset = -0.06
+albedo_offset = 0.0
 albedo_mult = 0.0
 rad_mult = 1.0
 ! number of time steps to run
