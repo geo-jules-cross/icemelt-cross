@@ -118,8 +118,8 @@
 
     namelist /params/ glacnum, z_0, dz1, n_snowgrain_radius, &
                        runmin, runmax, runnametext, &
-                       temp_surface, tempadd, &
-                       wind_surface, windmult, &
+                       temp_surface, temp_offset, &
+                       wind_surface, wind_mult, &
                        albedo_surface, albedo_offset, albedo_mult, &
                        rad_mult, &
                        maxiter, yeararg
@@ -158,20 +158,22 @@
 ! Adjustments to turn on or off for adjustments to general met data
     temp_surface        = 0.0
     ! Temperature added to specific surface type
-    tempadd             = 0.0   ! FLOOR=1.5   WALL=0.5  
-    ! Temperature added to measured temperature.
+    temp_offset         = 0.0   ! FLOOR=1.5   WALL=0.5  
+    ! Temperature added to measured temperature
+    temp_mult           = 1.0
+    ! Percent change to temperature JMC: added
     wind_surface        = 1.0
     ! Wind multiplier applied to specific surface type
-    windmult            = 1.0  ! FLOOR=0.33  WALL=0.67 
-    ! Wind multiplier on measured wind speed.
+    wind_mult           = 1.0  ! FLOOR=0.33  WALL=0.67 
+    ! Wind multiplier on measured wind speed
     albedo_surface      = 0.0   ! FLOOR=-0.17  WALL=-0.065 
     ! Albedo adjustment applied to specific surface type
     albedo_offset       = 0.0  
-    ! Albedo offset added to measured albedo.
-    albedo_mult         = 0.0
-    ! Percent change to albedo. JMC: added
+    ! Albedo offset added to measured albedo
+    albedo_mult         = 1.0
+    ! Percent change to albedo JMC: added
     rad_mult            = 1.0
-    ! SW radiation multplier for paleo runs. JMC: added.
+    ! SW radiation multplier for paleo runs JMC: added
 
 ! Define maxiter, the number of time steps in the model run.
 ! In the hourly model it's the number of days, hours are handled later
@@ -204,8 +206,8 @@
     iwritehourlymelt=0 ! changed by JMC
 
 ! factors to adjust met variables along cliffs
-    cliffwindmult = 0.68    ! CAA westside 0.68
-    clifftempadd = 0.5      !0.5
+    wind_cliffmult = 0.68    ! CAA westside 0.68
+    temp_cliffadd = 0.5      !0.5
 
 ! directory to store this run
     select case (glacnum)
@@ -872,7 +874,7 @@
                 
                 ! Albedo Offset and Percent Adjustment for the Day (constant for each day)
                 read (33,*) junk1,junk2,junk3,albedo
-                albedo = albedo + albedo_surface + albedo_offset + (albedo * albedo_mult)
+                albedo = (albedo * albedo_mult) + albedo_surface + albedo_offset
                 
                 ! Decrease albedo for EKH and Huey
                 if ((runcell(iii).ge.61).and.(runcell(iii).le.65)) then
@@ -924,20 +926,20 @@
 
                     ! Met adjustments for cliff sub-domain
                     if (((iscliff.eq.1).or.(glacnum.eq.3)).or.(glacnum.eq.6)) then
-                        windspd = (windspd * cliffwindmult) * windmult
+                        windspd = windspd * wind_cliffmult * wind_mult
                         if (Qsi.gt.50.0) then
-                            Tair = Tair + tempadd + clifftempadd
+                            Tair = (Tair * temp_mult) + temp_offset  + temp_cliffadd
                         else
-                            Tair = Tair + tempadd
+                            Tair = (Tair * temp_mult) + temp_offset
                         endif
                     else                      
                     
                     ! Met adjustments to other sub-domains
-                        windspd = (windspd * wind_surface) * windmult
+                        windspd = windspd * wind_surface * wind_mult
                         if (Qsi.gt.50.0) then
-                            Tair = Tair + tempadd + temp_surface
+                            Tair = (Tair * temp_mult) + temp_offset + temp_surface
                         else
-                            Tair = Tair + tempadd
+                            Tair = (Tair * temp_mult) + temp_offset
                         endif
                     endif
 

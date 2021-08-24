@@ -42,8 +42,6 @@ sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.001/" $NL.bwall
 sed -i.SEDBACKUP "s/.*temp_surface.*/temp_surface = 0.5/" $NL.bwall
 sed -i.SEDBACKUP "s/.*wind_surface.*/wind_surface = 0.67/" $NL.bwall
 sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.065/" $NL.bwall
-# Basin albedo is not lowered any further
-sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL.bwall
 sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname-bwall\"/" $NL.bwall
 
 # run basin wall
@@ -55,8 +53,6 @@ sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.001/" $NL.bfloor
 sed -i.SEDBACKUP "s/.*temp_surface.*/temp_surface = 1.5/" $NL.bfloor
 sed -i.SEDBACKUP "s/.*wind_surface.*/wind_surface = 0.33/" $NL.bfloor
 sed -i.SEDBACKUP "s/.*albedo_surface.*/albedo_surface = -0.17/" $NL.bfloor
-# Basin albedo is not lowered any further
-sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL.bfloor
 sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname-bfloor\"/" $NL.bfloor
 
 # run basin floor
@@ -67,7 +63,8 @@ cp $NL $NL.cliff
 sed -i.SEDBACKUP "s/.*z_0.*/z_0 = 0.0001/" $NL.cliff
 sed -i.SEDBACKUP "s/.*glacnum.*/glacnum = -1/" $NL.cliff
 sed -i.SEDBACKUP "s/.*runnametext.*/runnametext = \"$runname-cliff\"/" $NL.cliff
-sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 0.0/" $NL.cliff
+# cliff albedo is not changed
+sed -i.SEDBACKUP "s/.*albedo_mult.*/albedo_mult = 1.0/" $NL.cliff
 
 # run cliff
 $CMD $NL.cliff &
