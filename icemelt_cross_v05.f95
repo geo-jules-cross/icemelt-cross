@@ -107,8 +107,9 @@
     character*(80) nlfname
     real endofsummerdensity(JJ)
     integer :: ierr
-    real :: z_0, dz1, drainthresh, tempadd, windmult
-    real :: temp_surface, wind_surface
+    real :: z_0, dz1, drainthresh
+    real :: temp_surface, temp_offset, temp_mult
+    real :: wind_surface, wind_mult
     real :: albedo_surface, albedo_offset, albedo_mult
     real :: rad_mult
     integer :: n_snowgrain_radius
@@ -118,7 +119,7 @@
 
     namelist /params/ glacnum, z_0, dz1, n_snowgrain_radius, &
                        runmin, runmax, runnametext, &
-                       temp_surface, temp_offset, &
+                       temp_surface, temp_offset, temp_mult &
                        wind_surface, wind_mult, &
                        albedo_surface, albedo_offset, albedo_mult, &
                        rad_mult, &
