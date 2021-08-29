@@ -108,16 +108,19 @@
     real endofsummerdensity(JJ)
     integer :: ierr
     real :: z_0, dz1, drainthresh
-    real :: temp_surface, temp_offset, temp_mult
-    real :: wind_surface, wind_mult
-    real :: albedo_surface, albedo_offset, albedo_mult
+    real :: temp_surface, temp_offset
+    real :: temp_mult
+    real :: wind_surface
+    real :: wind_mult
+    real :: albedo_surface, albedo_offset
+    real :: albedo_mult
     real :: rad_mult
     integer :: n_snowgrain_radius
 
     data stnx/53,63,65,133,143,127,164,0/
     data stny/36,43,45,93,66,88,114,0/
 
-    namelist /params/ glacnum, z_0, dz1, n_snowgrain_radius, &
+    namelist /params/  glacnum, z_0, dz1, n_snowgrain_radius, &
                        runmin, runmax, runnametext, &
                        temp_surface, temp_offset, temp_mult &
                        wind_surface, wind_mult, &
