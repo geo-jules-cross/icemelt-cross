@@ -10,7 +10,7 @@ runnametext = "sens-temp-plus-10%"
 ! adjustments to met data
 temp_surface = 0.0
 temp_offset = 0.0
-temp_mult = 1.0
+temp_mult = 1.1
 wind_surface = 1.0
 wind_mult = 1.0
 albedo_surface = 0.0
