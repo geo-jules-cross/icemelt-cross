@@ -122,7 +122,7 @@
 
     namelist /params/  glacnum, z_0, dz1, n_snowgrain_radius, &
                        runmin, runmax, runnametext, &
-                       temp_surface, temp_offset, temp_mult &
+                       temp_surface, temp_offset, temp_mult, &
                        wind_surface, wind_mult, &
                        albedo_surface, albedo_offset, albedo_mult, &
                        rad_mult, &
@@ -132,7 +132,7 @@
     xdur=secnds(0.0)
 
 !---------------------------------------------------------------------
-! Define Run Parameters (Including Default)
+! Define Default Run Parameters
 !---------------------------------------------------------------------
 
 ! Check if namelist.input file is provided  
@@ -202,6 +202,10 @@
         write(0,*) 'Error reading namelist!'
     endif
     close(11)
+
+!---------------------------------------------------------------------
+! Set other parameters
+!---------------------------------------------------------------------
 
 ! Set dz1 to the array
     deltaz(1) = dz1
