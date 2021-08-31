@@ -6,7 +6,7 @@ dz1 = 0.002 			! m
 n_snowgrain_radius = 9 	! index
 runmin = 10 			! index
 runmax = 82 			! index
-runnametext = "test"
+runnametext = "runname"
 ! adjustments to met data
 temp_surface = 0.0
 temp_offset = 0.0

@@ -108,12 +108,9 @@
     real endofsummerdensity(JJ)
     integer :: ierr
     real :: z_0, dz1, drainthresh
-    real :: temp_surface, temp_offset
-    real :: temp_mult
-    real :: wind_surface
-    real :: wind_mult
-    real :: albedo_surface, albedo_offset
-    real :: albedo_mult
+    real :: temp_surface, temp_offset, temp_mult
+    real :: wind_surface, wind_mult
+    real :: albedo_surface, albedo_offset, albedo_mult
     real :: rad_mult
     integer :: n_snowgrain_radius
 
