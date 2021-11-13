@@ -672,22 +672,26 @@
                 !         print *,'ALBEDO set for HOD'
                 ! end SELECT
 
-                ! Using combo new MODIS and station albedo, Article Cross & Fountain 2020
+                ! Using combo new MODIS and station albedo, Article Cross & Fountain 2022
                 SELECT CASE (runcell(iii))
                     case (10,11,15,16,19,25,21,26,29)               ! Taylor group
-                        albedo_file = './input/combo_alb_new3.TAR'
+                        !albedo_file = './input/combo_alb_new3.TAR'
+                        albedo_file = './input/combo_albedo.TAR'
                         print *,'ALBEDO set for TAR/Bonney Basin'
                     case (24,22,23,36,37,38,39)                     ! Hughes/ WKH group
-                        albedo_file = './input/combo_alb_new3.TAR'
+                        !albedo_file = './input/combo_alb_new3.TAR'
+                        albedo_file = './input/combo_albedo.TAR'
                     case (31,32,33,34,41,42,43,44,45,61)            ! Canada & Suess glaciers
-                        albedo_file = './input/combo_alb_new3.CAA'
+                        !albedo_file = './input/combo_alb_new3.CAA'
+                        albedo_file = './input/combo_albedo.CAA'
                         print *,'ALBEDO set for CAA/Hoare Basin'
                     case (50,66,62,63,64,65,71,72,73,74,81,82)      ! Fryxell Basin
-                        albedo_file = './input/combo_alb_new3.COH'
+                        !albedo_file = './input/combo_alb_new3.COH'
+                        albedo_file = './input/combo_albedo.COH'
                         print *,'ALBEDO set for COH/Fryxell Basin'
                     case (90)                                       ! RIS MIN
-                        ! albedo_file = './input/constant_alb.RIS'
-                        albedo_file = './input/combo_alb_new3.COH'
+                        albedo_file = './input/constant_alb.RIS'
+                        ! albedo_file = './input/combo_alb_new3.COH'
                         print *,'ALBEDO set for RIS Minimum'
                 end SELECT
 
