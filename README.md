@@ -4,9 +4,9 @@ Repository for ICEMELT fortran model and pre- and post- processing scripts. Crea
 
 This FORTRAN code simulates the temperature and water content within snow and ice in response to the surface energy balance and penetration of solar radiation into the snow and ice.
 
-**Code:** `icemelt_cross_v05.f95`  
-**File Location:**
-`I:\Antarctica_Julian\icemelt-cross`  
+[![DOI](https://zenodo.org/badge/244482737.svg)](https://zenodo.org/badge/latestdoi/244482737)
+
+**Code:** `icemelt_cross_v05.f95`    
 **Date of README:** September 2019  
 **Author of README:** Julian Cross
 
