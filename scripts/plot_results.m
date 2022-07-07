@@ -2,10 +2,8 @@ clear;
 
 %% Load run data
 
-% Output Directory
-outDirectory='/Users/Julian/Documents/_Projects/MDV-Lakes-Thesis/melt-model/processed-data/';
-% Met Data
-modelinputdir  = '/Users/Julian/Documents/_Projects/MDV-Lakes-Thesis/melt-model/postprocess-output/input/';
+% Meltwater Output Directory
+outDirectory='processed/';
 
 % Specify Run to Process
 runDate='20211115_ADJ_M3/';
