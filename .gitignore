@@ -35,6 +35,16 @@ output/*
 processed/*
 
 # except these files in input directory
+!input/9513*
+!input/*.bin
+!input/combo*
+!input/icetempinit2008good.txt
+!input/*.dat
+!input/T_avg_all.txt
+!input/T_avg_cliff.txt
+!input/T_avg_surf.txt
+!input/tv_dem250.txt
+!input/tv_landcovermetstake.txt
 !input/tv_basins_surface_jmc_ekh.txt
 !input/tv_bridge_number_of_2mgridcells_per_250mgridcell.txt
 !input/tv_bwalls_number_of_2mgridcells_per_250mgridcell.txt
