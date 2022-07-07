@@ -1,23 +1,42 @@
 # list of files to ignore by git
 
-# exclude these files
+# exclude these top level files
 desktop.ini
+.DS_Store
 icemelt.sublime-project
 icemelt.sublime-workspace
 icemelt
 icemelt-mjh
-.DS_Store
+run_smooth_mjh.sh
+
+# exclude these files in scripts directory
+scripts/*paleo.m
+scripts/compare_runs.m
+scripts/compare_skill.m
+scripts/compare_stake_all.m
+scripts/compare_stake_subset.m
+scripts/model_skill.m
+scripts/model_skill_subset.m
+scripts/modelSkill_Tmp.mat
+scripts/plot_ablation_maps.m
+scripts/plot_albedo_runs.m
+scripts/plot_comparison_maps.m
+scripts/plot_enbal.m
+scripts/plot_met.m
+scripts/plot_sensitivity_runs.m
+scripts/sensitivity_analysis.m
 
 # exclude these directories
-output/*
-logs/*
 input/*
+logs/*
 namelist/*
-icemelt-versions/*
+output/*
+processed/*
 
 # except these files
-!output/.gitkeep 
-!logs/.gitkeep 
 !input/.gitkeep
+!logs/.gitkeep 
 !namelist/namelist.input
-!namelist/namelist.input-mjh
+!output/.gitkeep
+!processed/.gitkeep
+!processed/20211115_ADJ_M3
