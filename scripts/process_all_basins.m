@@ -122,8 +122,8 @@ cleaner=find(isnan(basin_floor_area));   basin_floor_area(cleaner)=0;  % change 
 
 % Convert from number of 2m grid cells to an area
 if docliff==1
-    [basinsCliff, Ref] = ImportAsciiRaster([ modelinputdir '/tv_basins_cliff.txt']);
-    [cliffLength, Ref] = ImportAsciiRaster([ modelinputdir 'cliff_length.txt']);
+    [basinsCliff, Ref] = ImportAsciiRaster([ modelinputdir '/tv_basins_cliff_jmc.txt']);
+    [cliffLength, Ref] = ImportAsciiRaster([ modelinputdir '/tv_cliff_length.txt']);
     cleaner=find(cliffLength(:)==0);
     cliffLength(cleaner)=NaN;
     cliffHeight=25; %maybe need to refine this!

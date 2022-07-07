@@ -33,8 +33,17 @@ namelist/*
 output/*
 processed/*
 
+# except these files in input directory
+!input/tv_basins_surface_jmc_ekh.txt
+!input/tv_bridge_number_of_2mgridcells_per_250mgridcell.txt
+!input/tv_bwalls_number_of_2mgridcells_per_250mgridcell.txt
+!input/tv_bfloor_number_of_2mgridcells_per_250mgridcell.txt
+!input/tv_basins_cliff_jmc.txt
+!input/tv_cliff_length.txt
+!input/TV_stream_data.mat
+!input/TV_stream_data_qual.mat
+
 # except these files
-!input/.gitkeep
 !logs/.gitkeep 
 !namelist/namelist.input
 !output/.gitkeep
