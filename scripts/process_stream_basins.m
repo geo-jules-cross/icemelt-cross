@@ -1,13 +1,13 @@
 clear;
 
-%% Post-process Multi-surface Run
+%% Post-process Multi-surface Run for Streamflow
 
 % Specify Run to Process
 runDate='20211115_ADJ_M3/'; %choose run to process here
 runname= 'multi-adj-ekh-alb-2007'; % change run name too
 
 % ICEMELT Output Directory
-outDirectory='output/';
+outDirectory='../output/';
 path2output=[outDirectory runDate];
 
 % Directories to process
@@ -16,17 +16,12 @@ basinwallrun=  [path2output 'XXX_' runname '-bwall_0.0010000_0.0020_09/'];
 basinfloorrun= [path2output 'XXX_' runname '-bfloor_0.0010000_0.0020_09/'];
 cliffrun=      [path2output 'XCL_' runname '-cliff_0.0001000_0.0020_09/'];
 
-% surfrun=       [path2output runname, '/' ];
-% basinwallrun=  [path2output runname '-bwall/'];
-% basinfloorrun= [path2output runname '-bfloor/'];
-% cliffrun=      [path2output runname '-cliff/'];
-
 %% Script details - what to process, where some data files are located.
 
 % Meltwater input data
-modelinputdir  = 'input/';
-streamdatafile = 'input/TV_stream_data.mat';
-dataqualfile = 'input/TV_stream_data_qual.mat';
+modelinputdir  = '../input/';
+streamdatafile = '../input/TV_stream_data.mat';
+dataqualfile = '../input/TV_stream_data_qual.mat';
 
 docliff=1;  % option to include analysis of cliff model or not.
 dobasins=1;  % option to include analysis of basins or not.
@@ -47,7 +42,6 @@ basins2process=(1:99); % whole valley
 %basins2process=(41);  % CAA
 
 %%
-%[basins,Ref] = ImportAsciiRaster([ modelinputdir 'tv_basins_surface.txt']);
 [basins,Ref] = ImportAsciiRaster([ modelinputdir 'tv_basins_surface_jmc_ekh.txt']);
 
 % Note: Priscu stream's contributing area needs to be adjusted
@@ -113,8 +107,8 @@ cleaner=find(isnan(basin_floor_area));   basin_floor_area(cleaner)=0;  % change 
 
 % Convert from number of 2m grid cells to an area
 if docliff==1
-    [basinsCliff, Ref] = ImportAsciiRaster([ modelinputdir '/tv_basins_cliff_jmc.txt']);
-    [cliffLength, Ref] = ImportAsciiRaster([ modelinputdir '/tv_cliff_length.txt']);
+    [basinsCliff, Ref] = ImportAsciiRaster([ modelinputdir 'tv_basins_cliff_jmc.txt']);
+    [cliffLength, Ref] = ImportAsciiRaster([ modelinputdir 'tv_cliff_length.txt']);
     cleaner=find(cliffLength(:)==0);
     cliffLength(cleaner)=NaN;
     cliffHeight=25; %maybe need to refine this!
@@ -561,7 +555,7 @@ if adjustBasins == 1
 end
 
 % Data Output Directory
-outDirectory='processed/';
+outDirectory='../processed/';
 
 fullPathData = fullfile(outDirectory, runDate);
 

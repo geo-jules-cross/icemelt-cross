@@ -11,10 +11,10 @@ run_smooth_mjh.sh
 
 # exclude these files in scripts directory
 scripts/*paleo.m
-scripts/compare_runs.m
-scripts/compare_skill.m
-scripts/compare_stake_all.m
-scripts/compare_stake_subset.m
+scripts/plot_compare_runs.m
+scripts/plot_compare_skill.m
+scripts/plot_compare_stake_all.m
+scripts/plot_compare_stake_subset.m
 scripts/model_skill.m
 scripts/model_skill_subset.m
 scripts/modelSkill_Tmp.mat
@@ -23,6 +23,7 @@ scripts/plot_albedo_runs.m
 scripts/plot_comparison_maps.m
 scripts/plot_enbal.m
 scripts/plot_met.m
+scripts/plot_all_results.m
 scripts/plot_sensitivity_runs.m
 scripts/sensitivity_analysis.m
 
