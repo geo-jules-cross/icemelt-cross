@@ -48,4 +48,3 @@ processed/*
 !namelist/namelist.input
 !output/.gitkeep
 !processed/.gitkeep
-!processed/20211115_ADJ_M3
