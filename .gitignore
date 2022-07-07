@@ -36,7 +36,6 @@ processed/*
 
 # except these files in input directory
 !input/9513*
-#!input/*.bin
 !input/combo*
 !input/icetempinit2008good.txt
 !input/*.dat
